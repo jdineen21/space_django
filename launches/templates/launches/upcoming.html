@@ -1,0 +1,42 @@
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'launches/upcoming.css' %}">
+
+{% if upcoming_launches %}
+    <div class="upcoming_launches_container">
+    {% for launch in upcoming_launches %}
+        <div class="upcoming_launch">
+            <h1>{{ launch.mission_name }}</h1>
+            <h2>Flight Number: {{ launch.flight_number }}</h2>
+            <p>{{ launch.launch_year }}</p>
+            <p>Launch Date: {{ launch.launch_date_utc }}</p>
+            <p>{{ launch.is_tentative }}</p>
+            {% if launch.is_tentative %}
+                <p>{{ launch.tentative_max_precision }}</p>
+                <p>{{ launch.tbd }}</p>
+            {% endif %}
+            <h2>Rocket</h2>
+            <ul>
+                <li>{{ launch.rocket.rocket_name }}</li>
+                <li>{{ launch.rocket.rocket_type }}</li>
+                {% comment %} <h3>First Stage</h3>
+                <ul>
+                    <li>{{ launch.rocket.first_stage. }}</li>
+                </ul> {% endcomment %}
+            </ul>
+            <h2>Launch Site</h2>
+            <ul>
+                <li>{{ launch.launch_site.site_name }}</li>
+                <li>{{ launch.launch_site.site_name_long }}</li>
+            </ul>
+            <p>{{ launch.details }}</p>
+            {% if not launch.crew is None %}
+                <p>{{ launch.crew }}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+{% else %}
+    <p>No upcoming launches available.</p>
+{% endif %}
