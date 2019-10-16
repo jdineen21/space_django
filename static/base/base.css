@@ -1,0 +1,35 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Raleway';
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 0 12.5%;
+    overflow: hidden;
+}
+
+#navbar {
+    background: #000000;
+}
+
+#navbar ul {
+    margin: 0;
+    margin-left: 10%;
+    padding: 0;
+    list-style-type: none;
+}
+
+#navbar ul li {
+    margin-right: 1em;
+    display: inline-block;
+    color: #ffffff;
+    font-weight: 600;
+    line-height: 4em;
+}

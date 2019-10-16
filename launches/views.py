@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 
 def index(request):
-    return HttpResponse('Launches!')
+    return render(request, 'launches/index.html')
 
 def upcoming(request):
     url = 'https://api.spacexdata.com/v3/launches/upcoming'

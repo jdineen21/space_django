@@ -1,4 +1,13 @@
 
-{% load static %}
+{% extends "base/base.html" %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'launches/index.css' %}">
+{% block stylesheet %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'launches/index.css' %}">
+{% endblock %}
+
+{% block title %}Launches{% endblock %}
+
+{% block content %}
+    <p>Launches!</p>
+{% endblock  %}

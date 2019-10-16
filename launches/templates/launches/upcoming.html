@@ -16,12 +16,27 @@
                 <h1>{{ launch.mission_name }}</h1>
                 <h2>Flight Number: {{ launch.flight_number }}</h2>
                 <p>{{ launch.launch_year }}</p>
-                <p>Launch Date: {{ launch.launch_date_utc }}</p>
-                <p>{{ launch.is_tentative }}</p>
-                {% if launch.is_tentative %}
-                    <p>{{ launch.tentative_max_precision }}</p>
-                    <p>{{ launch.tbd }}</p>
-                {% endif %}
+                <h2>Launch Date Information</h2>
+                <table>
+                    <tr>
+                        <td>Launch Date:</td>
+                        <td>{{ launch.launch_date_utc }}</td>
+                    <tr>
+                    {% if launch.is_tentative %}
+                        <tr>
+                            <td>Launch Data Tentative:</td>
+                            <td>{{ launch.is_tentative }}</td>
+                        <tr>
+                        <tr>
+                            <td>Launch Data Precision:</td>
+                            <td>{{ launch.tentative_max_precision }}</td>
+                        <tr>
+                        <tr>
+                            <td>Launch Date TBD:</td>
+                            <td>{{ launch.tbd }}</td>
+                        <tr>
+                    {% endif %}
+                <table>
                 <h2>Rocket</h2>
                 <ul>
                     <li>{{ launch.rocket.rocket_name }}</li>
