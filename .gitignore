@@ -1,0 +1,8 @@
+# List of files/folders to exclude
+/.idea
+/.vscode
+
+.env
+
+*.pyc
+*.sqlite3
