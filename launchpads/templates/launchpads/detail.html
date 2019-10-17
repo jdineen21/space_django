@@ -22,9 +22,9 @@
             <p>{{ launchpad.details }}</p>
             <h2>Vehicles Launched</h2>
             <ul>
-            {% for vehicle in launchpad.vehicles_launched %}
-                <li>{{ vehicle }}</li>
-            {% endfor %}
+                {% for vehicle in launchpad.vehicles_launched %}
+                    <li>{{ vehicle }}</li>
+                {% endfor %}
             </ul>
         </div>
     {% else %}

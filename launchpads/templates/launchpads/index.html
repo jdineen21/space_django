@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'launchpads/index.css' %}">
+{% endblock %}
+
+{% block title %}{{ launchpad.name }}{% endblock %}
+
+{% block content %}
+    {% if not launchpads.error %}
+        <div class="launchpads_container">
+            {% for launchpad in launchpads %}
+                <p>{{ launchpad.site_name_long }}</p>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2>Error</h2>
+        <p>{{ launchpads.error }}</p>
+    {% endif %}
+{% endblock %}
