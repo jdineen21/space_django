@@ -1,0 +1,63 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'launches/detail.css' %}">
+{% endblock %}
+
+{% block title %}{{ launch.mission_name }}{% endblock %}
+
+{% block content %}
+    {% if not launch.error %}
+        <div class="launch_container">
+            <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+            <h1>{{ launch.mission_name }}</h1>
+            <h2>Flight Number: {{ launch.flight_number }}</h2>
+            <p>{{ launch.launch_year }}</p>
+            <h2>Launch Date Information</h2>
+            <table>
+                <tr>
+                    <td>Launch Date:</td>
+                    <td>{{ launch.launch_date_utc }}</td>
+                <tr>
+                {% if launch.is_tentative %}
+                    <tr>
+                        <td>Launch Data Tentative:</td>
+                        <td>{{ launch.is_tentative }}</td>
+                    <tr>
+                    <tr>
+                        <td>Launch Data Precision:</td>
+                        <td>{{ launch.tentative_max_precision }}</td>
+                    <tr>
+                    <tr>
+                        <td>Launch Date TBD:</td>
+                        <td>{{ launch.tbd }}</td>
+                    <tr>
+                {% endif %}
+            <table>
+            <h2>Rocket</h2>
+            <ul>
+                <li>{{ launch.rocket.rocket_name }}</li>
+                <li>{{ launch.rocket.rocket_type }}</li>
+                {% comment %} <h3>First Stage</h3>
+                <ul>
+                    <li>{{ launch.rocket.first_stage. }}</li>
+                </ul> {% endcomment %}
+            </ul>
+            <h2>Launch Site</h2>
+            <ul>
+                <li>{{ launch.launch_site.site_name }}</li>
+                <li>{{ launch.launch_site.site_name_long }}</li>
+            </ul>
+            <h2>Launch Details</h2>
+            <p>{{ launch.details }}</p>
+            {% if not launch.crew is None %}
+                <h2>Crew</h2>
+                <p>{{ launch.crew }}</p>
+            {% endif %}
+        </div>
+    {% else %}
+        <h2>Error</h2>
+        <p>{{ launch.error }}</p>
+    {% endif %}
+{% endblock %}
