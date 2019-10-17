@@ -1,4 +1,38 @@
 
+.launch_details {
+    padding: 0 3em;
+    float: left;
+    width: 70%;
+}
+
+.press_kit {
+    padding: 0 1em;
+    float: right;
+    background: #0f9131;
+    color: #000000;
+    text-decoration: none;
+}
+
 .mission_patch {
-    width: 200px;
+    width: 175px;
+}
+
+.first_stage_details {
+    float: left;
+    width: 50%;
+}
+
+.second_stage_details {
+    float: left;
+    width: 50%;
+}
+
+.launch_assets {
+    padding-right: 1.5em;
+    float: left;
+    width: 30%;
+}
+
+.launch_assets img {
+    width: 100%;
 }

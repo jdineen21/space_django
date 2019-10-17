@@ -9,16 +9,24 @@
 
 {% block content %}
     {% if not launch.error %}
-        <div class="launch_container">
-            <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
-            <h1>{{ launch.mission_name }}</h1>
-            <h2>Flight Number: {{ launch.flight_number }}</h2>
-            <p>{{ launch.launch_year }}</p>
+        <div class="launch_details">
+            <a class="press_kit" href="{{ launch.links.presskit }}" target="_blank">
+                <p>Press Kit</p>
+            </a>
+            {% if launch.links.mission_patch_small %}
+                <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+            {% endif %}
+            <h1>{{ launch.rocket.rocket_name }} | {{ launch.mission_name }}</h1>
+            <h3>Flight Number: {{ launch.flight_number }}</h3>
             <h2>Launch Date Information</h2>
             <table>
                 <tr>
-                    <td>Launch Date:</td>
-                    <td>{{ launch.launch_date_utc }}</td>
+                    <td>Date:</td>
+                    <td>{{ launch.launch_date_local }}</td>
+                <tr>
+                <tr>
+                    <td>Time:</td>
+                    <td>{{ launch.launch_date_local|date:"Y-m-d G:i:s" }}</td>
                 <tr>
                 {% if launch.is_tentative %}
                     <tr>
@@ -34,19 +42,10 @@
                         <td>{{ launch.tbd }}</td>
                     <tr>
                 {% endif %}
-            <table>
-            <h2>Rocket</h2>
-            <ul>
-                <li>{{ launch.rocket.rocket_name }}</li>
-                <li>{{ launch.rocket.rocket_type }}</li>
-                {% comment %} <h3>First Stage</h3>
-                <ul>
-                    <li>{{ launch.rocket.first_stage. }}</li>
-                </ul> {% endcomment %}
-            </ul>
+            </table>
             <h2>Launch Site</h2>
             <ul>
-                <li>{{ launch.launch_site.site_name }}</li>
+                {% comment %} <li>{{ launch.launch_site.site_name }}</li> {% endcomment %}
                 <li>{{ launch.launch_site.site_name_long }}</li>
             </ul>
             <h2>Launch Details</h2>
@@ -54,6 +53,42 @@
             {% if not launch.crew is None %}
                 <h2>Crew</h2>
                 <p>{{ launch.crew }}</p>
+            {% endif %}
+            {% if launch.rocket.first_stage %}
+                {% if launch.rocket.first_stage.cores %}
+                    <div class="first_stage_details">
+                        <h2>First Stage</h2>
+                        {% for core in launch.rocket.first_stage.cores %}
+                            <h3>Core {{ forloop.counter }}</h3>
+                            <p>Core Serial: {{ core.core_serial }}</p>
+                            <p>Block Type: {{ core.block }}</p>
+                            <p>Flight no: {{ core.flight }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if launch.rocket.second_stage %}
+                {% if launch.rocket.second_stage.payloads %}
+                    <div class="second_stage_details">
+                        <h2>Second Stage</h2>
+                        {% for payload in launch.rocket.second_stage.payloads %}
+                            <h3>Payload {{ forloop.counter }}</h3>
+                            <p>Payload: {{ payload.payload_id }}</p>
+                            <p>Customers: {{ payload.customers|join:", " }}</p>
+                            <p>Nationality: {{ payload.nationality }}</p>
+                            <p>Manufacturer: {{ payload.manufacturer }}</p>
+                            <p>Payload Type: {{ payload.payload_type }}</p>
+                            <p>Payload Mass: {{ payload.payload_mass_kg }}kg</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="launch_assets">
+            {% if launch.links.flickr_images %}
+                {% for image in launch.links.flickr_images %}
+                    <img src={{ image }} >
+                {% endfor %}
             {% endif %}
         </div>
     {% else %}
