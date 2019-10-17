@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'launchpads/detail.css' %}">
+{% endblock %}
+
+{% block title %}{{ launchpad.name }}{% endblock %}
+
+{% block content %}
+    {% if not launchpad.error %}
+        <div class="launchpad_details">
+            <h1>{{ launchpad.site_name_long }}</h1>
+            {% if launchpad.status == "active" %}
+                <h2 class="status_active">Active</h2>
+            {% elif launchpad.status == "under construction" %}
+                <h2 class="status_under_construction">Under Construction</h2>
+            {% elif launchpad.status == "retired" %}
+                <h2 class="status_retired">Retired</h2>
+            {% endif %}
+            <h2>Launchpad Details</h2>
+            <p>{{ launchpad.details }}</p>
+            <h2>Vehicles Launched</h2>
+            <ul>
+            {% for vehicle in launchpad.vehicles_launched %}
+                <li>{{ vehicle }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <h2>Error</h2>
+        <p>{{ launchpad.error }}</p>
+    {% endif %}
+{% endblock %}

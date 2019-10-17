@@ -1,0 +1,29 @@
+
+.launchpad_details {
+    padding: 0 3em;
+    float: left;
+}
+
+.status_active {
+    margin: 0;
+    padding: 0.5em 1em;
+    display: inline-block;
+    background: #0f9131;
+    color: #ffffff;
+}
+
+.status_under_construction {
+    margin: 0;
+    padding: 0.5em 1em;
+    display: inline-block;
+    background: #ffbf00;
+    color: #ffffff;
+}
+
+.status_retired {
+    margin: 0;
+    padding: 0.5em 1em;
+    display: inline-block;
+    background: #ff0000;
+    color: #ffffff;
+}
