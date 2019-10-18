@@ -10,22 +10,77 @@
 {% block content %}
     {% if not launchpad.error %}
         <div class="launchpad_details">
-            <h1>{{ launchpad.site_name_long }}</h1>
-            {% if launchpad.status == "active" %}
-                <h2 class="status_active">Active</h2>
-            {% elif launchpad.status == "under construction" %}
-                <h2 class="status_under_construction">Under Construction</h2>
-            {% elif launchpad.status == "retired" %}
-                <h2 class="status_retired">Retired</h2>
-            {% endif %}
-            <h2>Launchpad Details</h2>
-            <p>{{ launchpad.details }}</p>
-            <h2>Vehicles Launched</h2>
-            <ul>
-                {% for vehicle in launchpad.vehicles_launched %}
-                    <li>{{ vehicle }}</li>
-                {% endfor %}
-            </ul>
+            <div class="main_content">
+                <h1>{{ launchpad.site_name_long }}</h1>
+                {% if launchpad.status == "active" %}
+                    <h2 class="status_active">Active</h2>
+                {% elif launchpad.status == "under construction" %}
+                    <h2 class="status_under_construction">Under Construction</h2>
+                {% elif launchpad.status == "retired" %}
+                    <h2 class="status_retired">Retired</h2>
+                {% endif %}
+                <h2>Launchpad Details</h2>
+                <p>{{ launchpad.details }}</p>
+                <h2>Location</h2>
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td>{{ launchpad.location.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Region:</td>
+                        <td>{{ launchpad.location.region }}</td>
+                    </tr>
+                </table>
+                <h2>Vehicles Launched</h2>
+                <ul>
+                    {% for vehicle in launchpad.vehicles_launched %}
+                        <li>{{ vehicle }}</li>
+                    {% endfor %}
+                </ul>
+                <h2>Launches</h2>
+                <table>
+                    <tr>
+                        <td>Attempted Launches:</td>
+                        <td>{{ launchpad.attempted_launches }}</td>
+                    </tr>
+                    <tr>
+                        <td>Successful Launches:</td>
+                        <td>{{ launchpad.successful_launches }}</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td><h3>Mission Name</h3></td>
+                        <td><h3>Vehicle</h3></td>
+                        <td><h3>Launch Date</h3></td>
+                    </tr>
+                    {% for launch in launches %}
+                        {% if launch.launch_site.site_id == launchpad.site_id %}
+                            <tr>
+                                <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
+                                <td>{{ launch.rocket.rocket_name }}</td>
+                                <td>global function need adding</td>
+                            </tr>
+                        {% endif %}            
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="side_content">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Iridium-1_Mission_%2831450835954%29.jpg">
+                <div style="width: 100%">
+                    <iframe
+                        width="100%"
+                        height="550"
+                        src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q={{ launchpad.location.latitude }},{{ launchpad.location.longitude }}&amp;ie=UTF8&amp;t=k&amp;z=15&amp;iwloc=B&amp;output=embed"
+                        frameborder="0"
+                        scrolling="no"
+                        marginheight="0"
+                        marginwidth="0"
+                    >
+                    </iframe>
+                </div>
+            </div>
         </div>
     {% else %}
         <h2>Error</h2>

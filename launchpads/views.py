@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 
 def index(request):
-    url = 'https://api.spacexdata.com/v3/launchpads'
+    url = 'https://api.spacexdata.com/v3/launchpads/'
     r = requests.get(url)
     #return JsonResponse(r.json(), safe=False)
     context = {'launchpads': r.json()}
@@ -14,6 +14,16 @@ def index(request):
 def detail(request, site_id):
     url = 'https://api.spacexdata.com/v3/launchpads/%s' % (site_id)
     r = requests.get(url)
+    launchpad = r.json()
+
+    url = 'https://api.spacexdata.com/v3/launches/'
+    r = requests.get(url)
+    launches = r.json()
+
     #return JsonResponse(r.json(), safe=False)
-    context = {'launchpad': r.json()}
+
+    context = {
+        'launchpad': launchpad,
+        'launches': launches,
+    }
     return render(request, 'launchpads/detail.html', context)

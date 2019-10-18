@@ -4,6 +4,12 @@
     float: left;
 }
 
+.main_content {
+    padding-right: 3em;
+    float: left;
+    width: 60%;
+}
+
 .status_active {
     margin: 0;
     padding: 0.5em 1em;
@@ -26,4 +32,13 @@
     display: inline-block;
     background: #ff0000;
     color: #ffffff;
+}
+
+.side_content {
+    float: left;
+    width: 40%;
+}
+
+.side_content img {
+    width: 100%;
 }
