@@ -9,87 +9,109 @@
 
 {% block content %}
     {% if not launch.error %}
-        <div class="launch_details">
-            <a class="press_kit" href="{{ launch.links.presskit }}" target="_blank">
-                <p>Press Kit</p>
-            </a>
-            {% if launch.links.mission_patch_small %}
-                <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
-            {% endif %}
-            <h1>{{ launch.rocket.rocket_name }} | {{ launch.mission_name }}</h1>
-            <h3>Flight Number: {{ launch.flight_number }}</h3>
-            <h2>Launch Date Information</h2>
-            <table>
-                <tr>
-                    <td>Date:</td>
-                    <td>{{ launch.launch_date_local }}</td>
-                <tr>
-                <tr>
-                    <td>Time:</td>
-                    <td>{{ launch.launch_date_local|date:"Y-m-d G:i:s" }}</td>
-                <tr>
-                {% if launch.is_tentative %}
+        <div class="launch">
+            <div class="launch_details">
+                <div class="top_right">
+                    {% if launch.links.mission_patch_small %}
+                        <div>
+                            <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+                        </div>
+                    {% endif %}
+                    {% if launch.links.presskit %}
+                        <a class="press_kit" href="{{ launch.links.presskit }}" target="_blank">Press Kit</a>
+                    {% endif %}       
+                </div>
+                <h1>{{ launch.mission_name }} | {{ launch.rocket.rocket_name }}</h1>
+                <h3>Flight Number: {{ launch.flight_number }}</h3>
+                <table>
                     <tr>
-                        <td>Launch Data Tentative:</td>
-                        <td>{{ launch.is_tentative }}</td>
+                        <td>Date:</td>
+                        <td></td>
                     <tr>
                     <tr>
-                        <td>Launch Data Precision:</td>
-                        <td>{{ launch.tentative_max_precision }}</td>
+                        <td>Time:</td>
+                        <td></td>
                     <tr>
-                    <tr>
-                        <td>Launch Date TBD:</td>
-                        <td>{{ launch.tbd }}</td>
-                    <tr>
+                    {% if launch.is_tentative %}
+                        <tr>
+                            <td>Launch Data Tentative:</td>
+                            <td>{{ launch.is_tentative }}</td>
+                        <tr>
+                        <tr>
+                            <td>Launch Data Precision:</td>
+                            <td>{{ launch.tentative_max_precision }}</td>
+                        <tr>
+                        <tr>
+                            <td>Launch Date TBD:</td>
+                            <td>{{ launch.tbd }}</td>
+                        <tr>
+                    {% endif %}
+                </table>
+                <h2>Launch Site</h2>
+                <a href="{% url 'launchpads:detail' launch.launch_site.site_id %}">
+                    {{ launch.launch_site.site_name_long }}
+                </a>
+                <div style="width: 100%">
+                    <iframe
+                        width="100%"
+                        height="600"
+                        src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q={{ launchpad.location.latitude }},{{ launchpad.location.longitude }}&amp;ie=UTF8&amp;t=k&amp;z=15&amp;iwloc=B&amp;output=embed"
+                        frameborder="0"
+                        scrolling="no"
+                        marginheight="0"
+                        marginwidth="0"
+                    >
+                    </iframe>
+                </div>
+                <h2>Launch Details</h2>
+                <p>{{ launch.details }}</p>
+                {% if not launch.crew is None %}
+                    <h2>Crew</h2>
+                    <p>{{ launch.crew }}</p>
                 {% endif %}
-            </table>
-            <h2>Launch Site</h2>
-            <ul>
-                {% comment %} <li>{{ launch.launch_site.site_name }}</li> {% endcomment %}
-                <li>{{ launch.launch_site.site_name_long }}</li>
-            </ul>
-            <h2>Launch Details</h2>
-            <p>{{ launch.details }}</p>
-            {% if not launch.crew is None %}
-                <h2>Crew</h2>
-                <p>{{ launch.crew }}</p>
-            {% endif %}
-            {% if launch.rocket.first_stage %}
-                {% if launch.rocket.first_stage.cores %}
-                    <div class="first_stage_details">
-                        <h2>First Stage</h2>
-                        {% for core in launch.rocket.first_stage.cores %}
-                            <h3>Core {{ forloop.counter }}</h3>
-                            <p>Core Serial: {{ core.core_serial }}</p>
-                            <p>Block Type: {{ core.block }}</p>
-                            <p>Flight no: {{ core.flight }}</p>
-                        {% endfor %}
-                    </div>
+                <div class="stages_container">
+                    {% if launch.rocket.first_stage %}
+                        {% if launch.rocket.first_stage.cores %}
+                            <div class="first_stage_details">
+                                <h2>First Stage</h2>
+                                {% for core in launch.rocket.first_stage.cores %}
+                                    {% if launch.rocket.first_stage.cores|length > 1 %}
+                                        <h3>Core {{ forloop.counter }}</h3>
+                                    {% endif %}
+                                    <p>Core Serial: {{ core.core_serial }}</p>
+                                    <p>Block Type: {{ core.block }}</p>
+                                    <p>Flight no: {{ core.flight }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    {% if launch.rocket.second_stage %}
+                        {% if launch.rocket.second_stage.payloads %}
+                            <div class="second_stage_details">
+                                <h2>Second Stage</h2>
+                                {% for payload in launch.rocket.second_stage.payloads %}
+                                    {% if launch.rocket.second_stage.payloads|length > 1 %}
+                                        <h3>Payload {{ forloop.counter }}</h3>
+                                    {% endif %}
+                                    <p>Payload: {{ payload.payload_id }}</p>
+                                    <p>Customers: {{ payload.customers|join:", " }}</p>
+                                    <p>Nationality: {{ payload.nationality }}</p>
+                                    <p>Manufacturer: {{ payload.manufacturer }}</p>
+                                    <p>Payload Type: {{ payload.payload_type }}</p>
+                                    <p>Payload Mass: {{ payload.payload_mass_kg }}kg</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="launch_assets">
+                {% if launch.links.flickr_images %}
+                    {% for image in launch.links.flickr_images %}
+                        <img src={{ image }} >
+                    {% endfor %}
                 {% endif %}
-            {% endif %}
-            {% if launch.rocket.second_stage %}
-                {% if launch.rocket.second_stage.payloads %}
-                    <div class="second_stage_details">
-                        <h2>Second Stage</h2>
-                        {% for payload in launch.rocket.second_stage.payloads %}
-                            <h3>Payload {{ forloop.counter }}</h3>
-                            <p>Payload: {{ payload.payload_id }}</p>
-                            <p>Customers: {{ payload.customers|join:", " }}</p>
-                            <p>Nationality: {{ payload.nationality }}</p>
-                            <p>Manufacturer: {{ payload.manufacturer }}</p>
-                            <p>Payload Type: {{ payload.payload_type }}</p>
-                            <p>Payload Mass: {{ payload.payload_mass_kg }}kg</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            {% endif %}
-        </div>
-        <div class="launch_assets">
-            {% if launch.links.flickr_images %}
-                {% for image in launch.links.flickr_images %}
-                    <img src={{ image }} >
-                {% endfor %}
-            {% endif %}
+            </div>
         </div>
     {% else %}
         <h2>Error</h2>

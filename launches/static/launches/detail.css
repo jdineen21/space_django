@@ -1,21 +1,36 @@
 
+.launch {
+    padding-left: 3em;
+}
+
 .launch_details {
-    padding: 0 3em;
+    padding-right: 3em;
     float: left;
     width: 70%;
 }
 
-.press_kit {
-    padding: 0 1em;
+.top_right {
     float: right;
-    background: #0f9131;
-    color: #ffffff;
-    font-weight: 500;
-    text-decoration: none;
 }
 
 .mission_patch {
     width: 175px;
+    float: right;
+}
+
+.press_kit {
+    margin-top: 2em;
+    padding: 0.5em 1em;
+    background: #0f9131;
+    color: #ffffff;
+    font-weight: 500;
+    text-decoration: none;
+    float: right;
+}
+
+.stages_container {
+    display: inline-block;
+    width: 100%;
 }
 
 .first_stage_details {
@@ -29,9 +44,10 @@
 }
 
 .launch_assets {
-    padding-right: 1.5em;
     float: left;
     width: 30%;
+    max-height: 90vh;
+    overflow: auto;
 }
 
 .launch_assets img {

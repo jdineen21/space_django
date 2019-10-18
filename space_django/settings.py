@@ -25,7 +25,7 @@ SECRET_KEY = 'p9xo)_+a1s#2bp((h6wy3gy(4f1nari#c9iyuq*=vy0vmp_u&0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.23']
+ALLOWED_HOSTS = ['jdineen.co.uk', '192.168.0.23']
 
 
 # Application definition
