@@ -49,22 +49,26 @@
                         <td>{{ launchpad.successful_launches }}</td>
                     </tr>
                 </table>
-                <table>
-                    <tr>
-                        <td><h3>Mission Name</h3></td>
-                        <td><h3>Vehicle</h3></td>
-                        <td><h3>Launch Date</h3></td>
-                    </tr>
-                    {% for launch in launches %}
-                        {% if launch.launch_site.site_id == launchpad.site_id %}
-                            <tr>
-                                <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
-                                <td>{{ launch.rocket.rocket_name }}</td>
-                                <td>global function need adding</td>
-                            </tr>
-                        {% endif %}            
-                    {% endfor %}
-                </table>
+                {% if not launchpad.attempted_launches == 0 %}
+                    <table>
+                        <tr>
+                            <td><h3>Mission Name</h3></td>
+                            <td><h3>Vehicle</h3></td>
+                            <td><h3>Launch Date</h3></td>
+                            <td><h3>Launch Success</h3></td>
+                        </tr>
+                        {% for launch in launches %}
+                            {% if launch.launch_site.site_id == launchpad.site_id %}
+                                <tr>
+                                    <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
+                                    <td>{{ launch.rocket.rocket_name }}</td>
+                                    <td>{{ launch.launch_datetime|date }}</td>
+                                    <td>{{ launch.launch_success }}</td>
+                                </tr>
+                            {% endif %}        
+                        {% endfor %}
+                    </table>
+                {% endif %}                
             </div>
             <div class="side_content">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Iridium-1_Mission_%2831450835954%29.jpg">

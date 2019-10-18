@@ -1,26 +1,19 @@
-import requests
-import json
+
+import api
 
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 
 def index(request):
-    url = 'https://api.spacexdata.com/v3/launchpads/'
-    r = requests.get(url)
-    #return JsonResponse(r.json(), safe=False)
-    context = {'launchpads': r.json()}
+    context = {
+        'launchpads': api.get_launchpads(),
+    }
     return render(request, 'launchpads/index.html', context)
 
 def detail(request, site_id):
-    url = 'https://api.spacexdata.com/v3/launchpads/%s' % (site_id)
-    r = requests.get(url)
-    launchpad = r.json()
+    launchpad = api.get_launchpad_by_site_id(site_id)
 
-    url = 'https://api.spacexdata.com/v3/launches/'
-    r = requests.get(url)
-    launches = r.json()
-
-    #return JsonResponse(r.json(), safe=False)
+    launches = api.get_past_launches()
 
     context = {
         'launchpad': launchpad,

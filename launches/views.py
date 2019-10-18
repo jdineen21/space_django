@@ -1,7 +1,4 @@
 
-import requests
-import json
-import datetime
 import api
 
 from django.shortcuts import render

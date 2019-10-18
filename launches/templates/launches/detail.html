@@ -17,9 +17,16 @@
                             <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
                         </div>
                     {% endif %}
-                    {% if launch.links.presskit %}
-                        <a class="press_kit" href="{{ launch.links.presskit }}" target="_blank">Press Kit</a>
-                    {% endif %}       
+                    {% if launch.links.presskit or launch.links.video_link %}
+                        <div class="buttons_container">
+                            {% if launch.links.presskit %}
+                                <a class="press_kit" href="{{ launch.links.presskit }}" target="_blank">Download Press Kit</a>
+                            {% endif %}
+                            {% if launch.links.video_link %}
+                                <a class="youtube_link" href="https://www.youtube.com/watch?v={{ launch.links.youtube_id }}" target="_blank">Watch Launch</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
                 </div>
                 <h1>{{ launch.mission_name }} | {{ launch.rocket.rocket_name }}</h1>
                 <h3>Flight Number: {{ launch.flight_number }}</h3>
