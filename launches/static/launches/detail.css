@@ -23,6 +23,22 @@
     float: right;
 }
 
+.successful_launch {
+    padding: 0.7em 1.1em;
+    display: inline-block;
+    background: #0f9131;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.fail_launch {
+    padding: 0.7em 1.1em;
+    display: inline-block;
+    background: #ff0000;
+    color: #ffffff;
+    font-weight: 500;
+}
+
 .upcoming_launch {
     padding: 0.7em 1.1em;
     display: inline-block;

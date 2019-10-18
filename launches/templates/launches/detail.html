@@ -29,9 +29,12 @@
                     {% endif %}
                 </div>
                 <h1>{{ launch.mission_name }} | {{ launch.rocket.rocket_name }}</h1>
-                {% if launch.upcoming %}
-                    <div class="upcoming_launch">Upcoming Launch</div>                
-                {% else %}
+                {% if launch.launch_success %}
+                    <div class="successful_launch">Successful Launch</div>
+                {% elif not launch.launch_success %}
+                    <div class="fail_launch">Launch Failure</div>
+                {% elif launch.upcoming %}
+                    <div class="upcoming_launch">Upcoming Launch</div>
                 {% endif %}
                 <h3>Flight Number: {{ launch.flight_number }}</h3>
                 <table>
@@ -64,6 +67,11 @@
                 </a>
                 <h2>Launch Details</h2>
                 <p>{{ launch.details }}</p>
+                {% comment %} Needs looking at due to display issues/not being required {% endcomment %}
+                {% if launch.launch_failure_details.reason %}
+                    <h2>Launch Failure Details</h2>
+                    <p>{{ launch.launch_failure_details.reason }}</p>
+                {% endif %}
                 {% if not launch.crew is None %}
                     <h2>Crew</h2>
                     <p>{{ launch.crew }}</p>

@@ -6,16 +6,16 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 
 def index(request):
-    launches = launches.get_all_launches()
+    all_launches = launches.get_all_launches()
 
     context = {
-        'launches': launches,
+        'launches': all_launches,
     }
     return render(request, 'launches/index.html', context)
 
 def detail(request, flight_number):
     launch = launches.get_launch_by_flight_number(flight_number)
-    launchpad = launchpads.get_launchpad_by_site_id(launch_json['launch_site']['site_id'])
+    launchpad = launchpads.get_launchpad_by_site_id(launch['launch_site']['site_id'])
     
     context = {
         'launch': launch, 
