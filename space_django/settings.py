@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['jdineen.co.uk', '192.168.0.23']
 
 INSTALLED_APPS = [
     'spacex.apps.SpacexConfig',
+    'cores.apps.CoresConfig',
     'launches.apps.LaunchesConfig',
     'launchpads.apps.LaunchpadsConfig',
     
