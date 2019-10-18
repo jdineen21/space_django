@@ -29,6 +29,10 @@
                     {% endif %}
                 </div>
                 <h1>{{ launch.mission_name }} | {{ launch.rocket.rocket_name }}</h1>
+                {% if launch.upcoming %}
+                    <div class="upcoming_launch">Upcoming Launch</div>                
+                {% else %}
+                {% endif %}
                 <h3>Flight Number: {{ launch.flight_number }}</h3>
                 <table>
                     <tr>

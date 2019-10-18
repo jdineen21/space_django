@@ -38,7 +38,26 @@
                         <li>{{ vehicle }}</li>
                     {% endfor %}
                 </ul>
-                <h2>Launches</h2>
+                <h2>Upcoming Launches</h2>
+                <table>
+                    <tr>
+                        <td><h3>Mission Name</h3></td>
+                        <td><h3>Vehicle</h3></td>
+                        <td><h3>Launch Date</h3></td>
+                        <td><h3>Launch Success</h3></td>
+                    </tr>
+                    {% for launch in upcoming_launches %}
+                        {% if launch.launch_site.site_id == launchpad.site_id %}
+                            <tr>
+                                <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
+                                <td>{{ launch.rocket.rocket_name }}</td>
+                                <td>{{ launch.launch_datetime|date }}</td>
+                                <td>{{ launch.launch_success }}</td>
+                            </tr>
+                        {% endif %}        
+                    {% endfor %}
+                </table>
+                <h2>Past Launches</h2>
                 <table>
                     <tr>
                         <td>Attempted Launches:</td>
@@ -57,7 +76,7 @@
                             <td><h3>Launch Date</h3></td>
                             <td><h3>Launch Success</h3></td>
                         </tr>
-                        {% for launch in launches %}
+                        {% for launch in past_launches %}
                             {% if launch.launch_site.site_id == launchpad.site_id %}
                                 <tr>
                                     <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>

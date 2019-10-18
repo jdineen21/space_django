@@ -23,6 +23,14 @@
     float: right;
 }
 
+.upcoming_launch {
+    padding: 0.7em 1.1em;
+    display: inline-block;
+    background: #20b9e8;
+    color: #ffffff;
+    font-weight: 500;
+}
+
 .press_kit {
     padding: 0.5em 1em;
     display: block;
