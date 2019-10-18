@@ -5,4 +5,4 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 
 def detail(request, core_serial):
-    return
+    return render(request, 'cores/detail.html')

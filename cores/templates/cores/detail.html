@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cores/detail.css' %}">
+{% endblock %}
+
+{% block title %}{{ launch.mission_name }}{% endblock %}
+
+{% block content %}
+    {% if not launch.error %}
+
+    {% else %}
+        <h2>Error</h2>
+        <p>{{ launch.error }}</p>
+    {% endif %}
+{% endblock %}

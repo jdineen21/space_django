@@ -7,5 +7,5 @@ urlpatterns = [
     # ex: cores/
     #path('', views.index, name='index'),
     # ex: cores/5/
-    path('<str:site_id>/', views.detail, name='detail'),
+    path('<str:core_serial>/', views.detail, name='detail'),
 ]
