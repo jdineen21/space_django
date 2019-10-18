@@ -18,6 +18,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('spacex/', include('spacex.urls')),
+    path('spacex/cores', include('cores.urls')),
     path('spacex/launches/', include('launches.urls')),
     path('spacex/launchpads/', include('launchpads.urls')),
 
