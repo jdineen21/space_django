@@ -58,10 +58,13 @@
     width: 50%;
 }
 
-.launch_assets {
+.side_bar {
     float: left;
     width: 30%;
-    max-height: 90vh;
+}
+
+.launch_assets {
+    max-height: 75vh;
     overflow: auto;
 }
 
