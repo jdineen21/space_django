@@ -100,12 +100,24 @@
                                     {% if launch.rocket.second_stage.payloads|length > 1 %}
                                         <h3>Payload {{ forloop.counter }}</h3>
                                     {% endif %}
-                                    <p>Payload: {{ payload.payload_id }}</p>
-                                    <p>Customers: {{ payload.customers|join:", " }}</p>
-                                    <p>Nationality: {{ payload.nationality }}</p>
-                                    <p>Manufacturer: {{ payload.manufacturer }}</p>
-                                    <p>Payload Type: {{ payload.payload_type }}</p>
-                                    <p>Payload Mass: {{ payload.payload_mass_kg }}kg</p>
+                                    {% if payload.payload_id %}
+                                        <p>Payload: {{ payload.payload_id }}</p>
+                                    {% endif %}
+                                    {% if payload.customers %}
+                                        <p>Customers: {{ payload.customers|join:", " }}</p>
+                                    {% endif %}
+                                    {% if payload.nationality %}
+                                        <p>Nationality: {{ payload.nationality }}</p>
+                                    {% endif %}
+                                    {% if payload.manufacturer %}
+                                        <p>Manufacturer: {{ payload.manufacturer }}</p>
+                                    {% endif %}
+                                    {% if payload.payload_type %}
+                                        <p>Payload Type: {{ payload.payload_type }}</p>
+                                    {% endif %}
+                                    {% if payload.payload_mass_kg %}
+                                        <p>Payload Mass: {{ payload.payload_mass_kg }} ({{ payload.payload_mass_lbs }}lbs)</p>
+                                    {% endif %}                                    
                                 {% endfor %}
                             </div>
                         {% endif %}
