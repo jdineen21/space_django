@@ -42,37 +42,34 @@
                         <td>Date:</td>
                         <td>{{ launch.launch_datetime|date:"D, d M Y" }}</td>
                     <tr>
-                    <tr>
-                        <td>Time:</td>
-                        <td>{{ launch.launch_datetime|time }}</td>
-                    <tr>
-                    {% if launch.is_tentative %}
+                    {% if launch.is_tentative == False and launch.launch_datetime|time != "midnight" %}
                         <tr>
-                            <td>Launch Data Tentative:</td>
-                            <td>{{ launch.is_tentative }}</td>
-                        <tr>
-                        <tr>
-                            <td>Launch Data Precision:</td>
-                            <td>{{ launch.tentative_max_precision }}</td>
-                        <tr>
-                        <tr>
-                            <td>Launch Date TBD:</td>
-                            <td>{{ launch.tbd }}</td>
+                            <td>Time:</td>
+                            <td>{{ launch.launch_datetime|time }}</td>
                         <tr>
                     {% endif %}
                 </table>
+                {% if launch.is_tentative %}
+                    <p>Launch date is tentative,
+                    {% if launch.tentative_max_precision %}
+                        stated launch date is accurate to a {{ launch.tentative_max_precision }}.
+                        {% if launch.tbd %}
+                            The launch date is to be determined.
+                        {% endif %}
+                    {% endif %}
+                    </p>
+                {% endif %}
                 <h2>Launch Site</h2>
                 <a href="{% url 'launchpads:detail' launch.launch_site.site_id %}">
                     {{ launch.launch_site.site_name_long }}
                 </a>
-                {% if launcd.details %}
+                {% if launch.details %}
                     <h2>Launch Details</h2>
                     <p class="launch_description">{{ launch.details }}</p>
                 {% endif %}
-                {% comment %} Needs looking at due to display issues/not being required {% endcomment %}
                 {% if launch.launch_failure_details.reason %}
                     <h2>Launch Failure Details</h2>
-                    <p>{{ launch.launch_failure_details.reason }}</p>
+                    <p>{{ launch.launch_failure_details.reason|capfirst }}</p>
                 {% endif %}
                 {% if not launch.crew is None %}
                     <h2>Crew</h2>
