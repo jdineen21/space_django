@@ -66,7 +66,7 @@
                     {{ launch.launch_site.site_name_long }}
                 </a>
                 <h2>Launch Details</h2>
-                <p>{{ launch.details }}</p>
+                <p class="launch_description">{{ launch.details }}</p>
                 {% comment %} Needs looking at due to display issues/not being required {% endcomment %}
                 {% if launch.launch_failure_details.reason %}
                     <h2>Launch Failure Details</h2>

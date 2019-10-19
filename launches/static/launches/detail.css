@@ -47,6 +47,10 @@
     font-weight: 500;
 }
 
+.launch_description {
+    width: 85%;
+}
+
 .press_kit {
     padding: 0.5em 1em;
     display: block;
