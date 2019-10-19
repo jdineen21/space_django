@@ -26,9 +26,10 @@ def detail(request, flight_number):
     
     launches_related = []
     for launch_temp in launches_all:
-        if launch_temp['flight_number'] != flight_number:
-            if launch_temp['mission_id'] == launch['mission_id']:
-                launches_related.append(launch_temp)
+        if launch_temp['mission_id'] != []:
+            if launch_temp['flight_number'] != flight_number:
+                if launch_temp['mission_id'] == launch['mission_id']:
+                    launches_related.append(launch_temp)
     
     context = {
         'launch': launch, 
