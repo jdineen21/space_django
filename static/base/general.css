@@ -1,0 +1,19 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue","Helvetica";
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+}
+
+table .first_row td h3 {
+    text-align: center;
+}
+
+table tr td {
+    padding-right: 1.5em;
+}

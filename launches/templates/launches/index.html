@@ -6,18 +6,36 @@
     <link rel="stylesheet" type="text/css" href="{% static 'launches/index.css' %}">
 {% endblock %}
 
-{% block title %}Launches{% endblock %}
+{% block title %}All SpaceX Launches{% endblock %}
 
 {% block content %}
     <div class="launches_container">
         <h1>All Launches</h1>
-        <table>
-            <tr>
-                <td><h3>Mission Name</h3></td>
+        <table class="launches_table">
+            <tr class="first_row">
+                <td><h3>Flight<br>no.</h3></td>
+                <td><h3>Mission<br>Name</h3></td>
                 <td><h3>Vehicle</h3></td>
-                <td><h3>Launch Site</h3></td>
-                <td><h3>Launch Date</h3></td>
+                <td><h3>Launch<br>Site</h3></td>
+                <td><h3>Launch<br>Date</h3></td>
+                <td></td>
             </tr>
+            {% for launch in launches %}
+                <tr>
+                    <td><p style="text-align: center;">{{ launch.flight_number }}</p></td>
+                    <td><a href="{% url 'launches:detail' launch.flight_number %}"><p>{{ launch.mission_name }}</p></a></td>
+                    <td><p>{{ launch.rocket.rocket_name }}</p></td>
+                    <td><a href="{% url 'launchpads:detail' launch.launch_site.site_id %}"><p>{{ launch.launch_site.site_name }}</p></a></td>
+                    <td><p>{{ launch.launch_datetime|date:"D, d M Y" }}</p></td>
+                    {% if launch.launch_success == True %}
+                        <td><div class="successful_launch">Successful Launch</div></td>
+                    {% elif launch.launch_success == False %}
+                        <td><div class="fail_launch">Launch Failure</div></td>
+                    {% elif launch.upcoming %}
+                        <td><div class="upcoming_launch">Upcoming Launch</div></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
         </table>
     </div>
 {% endblock  %}

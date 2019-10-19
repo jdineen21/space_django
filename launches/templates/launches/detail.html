@@ -29,11 +29,11 @@
                     {% endif %}
                 </div>
                 <h1>{{ launch.mission_name }} | {{ launch.rocket.rocket_name }}</h1>
-                {% if launch.launch_success %}
+                {% if launch.launch_success == True %}
                     <div class="successful_launch">Successful Launch</div>
-                {% elif not launch.launch_success %}
+                {% elif launch.launch_success == False %}
                     <div class="fail_launch">Launch Failure</div>
-                {% elif launch.upcoming %}
+                {% elif launch.upcoming == True %}
                     <div class="upcoming_launch">Upcoming Launch</div>
                 {% endif %}
                 <h3>Flight Number: {{ launch.flight_number }}</h3>
