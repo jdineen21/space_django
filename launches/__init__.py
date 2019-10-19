@@ -37,7 +37,7 @@ def get_upcoming_launches():
         launch_datetime = datetime.datetime.fromtimestamp(launches_json[i]['launch_date_unix'])
         launches_json[i]['launch_datetime'] = launch_datetime
 
-    return launches_json[::-1]
+    return launches_json
 
 def get_launch_by_flight_number(flight_number):
     url = 'https://api.spacexdata.com/v3/launches/%s/' % (flight_number)
