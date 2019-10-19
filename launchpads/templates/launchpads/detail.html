@@ -38,18 +38,18 @@
                         <li>{{ vehicle }}</li>
                     {% endfor %}
                 </ul>
-                <h2>Past Launches</h2>
-                <table>
-                    <tr>
-                        <td>Attempted Launches:</td>
-                        <td>{{ launchpad.attempted_launches }}</td>
-                    </tr>
-                    <tr>
-                        <td>Successful Launches:</td>
-                        <td>{{ launchpad.successful_launches }}</td>
-                    </tr>
-                </table>
-                {% if not launchpad.attempted_launches == 0 %}
+                {% if past_launches_at_site %}
+                    <h2>Past Launches</h2>
+                    <table>
+                        <tr>
+                            <td>Attempted Launches:</td>
+                            <td>{{ launchpad.attempted_launches }}</td>
+                        </tr>
+                        <tr>
+                            <td>Successful Launches:</td>
+                            <td>{{ launchpad.successful_launches }}</td>
+                        </tr>
+                    </table>
                     <table>
                         <tr class="first_row">
                             <td><h3>Mission Name</h3></td>
@@ -57,18 +57,18 @@
                             <td><h3>Launch Date</h3></td>
                             <td><h3>Launch</h3></td>
                         </tr>
-                        {% for launch in past_launches %}
+                        {% for launch in past_launches_at_site %}
                             {% if launch.launch_site.site_id == launchpad.site_id %}
                                 <tr>
                                     <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
                                     <td>{{ launch.rocket.rocket_name }}</td>
                                     <td>{{ launch.launch_datetime|date }}</td>
                                     {% if launch.launch_success == True %}
-                                        <td><div class="launch_outcome" style="background: #0f9131;">Success</div></td>
+                                        <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
                                     {% elif launch.launch_success == False %}
-                                        <td><div class="launch_outcome" style="background: #ff0000;">Failure</div></td>
+                                        <td><div class="bool_box" style="background: #ff0000;">Failure</div></td>
                                     {% elif launch.upcoming %}
-                                        <td><div class="launch_outcome" style="background: #20b9e8;">Upcoming</div></td>
+                                        <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
                                     {% endif %}
                                 </tr>
                             {% endif %}        
@@ -90,31 +90,25 @@
                     >
                     </iframe>
                 </div>
-                <h2>Upcoming Launches</h2>
-                <table>
-                    <tr class="first_row">
-                        <td><h3>Mission Name</h3></td>
-                        <td><h3>Vehicle</h3></td>
-                        <td><h3>Launch Date</h3></td>
-                        <td><h3>Launch</h3></td>
-                    </tr>
-                    {% for launch in upcoming_launches %}
-                        {% if launch.launch_site.site_id == launchpad.site_id %}
+                {% if upcoming_launches_at_site %}
+                    <h2>Upcoming Launches</h2>
+                    <table>
+                        <tr class="first_row">
+                            <td><h3>Mission Name</h3></td>
+                            <td><h3>Vehicle</h3></td>
+                            <td><h3>Launch Date</h3></td>
+                            <td><h3>Launch</h3></td>
+                        </tr>
+                        {% for launch in upcoming_launches_at_site %}
                             <tr>
                                 <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
                                 <td>{{ launch.rocket.rocket_name }}</td>
                                 <td>{{ launch.launch_datetime|date }}</td>
-                                {% if launch.launch_success == True %}
-                                    <td><div class="launch_outcome" style="background: #0f9131;">Success</div></td>
-                                {% elif launch.launch_success == False %}
-                                    <td><div class="launch_outcome" style="background: #ff0000;">Failure</div></td>
-                                {% elif launch.upcoming %}
-                                    <td><div class="launch_outcome" style="background: #20b9e8;">Upcoming</div></td>
-                                {% endif %}
-                            </tr>
-                        {% endif %}        
-                    {% endfor %}
-                </table>
+                                <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
+                            </tr>   
+                        {% endfor %}
+                    </table>
+                {% endif %}
             </div>
         </div>
     {% else %}

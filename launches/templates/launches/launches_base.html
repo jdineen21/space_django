@@ -25,11 +25,11 @@
                     <td><a href="{% url 'launchpads:detail' launch.launch_site.site_id %}"><p>{{ launch.launch_site.site_name }}</p></a></td>
                     <td><p>{{ launch.launch_datetime|date:"D, d M Y" }}</p></td>
                     {% if launch.launch_success == True %}
-                        <td><div class="launch_outcome" style="background: #0f9131;">Success</div></td>
+                        <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
                     {% elif launch.launch_success == False %}
-                        <td><div class="launch_outcome" style="background: #ff0000;">Failure</div></td>
+                        <td><div class="bool_box" style="background: #ff0000;">Failure</div></td>
                     {% elif launch.upcoming %}
-                        <td><div class="launch_outcome" style="background: #20b9e8;">Upcoming</div></td>
+                        <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
                     {% endif %}
                 </tr>
             {% endfor %}

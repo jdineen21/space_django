@@ -8,6 +8,7 @@ body {
     -webkit-font-smoothing: antialiased;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
 }
 
 table .first_row td h3 {
@@ -18,7 +19,7 @@ table tr td {
     padding-right: 1.5em;
 }
 
-.launch_outcome {
+.bool_box {
     padding: 0.7em 1.1em;
     display: inline-block;
     color: #ffffff;

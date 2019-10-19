@@ -7,7 +7,7 @@ from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 
 def index(request):
     context = {
-        'launchpads': api.get_launchpads(),
+        'launchpads': launchpads.get_launchpads(),
     }
     return render(request, 'launchpads/index.html', context)
 
@@ -17,9 +17,19 @@ def detail(request, site_id):
     past_launches = launches.get_past_launches()
     upcoming_launches = launches.get_upcoming_launches()
 
+    past_launches_at_site = []
+    for launch in past_launches:
+        if launch['launch_site']['site_id'] == launchpad['site_id']:
+            past_launches_at_site.append(launch)
+
+    upcoming_launches_at_site = []
+    for launch in upcoming_launches:
+        if launch['launch_site']['site_id'] == launchpad['site_id']:
+            upcoming_launches_at_site.append(launch)
+
     context = {
         'launchpad': launchpad,
-        'past_launches': past_launches,
-        'upcoming_launches': upcoming_launches,
+        'past_launches_at_site': past_launches_at_site,
+        'upcoming_launches_at_site': upcoming_launches_at_site,
     }
     return render(request, 'launchpads/detail.html', context)

@@ -5,17 +5,28 @@
     <link rel="stylesheet" type="text/css" href="{% static 'launchpads/index.css' %}">
 {% endblock %}
 
-{% block title %}{{ launchpad.name }}{% endblock %}
+{% block title %}SpaceX Launchpads{% endblock %}
 
 {% block content %}
-    {% if not launchpads.error %}
-        <div class="launchpads_container">
+    <div class="launchpads_container">
+        <h1>{% block header %}{% endblock  %}</h1>
+        <table class="launchpads_table">
+            <tr class="first_row">
+                <td><h3>Site Name</h3></td>
+                <td><h3>Status</h3></td>
+            </tr>
             {% for launchpad in launchpads %}
-                <a href="{% url 'launchpads:detail' launchpad.site_id %}"><h1>{{ launchpad.site_name_long }}</h1></a>
+                <tr>
+                    <td><a href="{% url 'launchpads:detail' launchpad.site_id %}"><p>{{ launchpad.name }}</p></a></td>
+                    {% if launchpad.status == "active" %}
+                        <td><div class="bool_box" style="background: #0f9131;">Active</div></td>
+                    {% elif launchpad.status == "under construction" %}
+                        <td><div class="bool_box" style="background: #ff0000;">Under Construction</div></td>
+                    {% elif launchpad.status == "retired" %}
+                        <td><div class="bool_box" style="background: #20b9e8;">Retired</div></td>
+                    {% endif %}
+                </tr>
             {% endfor %}
-        </div>
-    {% else %}
-        <h2>Error</h2>
-        <p>{{ launchpads.error }}</p>
-    {% endif %}
-{% endblock %}
+        </table>
+    </div>
+{% endblock  %}
