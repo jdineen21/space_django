@@ -1,0 +1,11 @@
+
+.rocket_container {
+    padding: 0 3em;
+    float: left;
+    width: 100%;
+}
+
+.rocket_img {
+    width: 40%;
+    float: right;
+}

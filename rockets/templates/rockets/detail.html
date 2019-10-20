@@ -1,0 +1,44 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+{% load humanize %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'rockets/detail.css' %}">
+{% endblock %}
+
+{% block title %}{{ rocket.rocket_name }}{% endblock %}
+
+{% block content %}
+    {% if not rocket.error %}
+        <div class="rocket_container">
+            <img class="rocket_img" src="{{ rocket.flickr_images|first }}">
+            <h1>{{ rocket.rocket_name }}</h1>
+            <h2>First Flight</h2>
+            <p>{{ rocket.first_flight }}</p>
+            <h2>Stats</h2>
+            <h3>Mass</h3>
+            <p>{{ rocket.mass.kg|intcomma }}kg</p>
+            <p>{{ rocket.mass.lb|intcomma }}lbs</p>
+            <h3>Height</h3>
+            <p>{{ rocket.height.meters }}m</p>
+            <p>{{ rocket.height.feet }}ft</p>
+            <h3>Diameter</h3>
+            <p>{{ rocket.diameter.meters }}m</p>
+            <p>{{ rocket.diameter.feet }}ft</p>
+            <h3>Cost per Launch</h3>
+            <p>${{ rocket.cost_per_launch|intcomma }}</p>
+            <h2>Description</h2>
+            <p>{{ rocket.description }}</p>
+            <h2>Payload Configurations</h2>
+            {% for payload in rocket.payload_weights %}
+                <h3>{{ payload.name }}</h3>
+                <p>{{ payload.kg|intcomma }}kg</p>
+                <p>{{ payload.lb|intcomma }}lb</p>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2>Error</h2>
+        <p>{{ rocket.error }}</p>
+    {% endif %}
+{% endblock %}
