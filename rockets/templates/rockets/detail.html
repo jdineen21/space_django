@@ -16,18 +16,28 @@
             <h1>{{ rocket.rocket_name }}</h1>
             <h2>First Flight</h2>
             <p>{{ rocket.first_flight }}</p>
-            <h2>Stats</h2>
-            <h3>Mass</h3>
-            <p>{{ rocket.mass.kg|intcomma }}kg</p>
-            <p>{{ rocket.mass.lb|intcomma }}lbs</p>
-            <h3>Height</h3>
-            <p>{{ rocket.height.meters }}m</p>
-            <p>{{ rocket.height.feet }}ft</p>
-            <h3>Diameter</h3>
-            <p>{{ rocket.diameter.meters }}m</p>
-            <p>{{ rocket.diameter.feet }}ft</p>
-            <h3>Cost per Launch</h3>
-            <p>${{ rocket.cost_per_launch|intcomma }}</p>
+            <div class="stats">
+                <h2>Stats</h2>
+                <div class="stat">
+                    <h3>Mass</h3>
+                    <p>{{ rocket.mass.kg|intcomma }}kg</p>
+                    <p>{{ rocket.mass.lb|intcomma }}lbs</p>
+                </div>
+                <div class="stat">
+                    <h3>Height</h3>
+                    <p>{{ rocket.height.meters }}m</p>
+                    <p>{{ rocket.height.feet }}ft</p>
+                </div>
+                <div class="stat">
+                    <h3>Diameter</h3>
+                    <p>{{ rocket.diameter.meters }}m</p>
+                    <p>{{ rocket.diameter.feet }}ft</p>
+                </div>
+                <div class="stat">
+                    <h3>Cost per Launch</h3>
+                    <p>${{ rocket.cost_per_launch|intcomma }}</p>
+                </div>
+            </div>
             <h2>Description</h2>
             <p>{{ rocket.description }}</p>
             <h2>Payload Configurations</h2>

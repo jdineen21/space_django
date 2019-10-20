@@ -21,7 +21,7 @@
                 <tr>
                     <td><p style="text-align: center;">{{ launch.flight_number }}</p></td>
                     <td><a href="{% url 'launches:detail' launch.flight_number %}"><p>{{ launch.mission_name }}</p></a></td>
-                    <td><p>{{ launch.rocket.rocket_name }}</p></td>
+                    <td><a href="{% url 'rockets:detail' launch.rocket.rocket_id %}"><p>{{ launch.rocket.rocket_name }}</p></a></td>
                     <td><a href="{% url 'launchpads:detail' launch.launch_site.site_id %}"><p>{{ launch.launch_site.site_name }}</p></a></td>
                     <td><p>{{ launch.launch_datetime|date:"D, d M Y" }}</p></td>
                     {% if launch.launch_success == True %}

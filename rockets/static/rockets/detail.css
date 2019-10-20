@@ -9,3 +9,17 @@
     width: 40%;
     float: right;
 }
+
+.stats {
+    display: inline-block;
+    width: 45%;
+}
+
+.stats h2 {
+    margin-bottom: 0.1em;
+}
+
+.stat {
+    float: left;
+    width: 50%;
+}
