@@ -21,6 +21,8 @@ urlpatterns = [
     path('spacex/cores/', include('cores.urls')),
     path('spacex/launches/', include('launches.urls')),
     path('spacex/launchpads/', include('launchpads.urls')),
+    #path('spacex/landingpads/', include('landingpads.urls')),
+    path('spacex/rockets/', include('rockets.urls')),
 
     path('admin/', admin.site.urls),
 ]

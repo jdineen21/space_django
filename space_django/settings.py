@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'cores.apps.CoresConfig',
     'launches.apps.LaunchesConfig',
     'launchpads.apps.LaunchpadsConfig',
+    #'landingpads.apps.LandingpadsConfig',
+    'rockets.apps.RocketsConfig',
     
     'django.contrib.admin',
     'django.contrib.auth',
