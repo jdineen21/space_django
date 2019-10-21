@@ -1,6 +1,6 @@
 
 #content {
-    padding-top: 4em;
+    padding: 4em 0 0 0;
     transition: padding 0.3s;
 }
 
@@ -17,6 +17,7 @@
     font-family: "Raleway";
     height: 4em;
     width: 100vw;
+    user-select: none;
 }
 
 #menu_burger {
