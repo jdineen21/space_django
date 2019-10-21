@@ -6,11 +6,18 @@
     <link rel="stylesheet" type="text/css" href="{% static 'base/base.css' %}">
     {% block stylesheet %}{% endblock  %}
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+    <script type="text/javascript" src="{% static 'base/js/dropdown.js' %}"></script>
     <title>{% block title %}Homepage{% endblock %}</title>
 </head>
 
 <body>
     <div id="navbar">
+        <div id="menu_burger" onclick="slideMenu(this)">&#9776;</div>
+        <div id="img_container">
+            <img src="{% static "base/images/spacex_logo_white.png" %}" alt="SpaceX Logo">
+        </div>
+    </div>
+    <div id="dropdown">
         <ul>
             <li>
                 <a href="">Home</a>

@@ -1,6 +1,7 @@
 
 #content {
-    padding: 0 10%;
+    padding-top: 4em;
+    transition: padding 0.3s;
 }
 
 .container {
@@ -11,35 +12,67 @@
 }
 
 #navbar {
-    padding-left: 10%;
+    position: fixed;
     background: #000000;
     font-family: "Raleway";
+    height: 4em;
+    width: 100vw;
 }
 
-#navbar ul {
+#menu_burger {
+    padding: 0 1em;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 2em;
+    line-height: 2em;
+    float: left;
+    height: 100%;
+}
+
+#img_container {
+    padding-top: 0.6em;
+    float: left;
+}
+
+#img_container img {
+    height: 2em;
+}
+
+#dropdown {
+    position: fixed;
+    top: 4em;
+    left: -10em;
+    transition: left 0.3s;
+    background-color: #222;
+    width: 10em;
+    height: 100vh;
+    min-height: 500px;
+}
+
+#dropdown ul {
     margin: 0;
     padding: 0;
-    padding-left: 2.5em;
+    padding-top: 0.5em;
     list-style-type: none;
 }
 
-#navbar ul li {
-    margin-right: 1em;
-    display: inline-block;
-    line-height: 4em;
+#dropdown ul li {
+    padding: 0 1em;
+    line-height: 3em;
 }
 
-#navbar ul li a {
+#dropdown ul li a {
     padding: 0 0.5em;
     display: inline-block;
     color: #ffffff;
     font-weight: 600;
     line-height: 2.5em;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: background 0.3s;
+    width: 100%;
 }
 
-#navbar ul li a:hover {
-    color: #808080;
-    transition: color 0.3s;
+#dropdown ul li a:hover {
+    background: #000000;
+    transition: background 0.3s;
 }
