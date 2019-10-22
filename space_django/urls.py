@@ -17,12 +17,11 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('spacex/', include('spacex.urls')),
-    path('spacex/cores/', include('cores.urls')),
-    path('spacex/launches/', include('launches.urls')),
-    path('spacex/launchpads/', include('launchpads.urls')),
-    #path('spacex/landingpads/', include('landingpads.urls')),
-    path('spacex/rockets/', include('rockets.urls')),
+    path('cores/', include('cores.urls')),
+    path('launches/', include('launches.urls')),
+    path('launchpads/', include('launchpads.urls')),
+    #path('landingpads/', include('landingpads.urls')),
+    path('rockets/', include('rockets.urls')),
 
     path('admin/', admin.site.urls),
 ]
