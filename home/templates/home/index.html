@@ -8,4 +8,32 @@
 {% block title %}SpaceX{% endblock %}
 
 {% block content %}
+    <div class="index_container">
+        <img src="https://live.staticflickr.com/65535/48380511492_51db1bf984_o_d.jpg">
+        <div class="blackbar"></div>
+        <div class="upcoming_launches">
+            {% if upcoming_launches %}
+                <div class="upcoming_launches_header">
+                    <h2>Upcoming Launches</h2>
+                    <p><a href="{% url 'launches:upcoming' %}">View More</a></p>
+                </div>
+                <table>
+                    <tr class="first_row">
+                        <td><h3>Mission Name</h3></td>
+                        <td><h3>Vehicle</h3></td>
+                        <td><h3>Launch Date</h3></td>
+                        <td><h3>Launch</h3></td>
+                    </tr>
+                    {% for launch in upcoming_launches %}
+                        <tr>
+                            <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
+                            <td><p><a href="{% url 'rockets:detail' launch.rocket.rocket_id %}">{{ launch.rocket.rocket_name }}</a></p></td>
+                            <td>{{ launch.launch_datetime|date }}</td>
+                            <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
+                        </tr>   
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
