@@ -2,7 +2,7 @@ import requests
 
 from django.utils import timezone
 
-from iterapi.models import Request
+from .models import Request
 
 def call(url):
     response = requests.get(url)

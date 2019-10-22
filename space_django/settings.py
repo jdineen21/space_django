@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['jdineen.co.uk', '192.168.0.23']
 # Application definition
 
 INSTALLED_APPS = [
-    'iterapi.apps.IterapiConfig',
+    'interapi.apps.InterapiConfig',
     'home.apps.HomeConfig',
     'cores.apps.CoresConfig',
     'launches.apps.LaunchesConfig',
