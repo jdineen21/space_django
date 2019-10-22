@@ -39,6 +39,21 @@
     height: 2em;
 }
 
+#social_container {
+    margin: 0.5em 1em;
+    float: right;
+    background: #ffffff;
+}
+
+#social_container a {
+    display: inline-block;
+}
+
+#social_container img {
+    height: 3em;
+    vertical-align:bottom; 
+}
+
 #dropdown {
     position: fixed;
     top: 4em;

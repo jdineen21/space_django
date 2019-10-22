@@ -61,7 +61,7 @@
                             {% if launch.launch_site.site_id == launchpad.site_id %}
                                 <tr>
                                     <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
-                                    <td>{{ launch.rocket.rocket_name }}</td>
+                                    <td><p><a href="{% url 'rockets:detail' launch.rocket.rocket_id %}">{{ launch.rocket.rocket_name }}</a></p></td>
                                     <td>{{ launch.launch_datetime|date }}</td>
                                     {% if launch.launch_success == True %}
                                         <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
@@ -102,7 +102,7 @@
                         {% for launch in upcoming_launches_at_site %}
                             <tr>
                                 <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
-                                <td>{{ launch.rocket.rocket_name }}</td>
+                                <td><p><a href="{% url 'rockets:detail' launch.rocket.rocket_id %}">{{ launch.rocket.rocket_name }}</a></p></td>
                                 <td>{{ launch.launch_datetime|date }}</td>
                                 <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
                             </tr>   
