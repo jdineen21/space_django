@@ -11,7 +11,7 @@
     min-height: calc(100vh - 4em);
 }
 
-#navbar {
+#topbar {
     position: fixed;
     background: #000000;
     font-family: "Raleway";
@@ -54,7 +54,7 @@
     vertical-align:bottom; 
 }
 
-#dropdown {
+#sidebar {
     position: fixed;
     top: 4em;
     left: -10em;
@@ -65,19 +65,19 @@
     min-height: 500px;
 }
 
-#dropdown ul {
+#sidebar > ul {
     margin: 0;
     padding: 0;
     padding-top: 0.5em;
     list-style-type: none;
 }
 
-#dropdown ul li {
+#sidebar ul li {
     padding: 0 1em;
     line-height: 3em;
 }
 
-#dropdown ul li a {
+#sidebar ul li a {
     padding: 0 0.5em;
     display: inline-block;
     color: #ffffff;
@@ -88,7 +88,11 @@
     width: 100%;
 }
 
-#dropdown ul li a:hover {
+#sidebar ul li a:hover {
     background: #000000;
     transition: background 0.3s;
+}
+
+.panel ul {
+    padding: 0;
 }

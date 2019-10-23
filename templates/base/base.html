@@ -6,12 +6,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'base/base.css' %}">
     {% block stylesheet %}{% endblock  %}
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
-    <script type="text/javascript" src="{% static 'base/js/dropdown.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base/js/sidebar.js' %}"></script>
     <title>{% block title %}Homepage{% endblock %}</title>
 </head>
 
 <body>
-    <div id="navbar">
+    <div id="topbar">
         <div id="menu_burger" onclick="slideMenu(this)">&#9776;</div>
         <div id="img_container">
             <img src="{% static "base/images/spacex_logo_white.png" %}" alt="SpaceX Logo">
@@ -22,29 +22,57 @@
             </a>
         </div>
     </div>
-    <div id="dropdown">
+    <div id="sidebar">
         <ul>
             <li>
                 <a href="{% url 'home:index' %}">Home</a>
             </li>
-            <li>
+            <li class="accordian">
                 <a href="{% url 'launches:past' %}">Launches</a>
             </li>
-            <li>
+            <div class="panel">
+                <ul>
+                    <li>
+                        <a href="{% url 'launches:index' %}">All</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'launches:past' %}">Past</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'launches:upcoming' %}">Upcoming</a>
+                    </li>
+                </ul>
+            </div>
+            <li class="accordian">
                 <a href="{% url 'launchpads:index' %}">Launch Pads</a>
             </li>
-            <li>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <li class="accordian">
                 <a href="">Landing Pads</a>
             </li>
-            <li>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <li class="accordian">
                 <a href="">Rockets</a>
             </li>
-            <li>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <li class="accordian">
                 <a href="">Dragons</a>
             </li>
-            <li>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <li class="accordian">
                 <a href="">Ships</a>
             </li>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
             <li>
                 <a href="">About</a>
             </li>
