@@ -1,11 +1,11 @@
 import requests
 import datetime
-import iterapi
+import interapi
 
 ### Launches api ###
 
 def get_all_launches():
-    launches_json = iterapi.call('https://api.spacexdata.com/v3/launches/')
+    launches_json = interapi.call('https://api.spacexdata.com/v3/launches/')
 
     # Add datetime value to each dictionary in list
     for i in range(len(launches_json)):
@@ -15,7 +15,7 @@ def get_all_launches():
     return launches_json[::-1]
 
 def get_past_launches():
-    launches_json = iterapi.call('https://api.spacexdata.com/v3/launches/past/')
+    launches_json = interapi.call('https://api.spacexdata.com/v3/launches/past/')
 
     # Add datetime value to each dictionary in list
     for i in range(len(launches_json)):

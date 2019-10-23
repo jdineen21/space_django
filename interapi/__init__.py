@@ -2,13 +2,13 @@ import requests
 
 from django.utils import timezone
 
-from .models import Request
+#from interapi.models import Request
 
 def call(url):
-    response = requests.get(url)
-    response_dict = response.json()
+    r = requests.get(url)
+    response = r.text
 
-    r = Request(url=url, response=response_dict, timestamp=timezone.now())
-    r.save()
+    #r = models.Request(url=url, response=response, timestamp=timezone.now())
+    #r.save()
 
-    return response_dict
+    return response
