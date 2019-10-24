@@ -1,11 +1,12 @@
 import requests
 import datetime
-import utils.api
 
 ### Launches api ###
 
 def get_all_launches():
-    launches_json = utils.api.call('https://api.spacexdata.com/v3/launches/')
+    url = 'https://api.spacexdata.com/v3/launches/'
+    r = requests.get(url)
+    launches_json = r.json()
 
     # Add datetime value to each dictionary in list
     for i in range(len(launches_json)):
@@ -15,12 +16,16 @@ def get_all_launches():
     return launches_json[::-1]
 
 def get_next_launch():
-    launch_json = utils.api.call('https://api.spacexdata.com/v3/launches/next/')
+    url = 'https://api.spacexdata.com/v3/launches/next/'
+    r = requests.get(url)
+    launches_json = r.json()
 
     return launch_json
 
 def get_past_launches():
-    launches_json = utils.api.call('https://api.spacexdata.com/v3/launches/past/')
+    url = 'https://api.spacexdata.com/v3/launches/past/'
+    r = requests.get(url)
+    launches_json = r.json()
 
     # Add datetime value to each dictionary in list
     for i in range(len(launches_json)):

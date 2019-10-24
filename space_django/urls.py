@@ -19,9 +19,9 @@ from django.urls import include, path
 urlpatterns = [
     path('', include('home.urls')),
     path('cores/', include('cores.urls')),
+    path('landpads/', include('landpads.urls')),
     path('launches/', include('launches.urls')),
     path('launchpads/', include('launchpads.urls')),
-    #path('landingpads/', include('landingpads.urls')),
     path('rockets/', include('rockets.urls')),
 
     path('admin/', admin.site.urls),

@@ -16,11 +16,11 @@
         <div id="img_container">
             <img src="{% static "base/images/spacex_logo_white.png" %}" alt="SpaceX Logo">
         </div>
-        <div id="social_container">
+        {% comment %} <div id="social_container">
             <a href="https://twitter.com/spacex/">
                 <img src="{% static "base/images/twitter_logo_blue.png" %}" alt="SpaceX Twitter">
             </a>
-        </div>
+        </div> {% endcomment %}
     </div>
     <div id="sidebar">
         <a href="{% url 'home:index' %}">Home</a>
@@ -41,13 +41,13 @@
         </div>
         <a class="accordion">Landing Pads</a>
         <div class="panel">
-            {% comment %} <a href="{% url 'landpads:detail' 'LZ-1' %}">Landing Zone 1</a>
+            <a href="{% url 'landpads:detail' 'LZ-1' %}">Landing Zone 1</a>
             <a href="{% url 'landpads:detail' 'LZ-2' %}">Landing Zone 2</a>
             <a href="{% url 'landpads:detail' 'LZ-4' %}">Landing Zone 4</a>
             <a href="{% url 'landpads:detail' 'JRTI' %}">Just Read The Instructions</a>
             <a href="{% url 'landpads:detail' 'JRTI-1' %}">Just Read The Instructions V1</a>
             <a href="{% url 'landpads:detail' 'OCISLY' %}">Of Course I Still Love You</a>
-            <a href="{% url 'landpads:detail' 'ASOG' %}">A Shortfall of Gravitas</a> {% endcomment %}
+            <a href="{% url 'landpads:detail' 'ASOG' %}">A Shortfall of Gravitas</a>
         </div>
         <a class="accordion">Rockets</a>
         <div class="panel">

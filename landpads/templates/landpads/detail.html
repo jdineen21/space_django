@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+
+{% block stylesheet %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'landpads/detail.css' %}">
+{% endblock %}
+
+{% block title %}{{ landpad.full_name }}{% endblock %}
+
+{% block content %}
+    {% if not landpad.error %}
+        <div class="landpad_container">
+            <h1>{{ landpad.full_name }} | {{ landpad.landing_type }}</h1>
+            {% if landpad.status == "active" %}
+                <h2 class="status_active">Active</h2>
+            {% elif landpad.status == "under construction" %}
+                <h2 class="status_under_construction">Under Construction</h2>
+            {% elif landpad.status == "retired" %}
+                <h2 class="status_retired">Retired</h2>
+            {% endif %}
+            <h2>Landingpad Details</h2>
+            <p>{{ landpad.details }}</p>
+            <table>
+                <tr>
+                    <td>Attempted Landings:</td>
+                    <td>{{ landpad.attempted_landings }}</td>
+                </tr>
+                <tr>
+                    <td>Successful Landings:</td>
+                    <td>{{ landpad.successful_landings }}</td>
+                </tr>
+            </table>
+            <h2>Location</h2>
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td>{{ landpad.location.name }}</td>
+                </tr>
+                <tr>
+                    <td>Region:</td>
+                    <td>{{ landpad.location.region }}</td>
+                </tr>
+            </table>
+        </div>
+    {% else %}
+        <h2>Error</h2>
+        <p>{{ launch.error }}</p>
+    {% endif %}
+{% endblock  %}

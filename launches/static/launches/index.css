@@ -1,7 +1,8 @@
 
 .launches_container {
+    margin: 0 auto;
     padding: 0 0 0 3em;
-    float: left;
+    width: 55%;
 }
 
 .first_row td h3 {

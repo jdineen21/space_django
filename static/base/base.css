@@ -81,6 +81,10 @@
     transition: background 0.3s;
 }
 
+.accordion {
+    user-select: none;
+}
+
 .active {
     background: #000000;
 }

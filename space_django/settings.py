@@ -31,12 +31,11 @@ ALLOWED_HOSTS = ['jdineen.co.uk', '192.168.0.23']
 # Application definition
 
 INSTALLED_APPS = [
-    'interapi.apps.InterapiConfig',
     'home.apps.HomeConfig',
     'cores.apps.CoresConfig',
+    'landpads.apps.LandpadsConfig',
     'launches.apps.LaunchesConfig',
     'launchpads.apps.LaunchpadsConfig',
-    #'landingpads.apps.LandingpadsConfig',
     'rockets.apps.RocketsConfig',
     
     'django.contrib.admin',
