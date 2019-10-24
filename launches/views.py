@@ -38,6 +38,11 @@ def detail(request, flight_number):
     }
     return render(request, 'launches/detail.html', context)
 
+def next(request):
+    next_launch = launches.get_next_launch()
+
+    return detail(request, next_launch['flight_number'])
+
 def past(request):
     past_launches = launches.get_past_launches()
 

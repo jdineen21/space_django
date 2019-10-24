@@ -55,6 +55,7 @@
 }
 
 #sidebar {
+    padding-top: 0.75em;
     position: fixed;
     top: 4em;
     left: -10em;
@@ -65,34 +66,31 @@
     min-height: 500px;
 }
 
-#sidebar > ul {
-    margin: 0;
-    padding: 0;
-    padding-top: 0.5em;
-    list-style-type: none;
-}
-
-#sidebar ul li {
-    padding: 0 1em;
-    line-height: 3em;
-}
-
-#sidebar ul li a {
-    padding: 0 0.5em;
-    display: inline-block;
+#sidebar a {
+    padding: 0.75em 1em;
+    display: block;
     color: #ffffff;
+    cursor: pointer;
     font-weight: 600;
-    line-height: 2.5em;
     text-decoration: none;
     transition: background 0.3s;
-    width: 100%;
 }
 
-#sidebar ul li a:hover {
+#sidebar a:hover {
     background: #000000;
     transition: background 0.3s;
 }
 
-.panel ul {
-    padding: 0;
+.active {
+    background: #000000;
+}
+
+.panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s;
+}
+
+.panel a {
+    background: #141414;
 }

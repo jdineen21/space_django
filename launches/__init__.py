@@ -14,6 +14,11 @@ def get_all_launches():
 
     return launches_json[::-1]
 
+def get_next_launch():
+    launch_json = utils.api.call('https://api.spacexdata.com/v3/launches/next/')
+
+    return launch_json
+
 def get_past_launches():
     launches_json = utils.api.call('https://api.spacexdata.com/v3/launches/past/')
 
