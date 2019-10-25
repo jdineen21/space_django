@@ -1,8 +1,11 @@
 
+.container {
+    text-align: center;
+}
+
 .launches_container {
-    margin: 0 auto;
-    padding: 0 0 0 3em;
-    width: 55%;
+    display: inline-block;
+    text-align: left;
 }
 
 .first_row td h3 {
