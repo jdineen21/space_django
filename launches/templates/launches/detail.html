@@ -5,6 +5,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'launches/detail.css' %}">
 {% endblock %}
 
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'base/js/launch_assets.js' %}"></script>
+{% endblock %}
+
 {% block title %}{{ launch.mission_name }}{% endblock %}
 
 {% block content %}
@@ -158,11 +162,11 @@
                     </div>
                 {% endif %}
             </div>
-            <div class="side_bar">
+            <div class="launch_side_bar">
                 <div class="launch_assets">
                     {% if launch.links.flickr_images %}
                         {% for image in launch.links.flickr_images %}
-                            <img src="{{ image }}" >
+                            <img class="flickr_image" src="{{ image }}" >
                         {% endfor %}
                     {% endif %}
                 </div>

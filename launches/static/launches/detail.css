@@ -86,16 +86,22 @@
     width: 50%;
 }
 
-.side_bar {
+.launch_side_bar {
     float: left;
     width: 30%;
 }
 
 .launch_assets {
-    max-height: 75vh;
+    position: relative;
+    z-index: 0;
     overflow: auto;
+}
+
+.launch_assets::-webkit-scrollbar {
+    width: 0 !important;
 }
 
 .launch_assets img {
     width: 100%;
+    vertical-align: bottom;
 }

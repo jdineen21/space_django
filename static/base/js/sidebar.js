@@ -17,8 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
             var act = document.getElementsByClassName("active");
             for (var i = 0; i < act.length; i++) {
                 if (act[i] != this) {
-                    console.log(act[i]);
-                    console.log(act[i].nextElementSibling);
                     panel = act[i].nextElementSibling;
                     if (panel.style.maxHeight) {
                         panel.style.maxHeight = null;
