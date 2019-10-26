@@ -13,6 +13,7 @@
     {% if not rocket.error %}
         <div class="rocket_container">
             <img class="rocket_img" src="{{ rocket.flickr_images|first }}">
+            <img class="rocket_badge_img" src="{{ launch.links.mission_patch }}">
             <h1>{{ rocket.rocket_name }}</h1>
             <h2>First Flight</h2>
             <p>{{ rocket.first_flight }}</p>
@@ -38,14 +39,20 @@
                     <p>${{ rocket.cost_per_launch|intcomma }}</p>
                 </div>
             </div>
-            <h2>Description</h2>
-            <p>{{ rocket.description }}</p>
-            <h2>Payload Configurations</h2>
-            {% for payload in rocket.payload_weights %}
-                <h3>{{ payload.name }}</h3>
-                <p>{{ payload.kg|intcomma }}kg</p>
-                <p>{{ payload.lb|intcomma }}lb</p>
-            {% endfor %}
+            <div class="description_container">
+                <h2>Description</h2>
+                <p>{{ rocket.description }}</p>
+            </div>
+            <div class="payload_container">
+                <h2>Payload Configurations</h2>
+                <div class="payload_type">
+                    {% for payload in rocket.payload_weights %}
+                        <h3>{{ payload.name }}</h3>
+                        <p>{{ payload.kg|intcomma }}kg</p>
+                        <p>{{ payload.lb|intcomma }}lb</p>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     {% else %}
         <h2>Error</h2>

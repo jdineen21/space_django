@@ -10,6 +10,12 @@
     float: right;
 }
 
+.rocket_badge_img {
+    margin-right: 3em;
+    width: 175px;
+    float: right;
+}
+
 .stats {
     display: inline-block;
     width: 45%;
@@ -22,4 +28,13 @@
 .stat {
     float: left;
     width: 50%;
+}
+
+.description_container {
+    float: left;
+    width: 30em;
+}
+
+.payload_container {
+    float: left;
 }
