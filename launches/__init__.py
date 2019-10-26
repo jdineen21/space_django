@@ -18,7 +18,7 @@ def get_all_launches():
 def get_next_launch():
     url = 'https://api.spacexdata.com/v3/launches/next/'
     r = requests.get(url)
-    launches_json = r.json()
+    launch_json = r.json()
 
     return launch_json
 
