@@ -164,11 +164,19 @@
             </div>
             <div class="launch_side_bar">
                 <div class="launch_assets">
-                    {% if launch.links.flickr_images %}
-                        {% for image in launch.links.flickr_images %}
-                            <img class="flickr_image" src="{{ image }}" >
-                        {% endfor %}
-                    {% endif %}
+                    <div id="up_arrow" class="arrow">
+                        <img class="arrow" src={% static "launches/images/arrow.png" %}>
+                    </div>
+                    <div class="images">
+                        {% if launch.links.flickr_images %}
+                            {% for image in launch.links.flickr_images %}
+                                <img class="flickr_image" src="{{ image }}" >
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div id="down_arrow"  class="arrow">
+                        <img class="arrow" src={% static "launches/images/arrow.png" %}>
+                    </div>
                 </div>
                 <div style="width: 100%">
                     <iframe

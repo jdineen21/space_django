@@ -6,7 +6,7 @@
 .launch_details {
     padding-right: 3em;
     float: left;
-    width: 70%;
+    width: 80%;
 }
 
 .top_right {
@@ -88,20 +88,36 @@
 
 .launch_side_bar {
     float: left;
-    width: 30%;
+    width: 20%;
 }
 
 .launch_assets {
-    position: relative;
-    z-index: 0;
-    overflow: auto;
+    text-align: center;
 }
 
-.launch_assets::-webkit-scrollbar {
-    width: 0 !important;
+.arrow {
+    margin: 0.2em 0;
+    padding: 0 2em;
+    display: inline-block;
+    background: #595959;
 }
 
-.launch_assets img {
+.arrow img {
+    padding: 0.5em;
+    width: 3em;
+    vertical-align: bottom;
+}
+
+#up_arrow {
+    
+}
+
+#down_arrow {
+    transform: rotate(180deg);
+}
+
+.flickr_image {
     width: 100%;
+    transition: max-height 0.5s;
     vertical-align: bottom;
 }
