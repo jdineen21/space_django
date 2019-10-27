@@ -87,15 +87,12 @@
 }
 
 .arrow {
-    margin: 0.2em 0;
-    padding: 0 2em;
-    display: inline-block;
-    background: #595959;
+    background: #DCDCDC;
 }
 
 .arrow img {
     padding: 0.5em;
-    width: 3em;
+    width: 2em;
     vertical-align: bottom;
 }
 
@@ -111,4 +108,9 @@
     width: 100%;
     transition: max-height 0.5s;
     vertical-align: bottom;
+}
+
+.map {
+    height: 400px;
+    width: 100%;
 }
