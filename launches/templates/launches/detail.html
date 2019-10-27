@@ -13,46 +13,15 @@
 
 {% block content %}
     {% if not launch.error %}
-        <div class="launch">
-            <div class="launch_details">
-                <div class="top_right">
-                    <div class="upper_container">
-                        <div class="wikipedia_container">
-                            <h3>Wikipedia Links</h3>
-                            <ul>
-                                <li>{{ launch.mission_name }} Wiki</li>
-                                <li>{{ launchpad.name }}</li>
-                                <li>{{ rocket.rocket_name }}</li>
-                            </ul>
-                        </div>
-                        {% if launch.links.mission_patch_small %}
-                            <div class="mission_patch_container">
-                                <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
-                            </div>
-                        {% endif %}
-                    </div>
-                    {% if launch.links.presskit or launch.links.video_link %}
-                        <ul class="buttons_container">
-                            {% if launch.links.presskit %}
-                                <li>
-                                    <a class="resource_link" style="background: #0f9131;" href="{{ launch.links.presskit }}" target="_blank">Download Press Kit</a>
-                                </li>
-                            {% endif %}
-                            {% if launch.links.video_link %}
-                                <li>
-                                    <a class="resource_link" style="background: #ff0000;" href="https://www.youtube.com/watch?v={{ launch.links.youtube_id }}" target="_blank">Watch Launch</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    {% endif %}
-                </div>
+        <div class="launch_details">
+            <div class="main_content">
                 <h1>{{ launch.mission_name }} | {{ launch.rocket.rocket_name }}</h1>
                 {% if launch.launch_success == True %}
-                    <div class="successful_launch">Successful Launch</div>
+                    <div class="launch_outcome" style="background: #0f9131;">Successful Launch</div>
                 {% elif launch.launch_success == False %}
-                    <div class="fail_launch">Launch Failure</div>
+                    <div class="launch_outcome" style="background: #ff0000;">Launch Failure</div>
                 {% elif launch.upcoming == True %}
-                    <div class="upcoming_launch">Upcoming Launch</div>
+                    <div class="launch_outcome" style="background: #20b9e8;">Upcoming Launch</div>
                 {% endif %}
                 <h3>Flight Number: {{ launch.flight_number }}</h3>
                 <table>
@@ -178,7 +147,38 @@
                     </div>
                 {% endif %}
             </div>
-            <div class="launch_side_bar">
+            <div class="center_content">
+                {% if launch.links.mission_patch_small %}
+                    <div class="mission_patch_container">
+                        <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+                    </div>
+                {% endif %}
+                <div class="buttons_container">
+                    {% if launch.links.presskit or launch.links.video_link %}
+                        <ul>
+                            {% if launch.links.presskit %}
+                                <li>
+                                    <a class="resource_link" style="background: #0f9131;" href="{{ launch.links.presskit }}" target="_blank">Download Press Kit</a>
+                                </li>
+                            {% endif %}
+                            {% if launch.links.video_link %}
+                                <li>
+                                    <a class="resource_link" style="background: #ff0000;" href="https://www.youtube.com/watch?v={{ launch.links.youtube_id }}" target="_blank">Watch Launch</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+                {% comment %} <div class="wikipedia_container">
+                    <h3>Wikipedia Links</h3>
+                    <ul>
+                        <li>{{ launch.mission_name }} Wiki</li>
+                        <li>{{ launchpad.name }}</li>
+                        <li>{{ rocket.rocket_name }}</li>
+                    </ul>
+                </div> {% endcomment %}
+            </div>
+            <div class="sidebar_content">
                 <div class="launch_assets">
                     <div id="up_arrow" class="arrow">
                         <img class="arrow" src={% static "launches/images/arrow.png" %}>
