@@ -22,13 +22,13 @@
 }
 
 #menu_burger {
-    padding: 0 1em;
+    margin: 0.4em 0.9em;
+    padding: 0.1em;
     cursor: pointer;
     color: #ffffff;
     font-size: 2em;
-    line-height: 2em;
+    line-height: 1em;
     float: left;
-    height: 100%;
 }
 
 #img_container {
