@@ -19,9 +19,9 @@
                             <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
                         </div>
                     {% endif %}
-                    {% if launch.links.presskit or launch.links.video_link %}
+                    {% if rocket.wikipedia %}
                         <div class="buttons_container">
-                            {% if launch.links.wikipedia %}
+                            {% if rocket.wikipedia %}
                                 <a class="wikipedia_link" href="{{ rocket.wikipedia }}" target="_blank">Wikipedia</a>
                             {% endif %}
                         </div>
