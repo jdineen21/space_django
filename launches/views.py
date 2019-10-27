@@ -3,6 +3,7 @@ import launches
 import launchpads
 import missions
 import payloads
+import rockets
 
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
@@ -23,6 +24,7 @@ def detail(request, flight_number):
             launch = launch_temp
 
     launchpad = launchpads.get_launchpad_by_site_id(launch['launch_site']['site_id'])
+    rocket = rockets.get_rocket_by_rocket_id(launch['rocket']['rocket_id'])
     
     launches_related = []
     for launch_temp in launches_all:
@@ -34,6 +36,7 @@ def detail(request, flight_number):
     context = {
         'launch': launch, 
         'launchpad': launchpad,
+        'rocket': rocket,
         'launches_related': launches_related,
     }
     return render(request, 'launches/detail.html', context)

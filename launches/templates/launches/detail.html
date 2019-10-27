@@ -16,21 +16,26 @@
         <div class="launch">
             <div class="launch_details">
                 <div class="top_right">
-                    {% if launch.links.mission_patch_small %}
-                        <div>
-                            <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+                    <div class="upper_container">
+                        <div class="wikipedia_container">
+                            <h3>Wikipedia Links</h3>
+                            <ul>
+                                <li>{{ launch.mission_name }} Wiki</li>
+                                <li>{{ launchpad.name }}</li>
+                                <li>{{ rocket.rocket_name }}</li>
+                            </ul>
                         </div>
-                    {% endif %}
+                        {% if launch.links.mission_patch_small %}
+                            <div class="mission_patch_container">
+                                <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+                            </div>
+                        {% endif %}
+                    </div>
                     {% if launch.links.presskit or launch.links.video_link %}
                         <ul class="buttons_container">
                             {% if launch.links.presskit %}
                                 <li>
                                     <a class="resource_link" style="background: #0f9131;" href="{{ launch.links.presskit }}" target="_blank">Download Press Kit</a>
-                                </li>
-                            {% endif %}
-                            {% if launch.links.wikipedia %}
-                                <li>
-                                    <a class="resource_link" style="background: #3e85f7;" href="{{ launch.links.wikipedia }}" target="_blank">Wikipedia</a>
                                 </li>
                             {% endif %}
                             {% if launch.links.video_link %}
@@ -77,8 +82,10 @@
                     {{ launch.launch_site.site_name_long }}
                 </a>
                 {% if launch.details %}
-                    <h2>Launch Details</h2>
-                    <p class="launch_description">{{ launch.details }}</p>
+                    <div class="launch_details_container">
+                        <h2>Launch Details</h2>
+                        <p>{{ launch.details }}</p>
+                    </div>
                 {% endif %}
                 {% if launch.launch_failure_details.reason %}
                     <h2>Launch Failure Details</h2>

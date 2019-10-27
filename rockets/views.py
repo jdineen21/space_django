@@ -1,9 +1,7 @@
 import rockets
 import launches
-import json
 
 from django.shortcuts import render
-from django.http import HttpResponse
 
 def index(request):
     rockets_all = rockets.get_all_rockets()

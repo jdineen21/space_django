@@ -27,7 +27,7 @@
                         </div>
                     {% endif %}
                 </div>
-            <h1>{{ rocket.rocket_name }}</h1>
+            <h1>{{ rocket.company }} | {{ rocket.rocket_name }}</h1>
             <h2>First Flight</h2>
             <p>{{ rocket.first_flight }}</p>
             <div class="description_container">
@@ -64,6 +64,11 @@
                         <p>{{ payload.lb|intcomma }}lb</p>
                     {% endfor %}
                 </div>
+            </div>
+            <div class="engines_container">
+                <h2>Propulsion</h2>
+                <p>{{ rocket.engines.type|capfirst }} {{ rocket.engines.version }}</p>
+                {% comment %} <p> finnsih this {% endcomment %}
             </div>
         </div>
     {% else %}
