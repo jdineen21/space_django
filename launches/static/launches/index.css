@@ -16,6 +16,14 @@
     padding-right: 1.5em;
 }
 
+.mission_patch {
+    text-align: center;
+}
+
+.mission_patch img {
+    width: 3em;
+}
+
 .successful_launch {
     padding: 0.7em 1.1em;
     display: inline-block;

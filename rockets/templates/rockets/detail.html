@@ -13,35 +13,47 @@
     {% if not rocket.error %}
         <div class="rocket_container">
             <img class="rocket_img" src="{{ rocket.flickr_images|first }}">
-            <img class="rocket_badge_img" src="{{ launch.links.mission_patch }}">
+            <div class="top_right">
+                    {% if launch.links.mission_patch_small %}
+                        <div>
+                            <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+                        </div>
+                    {% endif %}
+                    {% if launch.links.presskit or launch.links.video_link %}
+                        <div class="buttons_container">
+                            {% if launch.links.wikipedia %}
+                                <a class="wikipedia_link" href="{{ rocket.wikipedia }}" target="_blank">Wikipedia</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
             <h1>{{ rocket.rocket_name }}</h1>
             <h2>First Flight</h2>
             <p>{{ rocket.first_flight }}</p>
-            <div class="stats">
-                <h2>Stats</h2>
-                <div class="stat">
-                    <h3>Mass</h3>
-                    <p>{{ rocket.mass.kg|intcomma }}kg</p>
-                    <p>{{ rocket.mass.lb|intcomma }}lbs</p>
-                </div>
-                <div class="stat">
-                    <h3>Height</h3>
-                    <p>{{ rocket.height.meters }}m</p>
-                    <p>{{ rocket.height.feet }}ft</p>
-                </div>
-                <div class="stat">
-                    <h3>Diameter</h3>
-                    <p>{{ rocket.diameter.meters }}m</p>
-                    <p>{{ rocket.diameter.feet }}ft</p>
-                </div>
-                <div class="stat">
-                    <h3>Cost per Launch</h3>
-                    <p>${{ rocket.cost_per_launch|intcomma }}</p>
-                </div>
-            </div>
             <div class="description_container">
                 <h2>Description</h2>
                 <p>{{ rocket.description }}</p>
+                <div class="stats">
+                    <div class="stat">
+                        <h3>Mass</h3>
+                        <p>{{ rocket.mass.kg|intcomma }}kg</p>
+                        <p>{{ rocket.mass.lb|intcomma }}lbs</p>
+                    </div>
+                    <div class="stat">
+                        <h3>Height</h3>
+                        <p>{{ rocket.height.meters }}m</p>
+                        <p>{{ rocket.height.feet }}ft</p>
+                    </div>
+                    <div class="stat">
+                        <h3>Diameter</h3>
+                        <p>{{ rocket.diameter.meters }}m</p>
+                        <p>{{ rocket.diameter.feet }}ft</p>
+                    </div>
+                    <div class="stat">
+                        <h3>Cost per Launch</h3>
+                        <p>${{ rocket.cost_per_launch|intcomma }}</p>
+                    </div>
+                </div>
             </div>
             <div class="payload_container">
                 <h2>Payload Configurations</h2>

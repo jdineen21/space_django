@@ -21,10 +21,14 @@ def detail(request, rocket_id):
     for launch in launches_all:
         if launch['rocket']['rocket_id'] == rocket_id:
             launches_all_by_rocket_id.append(launch)
+    
+    launch_first = None
+    if len(launches_all_by_rocket_id) > 0:
+        launch_first = launches_all_by_rocket_id[0]
 
     context = {
         'rocket': rocket,
-        'launch': launches_all_by_rocket_id[0],
+        'launch': launch_first,
         'launches': launches_all_by_rocket_id,
     }
     return render(request, 'rockets/detail.html', context)
