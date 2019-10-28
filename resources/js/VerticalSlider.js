@@ -4,7 +4,10 @@ import { Carousel } from "react-responsive-carousel";
 export default class VerticalSlider extends React.Component {
     render() {
         return (
-            <Carousel dynamicHeight>
+            <Carousel 
+                dynamicHeight={true}
+                showThumbs={false}
+            >
                 <div>
                     <img src="https://live.staticflickr.com/65535/46856594435_206c773b5a_o.jpg" />
                 </div>
