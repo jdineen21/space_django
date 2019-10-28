@@ -1,29 +1,23 @@
 .launch_details {
-    padding: 0 3em;
+    padding: 0 1em 0 3em;
     float: left;
+    width: 100%;
 }
 
 .main_content {
-    padding-right: 3em;
     float: left;
-    width: 50%;
+    width: 65%;
 }
 
-.center_content {
-    float: left;
-    width: 20%;
+.floated_content {
+    float: right;
     text-align: right;
 }
 
 .sidebar_content {
-    padding-left: 3em;
+    padding-left: 1em;
     float: left;
-    width: 30%;
-}
-
-.top_right {
-    float: right;
-    text-align: right;
+    width: 35%;
 }
 
 .wikipedia_container {
@@ -77,36 +71,18 @@
     width: 50%;
 }
 
-.launch_side_bar {
-    float: left;
-    width: 20%;
+.control_arrow {
+    display: none;
 }
 
-.launch_assets {
-    text-align: center;
+.slider_animated {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
 
-.arrow {
-    background: #DCDCDC;
-}
-
-.arrow img {
-    padding: 0.5em;
-    width: 2em;
-    vertical-align: bottom;
-}
-
-#up_arrow {
-    
-}
-
-#down_arrow {
-    transform: rotate(180deg);
-}
-
-.flickr_image {
+.slider_image {
     width: 100%;
-    transition: max-height 0.5s;
     vertical-align: bottom;
 }
 

@@ -8,7 +8,7 @@
 
 {% block javascript %}
     <script type="text/javascript" src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.0.1/build/ol.js"></script>
-    <script type="text/javascript" src="{% static 'base/js/launch_assets.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base/js/carousel.js' %}"></script>
     <script type="text/javascript" src="{% static 'base/js/maps.js' %}"></script>
 {% endblock %}
 
@@ -18,6 +18,37 @@
     {% if not launch.error %}
         <div class="launch_details">
             <div class="main_content">
+                <div class="floated_content">
+                    {% if launch.links.mission_patch_small %}
+                        <div class="mission_patch_container">
+                            <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+                        </div>
+                    {% endif %}
+                    <div class="buttons_container">
+                        {% if launch.links.presskit or launch.links.video_link %}
+                            <ul>
+                                {% if launch.links.presskit %}
+                                    <li>
+                                        <a class="resource_link" style="background: #0f9131;" href="{{ launch.links.presskit }}" target="_blank">Download Press Kit</a>
+                                    </li>
+                                {% endif %}
+                                {% if launch.links.video_link %}
+                                    <li>
+                                        <a class="resource_link" style="background: #ff0000;" href="https://www.youtube.com/watch?v={{ launch.links.youtube_id }}" target="_blank">Watch Launch</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    {% comment %} <div class="wikipedia_container">
+                        <h3>Wikipedia Links</h3>
+                        <ul>
+                            <li>{{ launch.mission_name }} Wiki</li>
+                            <li>{{ launchpad.name }}</li>
+                            <li>{{ rocket.rocket_name }}</li>
+                        </ul>
+                    </div> {% endcomment %}
+                </div>
                 <h1>{{ launch.mission_name }} | {{ launch.rocket.rocket_name }}</h1>
                 {% if launch.launch_success == True %}
                     <div class="launch_outcome" style="background: #0f9131;">Successful Launch</div>
@@ -150,53 +181,24 @@
                     </div>
                 {% endif %}
             </div>
-            <div class="center_content">
-                {% if launch.links.mission_patch_small %}
-                    <div class="mission_patch_container">
-                        <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+            <div class="sidebar_content">
+                {% if launch.links.flickr_images %}
+                    <div class="carousel">
+                        <button type="button" class="control_prev control_arrow"></button>
+                        <div class="slider_vertical">
+                            <ul class="slider_animated">
+                                {% for image in launch.links.flickr_images %}
+                                    <li class="slide">
+                                        <div>
+                                            <img class="slider_image" src="{{ image }}" >
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <button type="button" class="control_prev control_arrow"></button>
                     </div>
                 {% endif %}
-                <div class="buttons_container">
-                    {% if launch.links.presskit or launch.links.video_link %}
-                        <ul>
-                            {% if launch.links.presskit %}
-                                <li>
-                                    <a class="resource_link" style="background: #0f9131;" href="{{ launch.links.presskit }}" target="_blank">Download Press Kit</a>
-                                </li>
-                            {% endif %}
-                            {% if launch.links.video_link %}
-                                <li>
-                                    <a class="resource_link" style="background: #ff0000;" href="https://www.youtube.com/watch?v={{ launch.links.youtube_id }}" target="_blank">Watch Launch</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    {% endif %}
-                </div>
-                {% comment %} <div class="wikipedia_container">
-                    <h3>Wikipedia Links</h3>
-                    <ul>
-                        <li>{{ launch.mission_name }} Wiki</li>
-                        <li>{{ launchpad.name }}</li>
-                        <li>{{ rocket.rocket_name }}</li>
-                    </ul>
-                </div> {% endcomment %}
-            </div>
-            <div class="sidebar_content">
-                <div class="launch_assets">
-                    <div id="up_arrow" class="arrow">
-                        <img class="arrow" src={% static "launches/images/arrow.png" %}>
-                    </div>
-                    <div class="images">
-                        {% if launch.links.flickr_images %}
-                            {% for image in launch.links.flickr_images %}
-                                <img class="flickr_image" src="{{ image }}" >
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div id="down_arrow"  class="arrow">
-                        <img class="arrow" src={% static "launches/images/arrow.png" %}>
-                    </div>
-                </div>
                 <div id="map" class="map"></div>
             </div>
         </div>
