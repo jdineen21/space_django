@@ -4,6 +4,8 @@
 
 /node_modules
 
+/static/base/js/app.js
+
 .env
 
 *.pyc

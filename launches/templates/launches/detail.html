@@ -183,21 +183,7 @@
             </div>
             <div class="sidebar_content">
                 {% if launch.links.flickr_images %}
-                    <div class="carousel">
-                        <button type="button" class="control_prev control_arrow"></button>
-                        <div class="slider_vertical">
-                            <ul class="slider_animated">
-                                {% for image in launch.links.flickr_images %}
-                                    <li class="slide">
-                                        <div>
-                                            <img class="slider_image" src="{{ image }}" >
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <button type="button" class="control_prev control_arrow"></button>
-                    </div>
+                    <div id="vertical_slider"></div>
                 {% endif %}
                 <div id="map" class="map"></div>
             </div>
