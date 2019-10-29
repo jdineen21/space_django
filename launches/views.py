@@ -19,6 +19,7 @@ def index(request):
 
 def detail(request, flight_number):
     launches_all = launches.get_all_launches()
+    launches_past = launches.get_past_launches()
 
     for launch_temp in launches_all:
         if launch_temp['flight_number'] == flight_number:
@@ -28,7 +29,7 @@ def detail(request, flight_number):
     rocket = rockets.get_rocket_by_rocket_id(launch['rocket']['rocket_id'])
     
     launches_related = []
-    for launch_temp in launches_all:
+    for launch_temp in launches_past:
         if launch_temp['mission_id'] != []:
             if launch_temp['flight_number'] != flight_number:
                 if launch_temp['mission_id'] == launch['mission_id']:

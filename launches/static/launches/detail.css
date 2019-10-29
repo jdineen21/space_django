@@ -56,6 +56,10 @@
     font-weight: 500;
 }
 
+.launch_details_container p {
+    margin-right: 3em;
+}
+
 .stages_container {
     display: inline-block;
     width: 100%;
