@@ -74,24 +74,3 @@
     float: left;
     width: 50%;
 }
-
-.control_arrow {
-    display: none;
-}
-
-.slider_animated {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-.slider_image {
-    width: 100%;
-    vertical-align: bottom;
-}
-
-.map {
-    margin-top: 1em;
-    height: 400px;
-    width: 100%;
-}
