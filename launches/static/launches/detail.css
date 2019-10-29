@@ -87,6 +87,7 @@
 }
 
 .map {
+    margin-top: 1em;
     height: 400px;
     width: 100%;
 }
