@@ -1,4 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
+    var i = new ol.interaction.MouseWheelZoom();
+    
+    if (document.getElementById('launchpad')) {
+        var location = JSON.parse(document.getElementById('launchpad').textContent).location;
+    }
+
+    var oldFn = i.handleEvent;
+    i.handleEvent = function(e) {
+        var type = e.type;
+        if (type !== "wheel" && type !== "wheel" ) {
+            return true;
+        }
+        
+        if (!e.originalEvent.ctrlKey) {
+            return true
+        }
+
+        oldFn.call(this,e);
+    }
+
     var baseLayer = new ol.layer.Tile({
         visible: true,
         preload: Infinity,
@@ -14,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     var map = new ol.Map({ 
+        interactions: ol.interaction.defaults({mouseWheelZoom: false}).extend([i]),
         layers: [baseLayer],
         target: 'map', 
         controls: ol.control.defaults({ 
@@ -22,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         }),
         view: new ol.View({ 
-            center: ol.proj.fromLonLat([-120.610829, 34.632093]),
+            center: ol.proj.fromLonLat([location.longitude, location.latitude]),
             zoom: 15
         })
     });

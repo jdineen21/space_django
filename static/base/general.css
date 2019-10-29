@@ -27,3 +27,8 @@ table tr td {
     text-align: center;
     width: 100%;
 }
+
+.map {
+    height: 400px;
+    width: 100%;
+}

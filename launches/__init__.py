@@ -1,10 +1,12 @@
 import requests
 import datetime
 
+url_prefix = 'http://192.168.0.23:5000/'
+
 ### Launches api ###
 
 def get_all_launches():
-    url = 'https://api.spacexdata.com/v3/launches/'
+    url = '%slaunches/' % url_prefix
     r = requests.get(url)
     launches_json = r.json()
 
@@ -16,7 +18,7 @@ def get_all_launches():
     return launches_json[::-1]
 
 def get_next_launch():
-    url = 'https://api.spacexdata.com/v3/launches/next/'
+    url = '%slaunches/next/' % url_prefix
     r = requests.get(url)
     launch_json = r.json()
 
