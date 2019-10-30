@@ -7,7 +7,7 @@
 
 .container {
     margin: 0 auto;
-    background: #f0f0f0;
+    background: #D3D3D3;
     overflow: hidden;
     min-height: calc(100vh - 4em);
     width: calc(100vw - 20em);
