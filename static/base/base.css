@@ -7,7 +7,6 @@
 
 .container {
     margin: 0 auto;
-    padding: 1em 0em;
     background: #f0f0f0;
     overflow: hidden;
     min-height: calc(100vh - 4em);

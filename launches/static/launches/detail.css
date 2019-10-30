@@ -1,10 +1,18 @@
 .launch_details {
-    padding: 0 1em 0 3em;
+    padding: 1em;
+    background: #D3D3D3;
     float: left;
     width: 100%;
 }
 
+.content {
+    padding: 1em;
+    background: #ffffff;
+    border-radius: 0.2em;
+}
+
 .main_content {
+    padding-right: 1em;
     float: left;
     width: 65%;
 }
@@ -14,10 +22,26 @@
     text-align: right;
 }
 
-.sidebar_content {
-    padding-left: 1em;
+.map_content,
+.image_content {
+    padding-bottom: 1em;
     float: left;
     width: 35%;
+}
+
+.about_content {
+    float: left;
+    width: 35%;
+}
+
+.website_links,
+.page_links {
+    display: inline-flex;
+    width: 50%;
+}
+
+.launch_header {
+    margin-top: 0;
 }
 
 .wikipedia_container {
