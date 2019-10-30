@@ -4,8 +4,13 @@
 }
 
 .launches_container {
+    padding: 1em;
     display: inline-block;
     text-align: left;
+}
+
+.launches_container h1 {
+    margin-top: 0;
 }
 
 .first_row td h3 {

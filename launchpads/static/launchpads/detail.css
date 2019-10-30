@@ -1,13 +1,17 @@
 
 .launchpad_details {
-    padding: 0 3em;
+    padding: 1em;
     float: left;
 }
 
 .main_content {
-    padding-right: 3em;
+    padding-right: 1em;
     float: left;
     width: 60%;
+}
+
+.launchpad_header {
+    margin-top: 0;
 }
 
 .status_active {
@@ -34,11 +38,14 @@
     color: #ffffff;
 }
 
-.side_content {
+.image_content,
+.map_content,
+.upcoming_content {
+    margin-bottom: 1em;
     float: left;
     width: 40%;
 }
 
-.side_content img {
+.image_content img {
     width: 100%;
 }

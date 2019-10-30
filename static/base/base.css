@@ -13,6 +13,12 @@
     width: calc(100vw - 20em);
 }
 
+.content {
+    padding: 1em;
+    background: #ffffff;
+    border-radius: 0.2em;
+}
+
 #topbar {
     position: fixed;
     z-index: 1;
