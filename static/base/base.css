@@ -10,7 +10,7 @@
     background: #D3D3D3;
     overflow: hidden;
     min-height: calc(100vh - 4em);
-    width: calc(100vw - 20em);
+    width: calc(100vw - 21em);
 }
 
 .content {
