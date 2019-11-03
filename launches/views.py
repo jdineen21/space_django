@@ -15,7 +15,7 @@ def index(request):
     context = {
         'launches': all_launches,
     }
-    return render(request, 'launches/launches_all.html', context)
+    return render(request, 'launches/index/all.html', context)
 
 def detail(request, flight_number):
     launches_all = launches.get_all_launches()
@@ -54,7 +54,7 @@ def past(request):
     context = {
         'launches': past_launches,
     }
-    return render(request, 'launches/launches_past.html', context)
+    return render(request, 'launches/index/past.html', context)
 
 def upcoming(request):
     upcoming_launches = launches.get_upcoming_launches()
@@ -62,4 +62,4 @@ def upcoming(request):
     context = {
         'launches': upcoming_launches,
     }
-    return render(request, 'launches/launches_upcoming.html', context)
+    return render(request, 'launches/index/upcoming.html', context)
