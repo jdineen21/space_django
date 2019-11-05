@@ -1,17 +1,26 @@
 
 .rocket_container {
-    padding: 0 3em;
+    padding: 1em;
     float: left;
     width: 100%;
 }
 
-.rocket_img {
-    width: 40%;
-    float: right;
+.main_content {
+    padding-right: 1em;
+    float: left;
+    width: 65%;
 }
 
-.top_right {
-    margin-right: 2em;
+.side_content {
+    float: right;
+    width: 35%;
+}
+
+.rocket_img {
+    width: 100%;
+}
+
+.floated_content {
     float: right;
 }
 
@@ -43,6 +52,14 @@
     font-weight: 500;
     text-decoration: none;
     float: right;
+}
+
+.rocket_header {
+    margin-top: 0;
+}
+
+.mid_content_container {
+    display: inline-block;
 }
 
 .stats {

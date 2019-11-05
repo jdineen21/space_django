@@ -12,63 +12,73 @@
 {% block content %}
     {% if not rocket.error %}
         <div class="rocket_container">
-            <img class="rocket_img" src="{{ rocket.flickr_images|first }}">
-            <div class="top_right">
-                    {% if launch.links.mission_patch_small %}
-                        <div>
-                            <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
-                        </div>
-                    {% endif %}
-                    {% if rocket.wikipedia %}
-                        <div class="buttons_container">
+            <div class="main_content">
+                <div class="content">
+                    <div class="floated_content">
+                            {% if launch.links.mission_patch_small %}
+                                <div>
+                                    <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+                                </div>
+                            {% endif %}
                             {% if rocket.wikipedia %}
-                                <a class="wikipedia_link" href="{{ rocket.wikipedia }}" target="_blank">Wikipedia</a>
+                                <div class="buttons_container">
+                                    {% if rocket.wikipedia %}
+                                        <a class="wikipedia_link" href="{{ rocket.wikipedia }}" target="_blank">Wikipedia</a>
+                                    {% endif %}
+                                </div>
                             {% endif %}
                         </div>
-                    {% endif %}
-                </div>
-            <h1>{{ rocket.company }} | {{ rocket.rocket_name }}</h1>
-            <h2>First Flight</h2>
-            <p>{{ rocket.first_flight }}</p>
-            <div class="description_container">
-                <h2>Description</h2>
-                <p>{{ rocket.description }}</p>
-                <div class="stats">
-                    <div class="stat">
-                        <h3>Mass</h3>
-                        <p>{{ rocket.mass.kg|intcomma }}kg</p>
-                        <p>{{ rocket.mass.lb|intcomma }}lbs</p>
+                    <h1 class="rocket_header">{{ rocket.company }} | {{ rocket.rocket_name }}</h1>
+                    <h2>First Flight</h2>
+                    <p>{{ rocket.first_flight }}</p>
+                    <div class="mid_content_container">
+                        <div class="description_container">
+                            <h2>Description</h2>
+                            <p>{{ rocket.description }}</p>
+                            <div class="stats">
+                                <div class="stat">
+                                    <h3>Mass</h3>
+                                    <p>{{ rocket.mass.kg|intcomma }}kg</p>
+                                    <p>{{ rocket.mass.lb|intcomma }}lbs</p>
+                                </div>
+                                <div class="stat">
+                                    <h3>Height</h3>
+                                    <p>{{ rocket.height.meters }}m</p>
+                                    <p>{{ rocket.height.feet }}ft</p>
+                                </div>
+                                <div class="stat">
+                                    <h3>Diameter</h3>
+                                    <p>{{ rocket.diameter.meters }}m</p>
+                                    <p>{{ rocket.diameter.feet }}ft</p>
+                                </div>
+                                <div class="stat">
+                                    <h3>Cost per Launch</h3>
+                                    <p>${{ rocket.cost_per_launch|intcomma }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="payload_container">
+                            <h2>Payload Configurations</h2>
+                            <div class="payload_type">
+                                {% for payload in rocket.payload_weights %}
+                                    <h3>{{ payload.name }}</h3>
+                                    <p>{{ payload.kg|intcomma }}kg</p>
+                                    <p>{{ payload.lb|intcomma }}lb</p>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <h3>Height</h3>
-                        <p>{{ rocket.height.meters }}m</p>
-                        <p>{{ rocket.height.feet }}ft</p>
-                    </div>
-                    <div class="stat">
-                        <h3>Diameter</h3>
-                        <p>{{ rocket.diameter.meters }}m</p>
-                        <p>{{ rocket.diameter.feet }}ft</p>
-                    </div>
-                    <div class="stat">
-                        <h3>Cost per Launch</h3>
-                        <p>${{ rocket.cost_per_launch|intcomma }}</p>
+                    <div class="engines_container">
+                        <h2>Propulsion</h2>
+                        <p>{{ rocket.engines.type|capfirst }} {{ rocket.engines.version }}</p>
+                        {% comment %} <p> finnsih this {% endcomment %}
                     </div>
                 </div>
             </div>
-            <div class="payload_container">
-                <h2>Payload Configurations</h2>
-                <div class="payload_type">
-                    {% for payload in rocket.payload_weights %}
-                        <h3>{{ payload.name }}</h3>
-                        <p>{{ payload.kg|intcomma }}kg</p>
-                        <p>{{ payload.lb|intcomma }}lb</p>
-                    {% endfor %}
+            <div class="side_content">
+                <div class="content">
+                    <img class="rocket_img" src="{{ rocket.flickr_images|first }}">
                 </div>
-            </div>
-            <div class="engines_container">
-                <h2>Propulsion</h2>
-                <p>{{ rocket.engines.type|capfirst }} {{ rocket.engines.version }}</p>
-                {% comment %} <p> finnsih this {% endcomment %}
             </div>
         </div>
     {% else %}
