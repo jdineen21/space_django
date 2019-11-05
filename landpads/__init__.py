@@ -4,7 +4,14 @@ import requests
 
 ### Landpads api ###
 
-def get_landing_pad_by_id(id):
+def get_landpads():
+    url = '%slandpads/' % (url_prefix)
+    r = requests.get(url)
+    landpads_json = r.json()
+
+    return landpads_json
+
+def get_landpad_by_id(id):
     url = '%slandpads/%s/' % (url_prefix, id.upper())
     r = requests.get(url)
     landpad_json = r.json()

@@ -35,32 +35,27 @@
         </div>
         <a class="accordion">Launch Pads</a>
         <div class="panel">
-            <a href="{% url 'launchpads:detail' 'vafb_slc_4e' %}">VAFB SLC 4E</a>
-            <a href="{% url 'launchpads:detail' 'ccafs_slc_40' %}">CCAFS SLC 40</a>
-            <a href="{% url 'launchpads:detail' 'stls' %}">STLS</a>
-            <a href="{% url 'launchpads:detail' 'kwajalein_atoll' %}">Kwajalein Atoll</a>
-            <a href="{% url 'launchpads:detail' 'vafb_slc_3w' %}">KSC LC 39A</a>
+            {% for launchpad in sidebar.launchpads %}
+                <a href="{% url 'launchpads:detail' launchpad.site_id %}">{{ launchpad.name }}</a>
+            {% endfor %}
         </div>
         <a class="accordion">Landing Pads</a>
         <div class="panel">
-            <a href="{% url 'landpads:detail' 'LZ-1' %}">Landing Zone 1</a>
-            <a href="{% url 'landpads:detail' 'LZ-2' %}">Landing Zone 2</a>
-            <a href="{% url 'landpads:detail' 'LZ-4' %}">Landing Zone 4</a>
-            <a href="{% url 'landpads:detail' 'JRTI' %}">Just Read The Instructions</a>
-            <a href="{% url 'landpads:detail' 'JRTI-1' %}">Just Read The Instructions V1</a>
-            <a href="{% url 'landpads:detail' 'OCISLY' %}">Of Course I Still Love You</a>
-            <a href="{% url 'landpads:detail' 'ASOG' %}">A Shortfall of Gravitas</a>
+            {% for landpad in sidebar.landpads %}
+                <a href="{% url 'landpads:detail' landpad.id %}">{{ landpad.full_name }}</a>
+            {% endfor %}
         </div>
         <a class="accordion">Rockets</a>
         <div class="panel">
-            <a href="{% url 'rockets:detail' 'falcon1' %}">Falcon 1</a>
-            <a href="{% url 'rockets:detail' 'falcon9' %}">Falcon 9</a>
-            <a href="{% url 'rockets:detail' 'falconheavy' %}">Falcon Heavy</a>
-            <a href="{% url 'rockets:detail' 'starship' %}">Starship</a>
+            {% for rocket in sidebar.rockets %}
+                <a href="{% url 'rockets:detail' rocket.rocket_id %}">{{ rocket.rocket_name }}</a>
+            {% endfor %}
         </div>
-        <a href="">Dragons</a>
+        <a class="accordion">Dragons</a>
         <div class="panel">
-            <p>Lorem ipsum...</p>
+            {% for dragon in sidebar.dragons %}
+                <a href="{% url 'dragons:detail' dragon.id %}">{{ dragon.name }}</a>
+            {% endfor %}
         </div>
         <a href="">Ships</a>
         <div class="panel">
