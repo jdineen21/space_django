@@ -23,6 +23,7 @@ urlpatterns = [
     path('launches/', include('launches.urls')),
     path('launchpads/', include('launchpads.urls')),
     path('rockets/', include('rockets.urls')),
+    path('dragons/', include('dragons.urls')),
 
     path('admin/', admin.site.urls),
 ]

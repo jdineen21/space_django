@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'dragons/detail.css' %}">
+{% endblock %}
+
+{% block javascript %}{% endblock %}
+
+{% block title %}{{ dragon.name }}{% endblock %}
+
+{% block content %}
+    {% if not dragon.error %}
+        <div class="dragon_details">
+            
+        </div>
+    {% else %}
+        <h2>Error</h2>
+        <p>{{ dragon.error }}</p>
+    {% endif %}
+{% endblock %}
