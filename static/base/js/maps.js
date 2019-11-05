@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     var i = new ol.interaction.MouseWheelZoom();
     
-    if (document.getElementById('launchpad')) {
-        var location = JSON.parse(document.getElementById('launchpad').textContent).location;
+    if (document.getElementById('location')) {
+        var location = JSON.parse(document.getElementById('location').textContent);
     }
 
     var oldFn = i.handleEvent;

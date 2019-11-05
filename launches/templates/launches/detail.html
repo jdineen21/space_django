@@ -10,7 +10,7 @@
     <script type="text/javascript" src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.0.1/build/ol.js"></script>
     <script type="text/javascript" src="{% static 'base/js/maps.js' %}"></script>
     {{ launch|json_script:"launch" }}
-    {{ launchpad|json_script:"launchpad" }}
+    {{ launchpad.location|json_script:"location" }}
 {% endblock %}
 
 {% block title %}{{ launch.mission_name }}{% endblock %}
