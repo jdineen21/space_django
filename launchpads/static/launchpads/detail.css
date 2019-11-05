@@ -2,12 +2,18 @@
 .launchpad_details {
     padding: 1em;
     float: left;
+    width: 100%;
 }
 
 .main_content {
     padding-right: 1em;
     float: left;
     width: 60%;
+}
+
+.side_content {
+    float: right;
+    width: 40%;
 }
 
 .launchpad_header {
@@ -42,8 +48,6 @@
 .map_content,
 .upcoming_content {
     margin-bottom: 1em;
-    float: left;
-    width: 40%;
 }
 
 .image_content img {

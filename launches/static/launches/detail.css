@@ -10,6 +10,11 @@
     width: 65%;
 }
 
+.side_content {
+    float: right;
+    width: 35%;
+}
+
 .floated_content {
     float: right;
     text-align: right;
@@ -17,14 +22,7 @@
 
 .map_content,
 .image_content {
-    padding-bottom: 1em;
-    float: left;
-    width: 35%;
-}
-
-.about_content {
-    float: left;
-    width: 35%;
+    margin-bottom: 1em;
 }
 
 .website_links,

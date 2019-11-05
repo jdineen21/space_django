@@ -85,40 +85,42 @@
                     {% endif %}                
                 </div>
             </div>
-            <div class="image_content">
-                <div class="content">
-                    {% if past_launches_at_site.0.links.flickr_images.0 %}
-                        <img src={{ past_launches_at_site.0.links.flickr_images.0 }}>
-                    {% endif %}
+            <div class="side_content">
+                {% if past_launches_at_site.0.links.flickr_images.0 %}
+                    <div class="image_content">
+                        <div class="content">
+                            <img src="{{ past_launches_at_site.0.links.flickr_images.0 }}">
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="map_content">
+                    <div class="content">
+                        <div id="map" class="map"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="map_content">
-                <div class="content">
-                    <div id="map" class="map"></div>
-                </div>
-            </div>
-            <div class="upcoming_content">
-                <div class="content">
-                    {% if upcoming_launches_at_site %}
-                        <h2>Upcoming Launches</h2>
-                        <table>
-                            <tr class="first_row">
-                                <td><h3>Mission Name</h3></td>
-                                <td><h3>Vehicle</h3></td>
-                                <td><h3>Launch Date</h3></td>
-                                <td><h3>Launch</h3></td>
-                            </tr>
-                            {% for launch in upcoming_launches_at_site %}
-                                <tr>
-                                    <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
-                                    <td><p><a href="{% url 'rockets:detail' launch.rocket.rocket_id %}">{{ launch.rocket.rocket_name }}</a></p></td>
-                                    <td>{{ launch.launch_datetime|date }}</td>
-                                    <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
-                                </tr>   
-                            {% endfor %}
-                        </table>
-                    {% endif %}
-                </div>
+                {% if upcoming_launches_at_site %}
+                    <div class="upcoming_content">
+                        <div class="content">
+                            <h2>Upcoming Launches</h2>
+                            <table>
+                                <tr class="first_row">
+                                    <td><h3>Mission Name</h3></td>
+                                    <td><h3>Vehicle</h3></td>
+                                    <td><h3>Launch Date</h3></td>
+                                    <td><h3>Launch</h3></td>
+                                </tr>
+                                {% for launch in upcoming_launches_at_site %}
+                                    <tr>
+                                        <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
+                                        <td><p><a href="{% url 'rockets:detail' launch.rocket.rocket_id %}">{{ launch.rocket.rocket_name }}</a></p></td>
+                                        <td>{{ launch.launch_datetime|date }}</td>
+                                        <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
+                                    </tr>   
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     {% else %}

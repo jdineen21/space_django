@@ -176,31 +176,33 @@
                     {% endif %}
                 </div>
             </div>
-            {% if launch.links.flickr_images %}
-                <div class="image_content">
+            <div class="side_content">
+                {% if launch.links.flickr_images %}
+                    <div class="image_content">
+                        <div class="content">
+                            <div id="vertical_slider"></div> 
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="map_content">
                     <div class="content">
-                        <div id="vertical_slider"></div> 
+                        <div id="map" class="map"></div>
                     </div>
                 </div>
-            {% endif %}
-            <div class="map_content">
-                <div class="content">
-                    <div id="map" class="map"></div>
-                </div>
-            </div>
-            <div class="about_content">
-                <div class="content">
-                    <div class="website_links">
-                        <h4>SpaceX</h4>
-                        <a href="#">Home</a>
-                        <a href="#">About</a>
-                        <a href="#">Contact</a>
-                    </div>
-                    <div class="page_links">
-                        <h4>{{ launch.mission_name }}</h4>
-                        <a href="#">Home</a>
-                        <a href="#">About</a>
-                        <a href="#">Contact</a>
+                <div class="about_content">
+                    <div class="content">
+                        <div class="website_links">
+                            <h4>SpaceX</h4>
+                            <a href="#">Home</a>
+                            <a href="#">About</a>
+                            <a href="#">Contact</a>
+                        </div>
+                        <div class="page_links">
+                            <h4>{{ launch.mission_name }}</h4>
+                            <a href="#">Home</a>
+                            <a href="#">About</a>
+                            <a href="#">Contact</a>
+                        </div>
                     </div>
                 </div>
             </div>
