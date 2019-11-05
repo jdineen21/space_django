@@ -24,7 +24,7 @@
                         <td><p style="text-align: center;">{{ launch.flight_number }}</p></td>
                         <td class="mission_patch">
                             {% if launch.links.mission_patch %}
-                                <img src="{{ launch.links.mission_patch }}">
+                                <img src="{{ launch.links.mission_patch_small }}">
                             {% endif %}
                         </td>
                         <td><a href="{% url 'launches:detail' launch.flight_number %}"><p>{{ launch.mission_name }}</p></a></td>
