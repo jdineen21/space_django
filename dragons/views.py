@@ -1,11 +1,11 @@
-from django.shortcuts import render
+import dragons
 
 from django.shortcuts import render
 
 def detail(request, id):
-    # landpad = landpads.get_landing_pad_by_id(id)
+    dragon = dragons.get_dragon_by_id(id)
 
-    # context = {
-    #     'landpad': landpad,
-    # }
-    return render(request, 'dragons/detail.html')#, context)
+    context = {
+        'dragon': dragon,
+    }
+    return render(request, 'dragons/detail.html', context)
