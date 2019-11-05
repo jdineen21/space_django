@@ -1,7 +1,6 @@
-import requests
-import datetime
+from space_django import url_prefix
 
-url_prefix = 'https://api.spacexdata.com/v3/'
+import requests
 
 def get_dragon_by_id(id):
     url = '%sdragons/%s/' % (url_prefix, id)

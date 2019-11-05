@@ -1,9 +1,11 @@
+from space_django import url_prefix
+
 import requests
 
 ### Payloads api ###
 
 def get_all_payloads():
-    url = 'https://api.spacexdata.com/v3/payloads/'
+    url = '%spayloads/' % (url_prefix)
     r = requests.get(url)
     payloads = r.json()
 

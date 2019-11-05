@@ -1,10 +1,11 @@
+from space_django import url_prefix
+
 import requests
-import datetime
 
 ### Landpads api ###
 
 def get_landing_pad_by_id(id):
-    url = 'https://api.spacexdata.com/v3/landpads/%s/' % (id.upper())
+    url = '%slandpads/%s/' % (url_prefix, id.upper())
     r = requests.get(url)
     landpad_json = r.json()
 

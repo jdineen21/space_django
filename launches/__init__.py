@@ -1,7 +1,7 @@
+from space_django import url_prefix
+
 import requests
 import datetime
-
-url_prefix = 'http://192.168.0.23:5000/'
 
 ### Launches api ###
 
@@ -25,7 +25,7 @@ def get_next_launch():
     return launch_json
 
 def get_past_launches():
-    url = 'https://api.spacexdata.com/v3/launches/past/'
+    url = '%slaunches/past/' % url_prefix
     r = requests.get(url)
     launches_json = r.json()
 
@@ -37,7 +37,7 @@ def get_past_launches():
     return launches_json[::-1]
 
 def get_upcoming_launches():
-    url = 'https://api.spacexdata.com/v3/launches/upcoming/'
+    url = '%slaunches/upcoming/' % url_prefix
     r = requests.get(url)
     launches_json = r.json()
 
@@ -49,7 +49,7 @@ def get_upcoming_launches():
     return launches_json
 
 def get_launch_by_flight_number(flight_number):
-    url = 'https://api.spacexdata.com/v3/launches/%s/' % (flight_number)
+    url = '%slaunches/%s/' % url_prefix, flight_number
     r = requests.get(url)
     launch_json = r.json()
     
