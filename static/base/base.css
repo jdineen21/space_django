@@ -10,7 +10,8 @@
     background: #D3D3D3;
     overflow: hidden;
     min-height: calc(100vh - 4em);
-    width: calc(100vw - 21em);
+    width: 80vw;
+    transition: width 0.1s;
 }
 
 .content {
@@ -70,8 +71,9 @@
     left: -10em;
     transition: left 0.3s;
     background-color: #222;
-    width: 10em;
+    width: 8vw;
     height: 100vh;
+    min-width: 10em;
     min-height: 500px;
 }
 
@@ -106,4 +108,10 @@
 
 .panel a {
     background: #141414;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        width: 100%;
+    }
 }
