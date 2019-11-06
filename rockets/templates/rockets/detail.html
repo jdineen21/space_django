@@ -18,27 +18,23 @@
         <div class="rocket_container">
             <div class="main_content">
                 <div class="content">
-                    <div class="floated_content">
-                            {% if launch.links.mission_patch_small %}
-                                <div>
-                                    <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
-                                </div>
-                            {% endif %}
-                            {% if rocket.wikipedia %}
-                                <div class="buttons_container">
-                                    {% if rocket.wikipedia %}
-                                        <a class="wikipedia_link" href="{{ rocket.wikipedia }}" target="_blank">Wikipedia</a>
-                                    {% endif %}
-                                </div>
-                            {% endif %}
-                        </div>
                     <h1 class="rocket_header">{{ rocket.company }} | {{ rocket.rocket_name }}</h1>
+                    {% if first_launch.links.mission_patch_small %}
+                        <img class="mission_patch" src="{{ first_launch.links.mission_patch_small }}" >
+                    {% endif %}
                     <table>
                         <tr>
-                            <td>First Flight:</td>
+                            <td><b>First Flight:</b></td>
                             <td>{{ rocket.first_flight }}</td>
                         </tr>
                     </table>
+                    {% if rocket.wikipedia %}
+                        <div class="buttons_container">
+                            {% if rocket.wikipedia %}
+                                <a class="wikipedia_link" href="{{ rocket.wikipedia }}" target="_blank">Wikipedia</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
                     <div class="mid_content_container">
                         <div class="description_container">
                             <h2>Description</h2>
@@ -67,7 +63,7 @@
                                 </tr>
                             </table>
                             <h2>Propulsion</h2>
-                            <p>{{ rocket.engines.type|capfirst }} {{ rocket.engines.version }}</p>
+                            <h4>{{ rocket.engines.type|capfirst }} {{ rocket.engines.version }}</h4>
                             <table>
                                 <tr>
                                     <td>Number of Engines</td>
@@ -121,10 +117,39 @@
                 </div>
             </div>
             <div class="side_content">
-                {% if launch.links.flickr_images %}
+                {% if rocket.flickr_images %}
                     <div class="image_content">
                         <div class="content">
                             <div id="vertical_slider"></div> 
+                        </div>
+                    </div>
+                {% endif %}
+                {% if recent_related_launches %}
+                    <div class="recent_related_launches">
+                        <div class="content">
+                            <h2>{{ rocket.rocket_name }} Recent Launches</h2>
+                            <table>
+                                <tr class="first_row">
+                                    <td><h3>Mission Name</h3></td>
+                                    <td><h3>Vehicle</h3></td>
+                                    <td><h3>Launch Date</h3></td>
+                                    <td><h3>Launch</h3></td>
+                                </tr>
+                                {% for launch in recent_related_launches %}
+                                    <tr>
+                                        <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
+                                        <td><p><a href="{% url 'rockets:detail' launch.rocket.rocket_id %}">{{ launch.rocket.rocket_name }}</a></p></td>
+                                        <td>{{ launch.launch_datetime|date }}</td>
+                                        {% if launch.launch_success == True %}
+                                            <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
+                                        {% elif launch.launch_success == False %}
+                                            <td><div class="bool_box" style="background: #ff0000;">Failure</div></td>
+                                        {% elif launch.upcoming %}
+                                            <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
+                                        {% endif %}
+                                    </tr>   
+                                {% endfor %}
+                            </table>
                         </div>
                     </div>
                 {% endif %}

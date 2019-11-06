@@ -13,20 +13,24 @@ def index(request):
 
 def detail(request, rocket_id):
     rocket = rockets.get_rocket_by_rocket_id(rocket_id)
-    launches_all = launches.get_past_launches()
+    past_launches = launches.get_past_launches()
 
-    launches_all_by_rocket_id = []
-    for launch in launches_all:
-        if launch['rocket']['rocket_id'] == rocket_id:
-            launches_all_by_rocket_id.append(launch)
+    # Recent Related Launchs
+    related_launches = []
+    for launch in past_launches:
+        if launch['rocket']['rocket_id'] == rocket['rocket_id']:
+            related_launches.append(launch)
     
-    launch_first = None
-    if len(launches_all_by_rocket_id) > 0:
-        launch_first = launches_all_by_rocket_id[0]
+    recent_related_launches = related_launches[:5]
+
+    # Get First Launch With Matching Rocket ID
+    first_launch = None
+    if len(related_launches) > 0:
+        first_launch = related_launches[0]
 
     context = {
         'rocket': rocket,
-        'launch': launch_first,
-        'launches': launches_all_by_rocket_id,
+        'first_launch': first_launch,
+        'recent_related_launches': recent_related_launches,
     }
     return render(request, 'rockets/detail.html', context)

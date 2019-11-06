@@ -20,27 +20,26 @@
     width: 100%;
 }
 
-.floated_content {
-    float: right;
-}
-
 .mission_patch {
+    margin-bottom: 1em;
     width: 175px;
-    float: right;
 }
 
 .buttons_container {
-    margin-top: 1.5em;
-    float: right;
+    margin-top: 1em;
 }
 
 .wikipedia_link {
     padding: 0.5em 1em;
-    display: block;
+    display: inline-block;
     background: #3e85f7;
     color: #ffffff;
     font-weight: 500;
     text-decoration: none;
+}
+
+.image_content {
+    margin-bottom: 1em;
 }
 
 .article_link {
