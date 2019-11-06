@@ -11,7 +11,6 @@
     overflow: hidden;
     min-height: calc(100vh - 4em);
     width: 80vw;
-    transition: width 0.1s;
 }
 
 .content {
