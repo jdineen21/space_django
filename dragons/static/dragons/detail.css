@@ -2,3 +2,18 @@
 .dragon_details {
     padding: 1em;
 }
+
+.main_content {
+    padding-right: 1em;
+    float: left;
+    width: 65%;
+}
+
+.side_content {
+    float: right;
+    width: 35%;
+}
+
+.dragon_header {
+    margin-top: 0;
+}

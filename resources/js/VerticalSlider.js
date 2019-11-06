@@ -5,7 +5,7 @@ export default class VerticalSlider extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            images: JSON.parse(document.getElementById('launch').textContent).links.flickr_images,
+            images: JSON.parse(document.getElementById('images').textContent),
         }
     }
     

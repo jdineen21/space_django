@@ -62,23 +62,13 @@
     display: inline-block;
 }
 
-.stats {
-    display: inline-block;
-    width: 100%;
-}
-
-.stats h2 {
-    margin-bottom: 0.1em;
-}
-
-.stat {
-    float: left;
-    width: 50%;
-}
-
 .description_container {
     float: left;
     width: 30em;
+}
+
+.stats_table tr td {
+    padding-bottom: 0.2em;
 }
 
 .payload_container {

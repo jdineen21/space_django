@@ -5,7 +5,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'dragons/detail.css' %}">
 {% endblock %}
 
-{% block javascript %}{% endblock %}
+{% block javascript %}
+    {{ dragon.flickr_images|json_script:"images" }}
+{% endblock %}
 
 {% block title %}{{ dragon.name }}{% endblock %}
 
@@ -14,8 +16,23 @@
         <div class="dragon_details">
             <div class="main_content">
                 <div class="content">
-                    
+                    <h1 class="dragon_header">{{ dragon.name }}</h1>
+                    {% if dragon.description %}
+                        <div class="dragon_description">
+                            <h2>Dragon Description</h2>
+                            <p>{{ dragon.description }}</p>
+                        </div>
+                    {% endif %}
                 </div>
+            </div>
+            <div class="side_content">
+                {% if dragon.flickr_images %}
+                    <div class="image_content">
+                        <div class="content">
+                            <div id="vertical_slider"></div> 
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     {% else %}
