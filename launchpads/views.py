@@ -29,7 +29,7 @@ def detail(request, site_id):
 
     context = {
         'launchpad': launchpad,
-        'past_launches_at_site': past_launches_at_site,
-        'upcoming_launches_at_site': upcoming_launches_at_site,
+        'past_launches_at_site': past_launches_at_site[:14],
+        'upcoming_launches_at_site': upcoming_launches_at_site[:5],
     }
     return render(request, 'launchpads/detail.html', context)

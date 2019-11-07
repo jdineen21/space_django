@@ -21,27 +21,29 @@
             <div class="main_content">
                 <div class="content">
                     <div class="floated_content">
-                        {% if launch.links.mission_patch_small %}
-                            <div class="mission_patch_container">
-                                <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
-                            </div>
-                        {% endif %}
-                        <div class="buttons_container">
-                            {% if launch.links.presskit or launch.links.video_link %}
-                                <ul>
-                                    {% if launch.links.presskit %}
-                                        <li>
-                                            <a class="resource_link" style="background: #0f9131;" href="{{ launch.links.presskit }}" target="_blank">Download Press Kit</a>
-                                        </li>
-                                    {% endif %}
-                                    {% if launch.links.video_link %}
-                                        <li>
-                                            <a class="resource_link" style="background: #ff0000;" href="https://www.youtube.com/watch?v={{ launch.links.youtube_id }}" target="_blank">Watch Launch</a>
-                                        </li>
-                                    {% endif %}
-                                </ul>
+                        <ul>
+                            {% if launch.links.mission_patch_small %}
+                                <li>
+                                    <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+                                </li>
                             {% endif %}
-                        </div>
+                            {% if launch.links.presskit or launch.links.video_link %}
+                                <li>
+                                    <ul>
+                                        {% if launch.links.presskit %}
+                                            <li>
+                                                <a class="resource_link" style="background: #0f9131;" href="{{ launch.links.presskit }}" target="_blank">Download Press Kit</a>
+                                            </li>
+                                        {% endif %}
+                                        {% if launch.links.video_link %}
+                                            <li>
+                                                <a class="resource_link" style="background: #ff0000;" href="https://www.youtube.com/watch?v={{ launch.links.youtube_id }}" target="_blank">Watch Launch</a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        </ul>
                     </div>
                     <h1 class="launch_header">{{ launch.mission_name }} | {{ launch.rocket.rocket_name }}</h1>
                     {% if launch.launch_success == True %}

@@ -20,6 +20,12 @@
     text-align: right;
 }
 
+.floated_content ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
 .map_content,
 .image_content {
     margin-bottom: 1em;
@@ -41,18 +47,9 @@
     display: inline-block;
 }
 
-.mission_patch_container {
-    display: inline-block;
-}
-
 .mission_patch {
     width: 175px;
     vertical-align: bottom;
-}
-
-.buttons_container ul {
-    text-align: center;
-    list-style-type: none;
 }
 
 .resource_link {
