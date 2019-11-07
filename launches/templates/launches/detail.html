@@ -35,6 +35,11 @@
                                                 <a class="resource_link" style="background: #0f9131;" href="{{ launch.links.presskit }}" target="_blank">Download Press Kit</a>
                                             </li>
                                         {% endif %}
+                                        {% if launch.links.wikipedia %}
+                                            <li>
+                                                <a class="resource_link" style="background: #3e85f7;" href="{{ launch.links.wikipedia }}" target="_blank">Wikipedia</a>
+                                            </li>
+                                        {% endif %}
                                         {% if launch.links.video_link %}
                                             <li>
                                                 <a class="resource_link" style="background: #ff0000;" href="https://www.youtube.com/watch?v={{ launch.links.youtube_id }}" target="_blank">Watch Launch</a>
