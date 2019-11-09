@@ -9,3 +9,6 @@ def index(request):
         'upcoming_launches': upcoming_launches[:5],
     }
     return render(request, 'home/index.html', context)
+
+def contact(request):
+    return render(request, 'home/contact.html')

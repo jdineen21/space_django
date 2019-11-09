@@ -61,8 +61,8 @@
         <div class="panel">
             <p>Lorem ipsum...</p>
         </div> {% endcomment %}
-        <a href="">About</a>
-        <a href="">Contact</a>
+        {% comment %} <a href="">About</a> {% endcomment %}
+        <a href="{% url 'home:contact' %}">About</a>
     </div>
     <div id="content">
         <div class="container">
