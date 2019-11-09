@@ -1,10 +1,6 @@
 
 /* overides */
 
-#topbar {
-    background: 0;
-}
-
 #menu_burger {
     position: relative;
     animation-name: burger;
@@ -59,6 +55,7 @@
 /* end */
 
 #video {
+    position: absolute;
     object-fit: fill;
     width: 100%;
     height: 100%;

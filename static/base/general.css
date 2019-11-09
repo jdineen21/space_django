@@ -30,6 +30,7 @@ table tr td {
 
 #vertical_slider {
     background: #000000;
+    user-select: none;
 }
 
 .map {
