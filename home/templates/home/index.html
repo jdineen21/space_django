@@ -11,4 +11,26 @@
     <video autoplay muted loop id="video">
         <source src="{{ random_vid }}" type="video/mp4">
     </video>
+    <div class="main_content">
+        <div class="floated_content">
+            <h1>Significant Launches</h1>
+            <ul>
+                {% for launch in significant_launches %}
+                    <a href="{% url 'launches:detail' launch.flight_number %}">
+                        <li>
+                            <img src="{{ launch.links.mission_patch_small }}">
+                            <div class="sig_text">
+                                <h2>{{ launch.mission_name }}</h2>
+                                <p>{{ launch.launch_datetime|date }}</p>
+                            </div>
+                        </li>
+                    </a>
+                {% endfor %}
+            </ul>
+            <h1 class="next_launch_header">Next Launch</h1>
+            <div>
+                <h2>{{ next_launch.mission_name }}</h2>
+            </div>
+        </div>
+    </div>
 {% endblock %}
