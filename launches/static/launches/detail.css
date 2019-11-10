@@ -86,3 +86,7 @@
     float: left;
     width: 50%;
 }
+
+.mission_patch_data img {
+    width: 3em;
+}
