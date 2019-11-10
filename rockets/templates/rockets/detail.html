@@ -119,7 +119,7 @@
             <div class="side_content">
                 {% if rocket.flickr_images %}
                     <div class="image_content">
-                        <div class="content">
+                        <div class="content_nopadding">
                             <div id="vertical_slider"></div> 
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                 {% if recent_related_launches %}
                     <div class="recent_related_launches">
                         <div class="content">
-                            <h2>{{ rocket.rocket_name }} Recent Launches</h2>
+                            <h2 style="margin-top: 0;">{{ rocket.rocket_name }} Recent Launches</h2>
                             <table>
                                 <tr class="first_row">
                                     <td><h3>Mission Name</h3></td>

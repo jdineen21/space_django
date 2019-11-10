@@ -1,11 +1,10 @@
 .launch_details {
-    padding: 1em;
     float: left;
     width: 100%;
 }
 
 .main_content {
-    padding-right: 1em;
+    padding-right: 0.5em;
     float: left;
     width: 65%;
 }
@@ -28,7 +27,7 @@
 
 .map_content,
 .image_content {
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 
 .website_links,

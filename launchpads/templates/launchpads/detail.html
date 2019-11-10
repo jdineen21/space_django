@@ -88,20 +88,20 @@
             <div class="side_content">
                 {% if past_launches_at_site.0.links.flickr_images.0 %}
                     <div class="image_content">
-                        <div class="content">
+                        <div class="content_nopadding">
                             <img src="{{ past_launches_at_site.0.links.flickr_images.0 }}">
                         </div>
                     </div>
                 {% endif %}
                 <div class="map_content">
-                    <div class="content">
+                    <div class="content_nopadding">
                         <div id="map" class="map"></div>
                     </div>
                 </div>
                 {% if upcoming_launches_at_site %}
                     <div class="upcoming_content">
                         <div class="content">
-                            <h2>Upcoming Launches</h2>
+                            <h2 style="margin-top: 0;">Upcoming Launches</h2>
                             <table>
                                 <tr class="first_row">
                                     <td><h3>Mission Name</h3></td>
