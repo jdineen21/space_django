@@ -51,4 +51,5 @@
 
 .image_content img {
     width: 100%;
+    display: block;
 }
