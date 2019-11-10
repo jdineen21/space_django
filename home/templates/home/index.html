@@ -13,23 +13,41 @@
     </video>
     <div class="main_content">
         <div class="floated_content">
-            <h1>Significant Launches</h1>
-            <ul>
-                {% for launch in significant_launches %}
-                    <a href="{% url 'launches:detail' launch.flight_number %}">
-                        <li>
-                            <img src="{{ launch.links.mission_patch_small }}">
-                            <div class="sig_text">
-                                <h2>{{ launch.mission_name }}</h2>
-                                <p>{{ launch.launch_datetime|date }}</p>
-                            </div>
-                        </li>
-                    </a>
-                {% endfor %}
-            </ul>
-            <h1 class="next_launch_header">Next Launch</h1>
-            <div>
-                <h2>{{ next_launch.mission_name }}</h2>
+            <div class="significant_launches">
+                <h1 class="significant_launches_header">Significant Launches</h1>
+                <ul>
+                    {% for launch in significant_launches %}
+                        <a href="{% url 'launches:detail' launch.flight_number %}">
+                            <li>
+                                <img src="{{ launch.links.mission_patch_small }}">
+                                <div class="sig_text">
+                                    <h2>{{ launch.mission_name }}</h2>
+                                    <p>{{ launch.launch_datetime|date }}</p>
+                                </div>
+                            </li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="next_launch">
+                <h1 class="next_launch_header">Next Launch</h1>
+                <h2 class="next_launch_mission_name">{{ next_launch.mission_name }}</h2>
+                <div class="countdown">
+                    <table>
+                        <tr>
+                            <td>Days</td>
+                            <td>Hours</td>
+                            <td>Mins</td>
+                            <td>Secs</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>12</td>
+                            <td>45</td>
+                            <td>4</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

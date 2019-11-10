@@ -72,7 +72,7 @@
     animation-fill-mode: both;
 }
 
-.floated_content h1:nth-child(1) {
+.significant_launches_header {
     animation-delay: 1.25s;
 }
 
@@ -140,7 +140,6 @@
 
 .floated_content h1 {
     text-align: center;
-    color: #dcdcdc;
     color: #ffffff;
 }
 
@@ -178,4 +177,18 @@
 
 .floated_content li p {
     margin-bottom: 0;
+}
+
+.next_launch_mission_name {
+    text-align: center;
+}
+
+.countdown table {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.countdown tr td {
+    padding: 0.5em 1em;
 }
