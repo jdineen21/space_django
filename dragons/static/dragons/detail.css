@@ -10,6 +10,24 @@
     width: 35%;
 }
 
+.floated_content {
+    float: right;
+}
+
+.stats_container {
+    display: inline-block;
+    width: 100%;
+}
+
+.section_container {
+    float: left;
+    width: 50%;
+}
+
+#dragon_img {
+    width: 300px;
+}
+
 .dragon_header {
     margin-top: 0;
 }
