@@ -16,7 +16,21 @@
         <div class="dragon_details">
             <div class="main_content">
                 <div class="content">
+                    <div class="floated_content">
+                        <img src={% static "base/images/dragon_logo.png" %}>
+                    </div>
                     <h1 class="dragon_header">{{ dragon.name }}</h1>
+                    <table>
+                        <tr>
+                            <td><b>First Flight:</b></td>
+                            <td>{{ dragon.first_flight }}</td>
+                        </tr>
+                    </table>
+                    {% if dragon.wikipedia %}
+                        <div class="buttons_container">
+                            <a class="wikipedia_link" href="{{ dragon.wikipedia }}" target="_blank">Wikipedia</a>
+                        </div>
+                    {% endif %}
                     {% if dragon.description %}
                         <div class="dragon_description">
                             <h2>Dragon Description</h2>

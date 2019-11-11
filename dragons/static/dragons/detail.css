@@ -13,3 +13,16 @@
 .dragon_header {
     margin-top: 0;
 }
+
+.buttons_container {
+    margin-top: 1em;
+}
+
+.wikipedia_link {
+    padding: 0.5em 1em;
+    display: inline-block;
+    background: #3e85f7;
+    color: #ffffff;
+    font-weight: 500;
+    text-decoration: none;
+}
