@@ -19,175 +19,188 @@
     {% if not launch.error %}
         <div class="launch_details">
             <div class="main_content">
-                <div class="content">
-                    <div class="floated_content">
-                        <ul>
-                            {% if launch.links.mission_patch_small %}
-                                <li>
-                                    <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
-                                </li>
-                            {% endif %}
-                            {% if launch.links.presskit or launch.links.wikipedia or launch.links.video_link %}
-                                <li>
-                                    <ul>
-                                        {% if launch.links.presskit %}
-                                            <li>
-                                                <a class="resource_link" style="background: #0f9131;" href="{{ launch.links.presskit }}" target="_blank">Download Press Kit</a>
-                                            </li>
-                                        {% endif %}
-                                        {% if launch.links.wikipedia %}
-                                            <li>
-                                                <a class="resource_link" style="background: #3e85f7;" href="{{ launch.links.wikipedia }}" target="_blank">Wikipedia</a>
-                                            </li>
-                                        {% endif %}
-                                        {% if launch.links.video_link %}
-                                            <li>
-                                                <a class="resource_link" style="background: #ff0000;" href="https://www.youtube.com/watch?v={{ launch.links.youtube_id }}" target="_blank">Watch Launch</a>
-                                            </li>
-                                        {% endif %}
-                                    </ul>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                    <h1 class="launch_header">{{ launch.mission_name }} | {{ launch.rocket.rocket_name }}</h1>
-                    {% if launch.launch_success == True %}
-                        <div class="launch_outcome" style="background: #0f9131;">Successful Launch</div>
-                    {% elif launch.launch_success == False %}
-                        <div class="launch_outcome" style="background: #ff0000;">Launch Failure</div>
-                    {% elif launch.upcoming == True %}
-                        <div class="launch_outcome" style="background: #20b9e8;">Upcoming Launch</div>
-                    {% endif %}
-                    <h3>Flight Number: {{ launch.flight_number }}</h3>
-                    <table>
-                        <tr>
-                            <td>Date:</td>
-                            <td>{{ launch.launch_datetime|date:"D, d M Y" }}</td>
-                        <tr>
-                        {% if launch.is_tentative == False and launch.launch_datetime|time != "midnight" %}
-                            <tr>
-                                <td>Time:</td>
-                                <td>{{ launch.launch_datetime|time }}</td>
-                            <tr>
-                        {% endif %}
-                    </table>
-                    {% if launch.is_tentative %}
-                        <p>Launch date is tentative,
-                        {% if launch.tentative_max_precision %}
-                            stated launch date is accurate to a {{ launch.tentative_max_precision }}.
-                            {% if launch.tbd %}
-                                The launch date is to be determined.
-                            {% endif %}
-                        {% endif %}
-                        </p>
-                    {% endif %}
-                    <h2>Launch Site</h2>
-                    <a href="{% url 'launchpads:detail' launch.launch_site.site_id %}">
-                        {{ launch.launch_site.site_name_long }}
-                    </a>
-                    {% if launch.details %}
-                        <div class="launch_details_container">
-                            <h2>Launch Details</h2>
-                            <p>{{ launch.details }}</p>
-                        </div>
-                    {% endif %}
-                    {% if launch.launch_failure_details.reason %}
-                        <h2>Launch Failure Details</h2>
-                        <p>{{ launch.launch_failure_details.reason|capfirst }}</p>
-                    {% endif %}
-                    {% if not launch.crew is None %}
-                        <h2>Crew</h2>
-                        <p>{{ launch.crew }}</p>
-                    {% endif %}
-                    <div class="stages_container">
-                        {% if launch.rocket.first_stage and launch.upcoming == False %}
-                            {% if launch.rocket.first_stage.cores %}
-                                <div class="first_stage_details">
-                                    <h2>First Stage</h2>
-                                    {% for core in launch.rocket.first_stage.cores %}
-                                        {% if launch.rocket.first_stage.cores|length > 1 %}
-                                            <h3>Core {{ forloop.counter }}</h3>
-                                        {% endif %}
-                                        <p>Core Serial: <a href="{% url 'cores:detail' core.core_serial %}">{{ core.core_serial }}</a></p>
-                                        <p>Flight no: {{ core.flight }}</p>
-                                        <p>Block {{ core.block }}</p>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                        {% endif %}
-                        {% if launch.rocket.second_stage %}
-                            {% if launch.rocket.second_stage.payloads %}
-                                <div class="second_stage_details">
-                                    {% if launch.upcoming == True %}
-                                        <h2>Payload Stage</h2>
-                                    {% else %}
-                                        <h2>Second Stage</h2>
-                                    {% endif %}
-                                    {% for payload in launch.rocket.second_stage.payloads %}
-                                        {% if launch.rocket.second_stage.payloads|length > 1 %}
-                                            <h3>Payload {{ forloop.counter }}</h3>
-                                        {% endif %}
-                                        {% if payload.payload_id %}
-                                            <p>Payload: {{ payload.payload_id }}</p>
-                                        {% endif %}
-                                        {% if payload.customers %}
-                                            <p>Customers: {{ payload.customers|join:", " }}</p>
-                                        {% endif %}
-                                        {% if payload.nationality %}
-                                            <p>Nationality: {{ payload.nationality }}</p>
-                                        {% endif %}
-                                        {% if payload.manufacturer %}
-                                            <p>Manufacturer: {{ payload.manufacturer }}</p>
-                                        {% endif %}
-                                        {% if payload.payload_type %}
-                                            <p>Payload Type: {{ payload.payload_type }}</p>
-                                        {% endif %}
-                                        {% if payload.payload_mass_kg %}
-                                            <p>Payload Mass: {{ payload.payload_mass_kg }}kg ({{ payload.payload_mass_lbs }}lbs)</p>
-                                        {% endif %}                                    
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                    {% if launches_related %}
-                        <div class="misson_container">
-                            <h1>Past Related Launches</h1>
-                            <table>
-                                <tr class="first_row">
-                                    <td><h3>Flight<br>no.</h3></td>
-                                    <td><h3>Mission<br>Patch</h3></td>
-                                    <td><h3>Mission<br>Name</h3></td>
-                                    <td><h3>Vehicle</h3></td>
-                                    <td><h3>Launch<br>Site</h3></td>
-                                    <td><h3>Launch<br>Date</h3></td>
-                                    <td><h3>Launch</h3></td>
-                                </tr>
-                                {% for launch in launches_related %}
-                                    <tr>
-                                        <td><p style="text-align: center;">{{ launch.flight_number }}</p></td>
-                                        <td class="mission_patch_data">
-                                            {% if launch.links.mission_patch %}
-                                                <img src="{{ launch.links.mission_patch_small }}">
+                <div class="launch_content">
+                    <div class="content">
+                        <div class="floated_content">
+                            <ul>
+                                {% if launch.links.mission_patch_small %}
+                                    <li>
+                                        <img class="mission_patch" src="{{ launch.links.mission_patch_small }}" >
+                                    </li>
+                                {% endif %}
+                                {% if launch.links.presskit or launch.links.wikipedia or launch.links.video_link %}
+                                    <li>
+                                        <ul>
+                                            {% if launch.links.presskit %}
+                                                <li>
+                                                    <a class="resource_link" style="background: #0f9131;" href="{{ launch.links.presskit }}" target="_blank">Download Press Kit</a>
+                                                </li>
                                             {% endif %}
-                                        </td>
-                                        <td><a href="{% url 'launches:detail' launch.flight_number %}"><p>{{ launch.mission_name }}</p></a></td>
-                                        <td><p>{{ launch.rocket.rocket_name }}</p></td>
-                                        <td><a href="{% url 'launchpads:detail' launch.launch_site.site_id %}"><p>{{ launch.launch_site.site_name }}</p></a></td>
-                                        <td><p>{{ launch.launch_datetime|date:"D, d M Y" }}</p></td>
-                                        {% if launch.launch_success == True %}
-                                            <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
-                                        {% elif launch.launch_success == False %}
-                                            <td><div class="bool_box" style="background: #ff0000;">Failure</div></td>
-                                        {% elif launch.upcoming %}
-                                            <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
-                                        {% endif %}
-                                    </tr>
-                                {% endfor %}
-                            </table>
+                                            {% if launch.links.wikipedia %}
+                                                <li>
+                                                    <a class="resource_link" style="background: #3e85f7;" href="{{ launch.links.wikipedia }}" target="_blank">Wikipedia</a>
+                                                </li>
+                                            {% endif %}
+                                            {% if launch.links.video_link %}
+                                                <li>
+                                                    <a class="resource_link" style="background: #ff0000;" href="https://www.youtube.com/watch?v={{ launch.links.youtube_id }}" target="_blank">Watch Launch</a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                            </ul>
                         </div>
-                    {% endif %}
+                        <h1 class="launch_header">{{ launch.mission_name }} | {{ launch.rocket.rocket_name }}</h1>
+                        {% if launch.launch_success == True %}
+                            <div class="launch_outcome" style="background: #0f9131;">Successful Launch</div>
+                        {% elif launch.launch_success == False %}
+                            <div class="launch_outcome" style="background: #ff0000;">Launch Failure</div>
+                        {% elif launch.upcoming == True %}
+                            <div class="launch_outcome" style="background: #20b9e8;">Upcoming Launch</div>
+                        {% endif %}
+                        <h3>Flight Number: {{ launch.flight_number }}</h3>
+                        <table>
+                            <tr>
+                                <td>Date:</td>
+                                <td>{{ launch.launch_datetime|date:"D, d M Y" }}</td>
+                            <tr>
+                            {% if launch.is_tentative == False and launch.launch_datetime|time != "midnight" %}
+                                <tr>
+                                    <td>Time:</td>
+                                    <td>{{ launch.launch_datetime|time }}</td>
+                                <tr>
+                            {% endif %}
+                        </table>
+                        {% if launch.is_tentative %}
+                            <p>Launch date is tentative,
+                            {% if launch.tentative_max_precision %}
+                                stated launch date is accurate to a {{ launch.tentative_max_precision }}.
+                                {% if launch.tbd %}
+                                    The launch date is to be determined.
+                                {% endif %}
+                            {% endif %}
+                            </p>
+                        {% endif %}
+                        <h2>Launch Site</h2>
+                        <a href="{% url 'launchpads:detail' launch.launch_site.site_id %}">
+                            {{ launch.launch_site.site_name_long }}
+                        </a>
+                        {% if launch.details %}
+                            <div class="launch_details_container">
+                                <h2>Launch Details</h2>
+                                <p>{{ launch.details }}</p>
+                            </div>
+                        {% endif %}
+                        {% if launch.launch_failure_details.reason %}
+                            <h2>Launch Failure Details</h2>
+                            <p>{{ launch.launch_failure_details.reason|capfirst }}</p>
+                        {% endif %}
+                        {% if not launch.crew is None %}
+                            <h2>Crew</h2>
+                            <p>{{ launch.crew }}</p>
+                        {% endif %}
+                    </div>
                 </div>
+                <div class="stages_content">
+                    <div class="content">
+                        <div class="stages_container">
+                            {% if launch.rocket.first_stage and launch.upcoming == False %}
+                                {% if launch.rocket.first_stage.cores %}
+                                    <div class="stage_details">
+                                        <h2 class="header_nomargin">First Stage</h2>
+                                        {% for core in launch.rocket.first_stage.cores %}
+                                            {% if launch.rocket.first_stage.cores|length > 1 %}
+                                                <h3>Core {{ forloop.counter }}</h3>
+                                            {% endif %}
+                                            <p>Core Serial: <a href="{% url 'cores:detail' core.core_serial %}">{{ core.core_serial }}</a></p>
+                                            <p>Flight no: {{ core.flight }}</p>
+                                            <p>Block {{ core.block }}</p>
+                                            <h4>Landing Details</h4>
+                                            <p>Type: {{ core.landing_type }}</p>
+                                            <p>Vehicle: {{ core.landing_vehicle }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                            {% if launch.rocket.second_stage %}
+                                {% if launch.rocket.second_stage.payloads %}
+                                    <div class="stage_details">
+                                        {% if launch.upcoming == True %}
+                                            <h2 class="header_nomargin">Payload Stage</h2>
+                                        {% else %}
+                                            <h2 class="header_nomargin">Second Stage</h2>
+                                        {% endif %}
+                                        {% for payload in launch.rocket.second_stage.payloads %}
+                                            {% if launch.rocket.second_stage.payloads|length > 1 %}
+                                                <h3>Payload {{ forloop.counter }}</h3>
+                                            {% endif %}
+                                            {% if payload.payload_id %}
+                                                <p>Payload: {{ payload.payload_id }}</p>
+                                            {% endif %}
+                                            {% if payload.customers %}
+                                                <p>Customers: {{ payload.customers|join:", " }}</p>
+                                            {% endif %}
+                                            {% if payload.nationality %}
+                                                <p>Nationality: {{ payload.nationality }}</p>
+                                            {% endif %}
+                                            {% if payload.manufacturer %}
+                                                <p>Manufacturer: {{ payload.manufacturer }}</p>
+                                            {% endif %}
+                                            {% if payload.payload_type %}
+                                                <p>Payload Type: {{ payload.payload_type }}</p>
+                                            {% endif %}
+                                            {% if payload.payload_mass_kg %}
+                                                <p>Payload Mass: {{ payload.payload_mass_kg }}kg ({{ payload.payload_mass_lbs }}lbs)</p>
+                                            {% endif %}                                    
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% if launches_related %}
+                    <div class="related_content">
+                        <div class="content">
+                            <div class="misson_container">
+                                <h1 class="header_nomargin">Past Related Launches</h1>
+                                <table>
+                                    <tr class="first_row">
+                                        <td><h3>Flight<br>no.</h3></td>
+                                        <td><h3>Mission<br>Patch</h3></td>
+                                        <td><h3>Mission<br>Name</h3></td>
+                                        <td><h3>Vehicle</h3></td>
+                                        <td><h3>Launch<br>Site</h3></td>
+                                        <td><h3>Launch<br>Date</h3></td>
+                                        <td><h3>Launch</h3></td>
+                                    </tr>
+                                    {% for launch in launches_related %}
+                                        <tr>
+                                            <td><p style="text-align: center;">{{ launch.flight_number }}</p></td>
+                                            <td class="mission_patch_data">
+                                                {% if launch.links.mission_patch %}
+                                                    <img src="{{ launch.links.mission_patch_small }}">
+                                                {% endif %}
+                                            </td>
+                                            <td><a href="{% url 'launches:detail' launch.flight_number %}"><p>{{ launch.mission_name }}</p></a></td>
+                                            <td><p>{{ launch.rocket.rocket_name }}</p></td>
+                                            <td><a href="{% url 'launchpads:detail' launch.launch_site.site_id %}"><p>{{ launch.launch_site.site_name }}</p></a></td>
+                                            <td><p>{{ launch.launch_datetime|date:"D, d M Y" }}</p></td>
+                                            {% if launch.launch_success == True %}
+                                                <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
+                                            {% elif launch.launch_success == False %}
+                                                <td><div class="bool_box" style="background: #ff0000;">Failure</div></td>
+                                            {% elif launch.upcoming %}
+                                                <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
             <div class="side_content">
                 {% if launch.links.flickr_images %}

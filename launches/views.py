@@ -39,7 +39,7 @@ def detail(request, flight_number):
         'launch': launch, 
         'launchpad': launchpad,
         'rocket': rocket,
-        'launches_related': launches_related[:12],
+        'launches_related': launches_related[:7],
     }
     return render(request, 'launches/detail.html', context)
 

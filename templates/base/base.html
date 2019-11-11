@@ -45,7 +45,7 @@
                 <a href="{% url 'landpads:detail' landpad.id %}">{{ landpad.full_name }}</a>
             {% endfor %}
         </div>
-        <a class="accordion">Rockets</a>
+        <a class="accordion">Vehicles</a>
         <div class="panel">
             {% for rocket in sidebar.rockets %}
                 <a href="{% url 'rockets:detail' rocket.rocket_id %}">{{ rocket.rocket_name }}</a>

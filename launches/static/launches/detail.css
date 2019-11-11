@@ -9,6 +9,12 @@
     width: 65%;
 }
 
+.launch_content,
+.stages_content,
+.related_content {
+    margin-bottom: 0.5em;
+}
+
 .side_content {
     float: right;
     width: 35%;
@@ -76,14 +82,14 @@
     width: 100%;
 }
 
-.first_stage_details {
+.stage_details {
     float: left;
     width: 50%;
+    display: block;
 }
 
-.second_stage_details {
-    float: left;
-    width: 50%;
+.mission_patch_data {
+    text-align: center;
 }
 
 .mission_patch_data img {

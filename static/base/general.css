@@ -19,6 +19,10 @@ table tr td {
     padding-right: 1.5em;
 }
 
+.header_nomargin {
+    margin-top: 0;
+}
+
 .bool_box {
     padding: 0.7em 1.1em;
     display: inline-block;
