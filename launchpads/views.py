@@ -9,12 +9,6 @@ from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 
 from .models import LaunchpadImage
 
-def index(request):
-    context = {
-        'launchpads': launchpads.get_launchpads(),
-    }
-    return render(request, 'launchpads/index.html', context)
-
 def detail(request, site_id):
     launchpad = launchpads.get_launchpad_by_site_id(site_id)
 
