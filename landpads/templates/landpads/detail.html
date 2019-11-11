@@ -59,21 +59,19 @@
                                 <td><h3>Launch Date</h3></td>
                                 <td><h3>Launch</h3></td>
                             </tr>
-                            {% for launch in attempted_land_launches %}
-                                {% if launch.launch_site.site_id == launchpad.site_id %}
-                                    <tr>
-                                        <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
-                                        <td><p><a href="{% url 'rockets:detail' launch.rocket.rocket_id %}">{{ launch.rocket.rocket_name }}</a></p></td>
-                                        <td>{{ launch.launch_datetime|date }}</td>
-                                        {% if launch.launch_success == True %}
-                                            <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
-                                        {% elif launch.launch_success == False %}
-                                            <td><div class="bool_box" style="background: #ff0000;">Failure</div></td>
-                                        {% elif launch.upcoming %}
-                                            <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
-                                        {% endif %}
-                                    </tr>
-                                {% endif %}        
+                            {% for launch in past_launches_at_landpad %}
+                                <tr>
+                                    <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
+                                    <td><p><a href="{% url 'rockets:detail' launch.rocket.rocket_id %}">{{ launch.rocket.rocket_name }}</a></p></td>
+                                    <td>{{ launch.launch_datetime|date }}</td>
+                                    {% if launch.launch_success == True %}
+                                        <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
+                                    {% elif launch.launch_success == False %}
+                                        <td><div class="bool_box" style="background: #ff0000;">Failure</div></td>
+                                    {% elif launch.upcoming %}
+                                        <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
+                                    {% endif %}
+                                </tr>      
                             {% endfor %}
                         </table>
                     {% endif %}

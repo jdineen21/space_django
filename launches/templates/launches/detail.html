@@ -82,6 +82,10 @@
                             {% endif %}
                             </p>
                         {% endif %}
+                        <h2>Launch Vehicle</h2>
+                        <a href="{% url 'rockets:detail' launch.rocket.rocket_id %}">
+                            {{ launch.rocket.rocket_name }}
+                        </a>
                         <h2>Launch Site</h2>
                         <a href="{% url 'launchpads:detail' launch.launch_site.site_id %}">
                             {{ launch.launch_site.site_name_long }}
@@ -118,7 +122,7 @@
                                             <p>Block {{ core.block }}</p>
                                             <h4>Landing Details</h4>
                                             <p>Type: {{ core.landing_type }}</p>
-                                            <p>Vehicle: {{ core.landing_vehicle }}</p>
+                                            <p>Landpad: <a href="{% url 'landpads:detail' core.landing_vehicle %}">{{ core.landing_vehicle }}</a></p>
                                         {% endfor %}
                                     </div>
                                 {% endif %}
