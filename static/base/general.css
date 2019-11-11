@@ -11,7 +11,7 @@ body {
     min-height: 100vh;
 }
 
-table .first_row td h3 {
+.center_align {
     text-align: center;
 }
 
