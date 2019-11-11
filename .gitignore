@@ -4,11 +4,11 @@
 
 /node_modules
 
-/static/video
+/static/base/images
+/static/base/video
 /static/base/js/app.js
 
 .env
 
-*.mp4
 *.pyc
 *.sqlite3
