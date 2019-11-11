@@ -86,10 +86,10 @@
                 </div>
             </div>
             <div class="side_content">
-                {% if past_launches_at_site.0.links.flickr_images.0 %}
+                {% if launchpad_img %}
                     <div class="image_content">
                         <div class="content_nopadding">
-                            <img src="{{ past_launches_at_site.0.links.flickr_images.0 }}">
+                            <img src="{{ launchpad_img }}">
                         </div>
                     </div>
                 {% endif %}
