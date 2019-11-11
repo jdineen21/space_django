@@ -3,15 +3,21 @@ import random
 
 from django.shortcuts import render
 
+from .models import SignificantLaunch
+
 def index(request):
-    sig = [4, 14, 28, 55]
     next_launch = launches.get_next_launch()
     past_launches = launches.get_past_launches()
     random_vid = 'static/base/video/orbit_wo_%s.mp4' % (random.randint(0, 12))
 
+    # Get Significant Launches from DB
+    significant_launches_flight_numbers = []
+    for launch in SignificantLaunch.objects.all():
+        significant_launches_flight_numbers.append(launch.flight_number)
+
     significant_launches = []
     for launch in past_launches:
-        if launch['flight_number'] in sig:
+        if launch['flight_number'] in significant_launches_flight_numbers:
             significant_launches.append(launch)
 
     context = {

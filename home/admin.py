@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import SignificantLaunch
+
+class SignificantLaunchAdmin(admin.ModelAdmin):
+    list_display = ['flight_number']
+
+admin.site.register(SignificantLaunch, SignificantLaunchAdmin)
