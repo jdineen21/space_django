@@ -50,20 +50,23 @@
 
 #img_container {
     position: relative;
-    animation-name: image;
-    animation-duration: 0.5s;
+    animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation-delay: 1s;
-    animation-fill-mode: both;
 }
 
-@keyframes image {
-    from {
-        left: -25em;
+@keyframes slide-in-left {
+    0% {
+        -webkit-transform: translateX(-1000px);
+                transform: translateX(-1000px);
+        opacity: 0;
     }
-    to {
-        left: 0;
+    100% {
+        -webkit-transform: translateX(0);
+                transform: translateX(0);
+        opacity: 1;
     }
 }
+  
 
 .floated_content h1 {
     position: relative;
@@ -191,4 +194,10 @@
 
 .countdown tr td {
     padding: 0.5em 1em;
+}
+
+@media (max-device-width: 800px) {
+    .main_content {
+        padding-top: 10em;
+    }
 }

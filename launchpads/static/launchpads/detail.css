@@ -53,3 +53,15 @@
     width: 100%;
     display: block;
 }
+
+@media (max-width: 1000px) {
+    .main_content {
+        margin-bottom: 0.5em;
+        padding: 0;
+        width: 100%;
+    }
+
+    .side_content {
+        width: 100%;
+    }
+}
