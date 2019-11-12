@@ -2,6 +2,9 @@
 var acc = document.getElementsByClassName("accordion");
 
 document.addEventListener('DOMContentLoaded', function() {
+    var sidebar = document.getElementById("sidebar");
+    var sidebarTransform = document.getElementById("sidebar").style.transform;
+
     for (var i = 0; i < acc.length; i++) {
         acc[i].addEventListener("click", function() {
             var panel;
@@ -28,17 +31,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    hidden = true
+    document.getElementById("menu_burger").addEventListener("click", function() {
+        if (hidden) {
+            sidebar.style.transform = "translateX(0)";
+            // document.getElementById("content").style.paddingLeft = "10em";
+            hidden = false;
+        } else {
+            sidebar.style.transform = sidebarTransform;
+            // document.getElementById("content").style.paddingLeft = "0";
+            hidden = true;
+        }
+    });
 });
-
-hidden = true
-function slideMenu(id) {
-    if (hidden) {
-        document.getElementById("sidebar").style.left = "0";
-        // document.getElementById("content").style.paddingLeft = "10em";
-        hidden = false;
-    } else {
-        document.getElementById("sidebar").style.left = "-10em";
-        // document.getElementById("content").style.paddingLeft = "0";
-        hidden = true;
-    }
-}

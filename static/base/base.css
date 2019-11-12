@@ -73,8 +73,9 @@
 #sidebar {
     position: fixed;
     top: 4em;
-    left: -10em;
-    transition: left 0.3s;
+    transition: transform 0.5s;
+    transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    transform: translateX(-1000px);
     background-color: #222;
     width: 8vw;
     height: 100vh;
@@ -119,5 +120,32 @@
 @media (max-width: 1200px) {
     .container {
         width: 100%;
+    }
+}
+
+@media (max-device-width: 800px) {
+    #content {
+        padding: 10em 0 0 0;
+    }
+
+    #topbar {
+        height: 10em;
+    }
+
+    #menu_burger {
+        font-size: 5em;
+    }
+
+    #img_container {
+        padding-top: 1.5em;    
+    }
+
+    #img_container img {
+        height: 5em;
+    }
+
+    #sidebar {
+        top: 10em;
+        width: 100vw;
     }
 }

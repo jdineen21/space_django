@@ -1,6 +1,7 @@
 
 .container {
     text-align: center;
+    min-width: 780px;
 }
 
 .launches_container {
