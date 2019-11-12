@@ -117,12 +117,14 @@
                                             {% if launch.rocket.first_stage.cores|length > 1 %}
                                                 <h3>Core {{ forloop.counter }}</h3>
                                             {% endif %}
-                                            <p>Core Serial: <a href="{% url 'cores:detail' core.core_serial %}">{{ core.core_serial }}</a></p>
+                                            <p>Core Serial: {{ core.core_serial }}</p>
                                             <p>Flight no: {{ core.flight }}</p>
                                             <p>Block {{ core.block }}</p>
-                                            <h4>Landing Details</h4>
-                                            <p>Type: {{ core.landing_type }}</p>
-                                            <p>Landpad: <a href="{% url 'landpads:detail' core.landing_vehicle %}">{{ core.landing_vehicle }}</a></p>
+                                            {% if core.landing_intent %}
+                                                <h4>Landing Details</h4>
+                                                <p>Type: {{ core.landing_type }}</p>
+                                                <p>Landpad: <a href="{% url 'landpads:detail' core.landing_vehicle %}">{{ core.landing_vehicle }}</a></p>
+                                            {% endif %}
                                         {% endfor %}
                                     </div>
                                 {% endif %}
