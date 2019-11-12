@@ -72,6 +72,7 @@
 
 #sidebar {
     position: fixed;
+    z-index: 100;
     top: 4em;
     transition: transform 0.5s;
     transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
@@ -81,7 +82,6 @@
     height: 100vh;
     min-width: 10em;
     min-height: 500px;
-    z-index: 1;
 }
 
 #sidebar a {
@@ -130,6 +130,7 @@
 
     #topbar {
         height: 10em;
+        background-color: #000000 !important;
     }
 
     #menu_burger {
@@ -145,7 +146,15 @@
     }
 
     #sidebar {
+        position: absolute;
         top: 10em;
         width: 100vw;
+        height: unset;
+        min-height: 100vh;
+        background-color: #222 !important;
+    }
+
+    #sidebar a {
+        font-size: 4em;
     }
 }
