@@ -8,6 +8,7 @@
 .container {
     margin: 0 auto;
     padding: 0.5em;
+    padding-bottom: 0;
     /* background: #D3D3D3; */
     overflow: hidden;
     min-height: calc(100vh - 4em);

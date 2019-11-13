@@ -5,12 +5,14 @@
 }
 
 .main_content {
+    margin-bottom: 0.5em;
     padding-right: 0.5em;
     float: left;
     width: 60%;
 }
 
 .side_content {
+    margin-bottom: 0.5em;
     float: right;
     width: 40%;
 }
@@ -74,9 +76,15 @@
     float: left;
 }
 
+@media (max-width: 1400px) {
+    .container {
+        margin: 0;
+        width: 100%;
+    }
+}
+
 @media (max-width: 1000px) {
     .main_content {
-        margin-bottom: 0.5em;
         padding: 0;
         width: 100%;
     }
