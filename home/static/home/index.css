@@ -142,8 +142,10 @@
 }
 
 .floated_content h1 {
+    font-family: "Raleway";
     text-align: center;
     color: #ffffff;
+    font-weight: 900;
 }
 
 .floated_content ul {
@@ -175,10 +177,12 @@
 }
 
 .floated_content li h2 {
+    font-family: "Raleway";
     margin-top: 0;
 }
 
 .floated_content li p {
+    font-family: "Raleway";
     margin-bottom: 0;
 }
 
