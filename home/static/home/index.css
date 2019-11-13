@@ -119,7 +119,7 @@
 
 #video {
     position: absolute;
-    object-fit: fill;
+    object-fit: cover;
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -198,6 +198,12 @@
 
 @media (max-device-width: 800px) {
     .main_content {
-        padding-top: 10em;
+        padding-top: 8em;
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    .main_content {
+        padding-top: 4em;
     }
 }

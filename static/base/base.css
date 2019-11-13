@@ -125,29 +125,29 @@
 
 @media (max-device-width: 800px) {
     #content {
-        padding: 10em 0 0 0;
+        padding: 8em 0 0 0;
     }
 
     #topbar {
-        height: 10em;
+        height: 8em;
         background-color: #000000 !important;
     }
 
     #menu_burger {
-        font-size: 5em;
+        font-size: 4em;
     }
 
     #img_container {
-        padding-top: 1.5em;    
+        padding-top: 1.2em;    
     }
 
     #img_container img {
-        height: 5em;
+        height: 4em;
     }
 
     #sidebar {
         position: absolute;
-        top: 10em;
+        top: 8em;
         width: 100vw;
         height: unset;
         min-height: 100vh;
@@ -156,5 +156,41 @@
 
     #sidebar a {
         font-size: 4em;
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    #content {
+        padding: 4em 0 0 0;
+    }
+
+    #topbar {
+        height: 4em;
+        background-color: #000000 !important;
+    }
+
+    #menu_burger {
+        font-size: 2em;
+    }
+
+    #img_container {
+        padding-top: 0.6em;    
+    }
+
+    #img_container img {
+        height: 2em;
+    }
+
+    #sidebar {
+        position: absolute;
+        top: 4em;
+        width: 100vw;
+        height: unset;
+        min-height: 100vh;
+        background-color: #222 !important;
+    }
+
+    #sidebar a {
+        font-size: 3em;
     }
 }
