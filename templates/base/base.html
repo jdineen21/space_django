@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'base/general.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'base/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'general.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
     {% block stylesheet %}{% endblock  %}
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
     {% if debug %}
@@ -17,8 +17,8 @@
             gtag('config', 'UA-152422335-1');
         </script>
     {% endif %}
-    <script type="text/javascript" src="{% static 'base/js/app.js' %}"></script>
-    <script type="text/javascript" src="{% static 'base/js/sidebar.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/sidebar.js' %}"></script>
     {% block javascript %}{% endblock  %}
     <title>{% block title %}Homepage{% endblock %}</title>
 </head>
@@ -27,7 +27,7 @@
     <div id="topbar">
         <div id="menu_burger">&#9776;</div>
         <div id="img_container">
-            <img src={% static "base/images/spacex_logo_white.png" %} alt="SpaceX Logo">
+            <img src={% static "images/spacex_logo_white.png" %} alt="SpaceX Logo">
         </div>
         {% comment %} <div id="social_container">
             <a href="https://twitter.com/spacex/">

@@ -4,8 +4,8 @@
 
 /node_modules
 
-/static/base/images
-/static/base/video
+/static/images
+/static/video
 /static/base/js/app.js
 
 .env
