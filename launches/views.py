@@ -7,7 +7,8 @@ import rockets
 import json
 
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, Http404, HttpResponseNotFound
+from django.views import defaults
 
 def index(request):
     all_launches = launches.get_all_launches()
@@ -21,9 +22,13 @@ def detail(request, flight_number):
     launches_all = launches.get_all_launches()
     launches_past = launches.get_past_launches()
 
+    launch = None
     for launch_temp in launches_all:
         if launch_temp['flight_number'] == flight_number:
             launch = launch_temp
+    
+    if launch is None:
+        return defaults.page_not_found(request, None)
 
     launchpad = launchpads.get_launchpad_by_site_id(launch['launch_site']['site_id'])
     rocket = rockets.get_rocket_by_rocket_id(launch['rocket']['rocket_id'])
