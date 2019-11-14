@@ -16,4 +16,12 @@ https://www.spacextrack.com/
 
 5. npm run production
 
-6. python manage.py runserver
+6. cp .env.example .env
+
+7. python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())' >> .env
+
+8. (optional) python manage.py migrate
+
+9. (optional) python manage.py createsuperuser
+
+10. python manage.py runserver 
