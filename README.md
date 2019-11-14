@@ -25,3 +25,5 @@ https://www.spacextrack.com/
 
 #### 6. Launch development server 
   - python manage.py runserver
+
+Use command 'deactivate' to unmount the python virtual environment
