@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         source: new ol.source.BingMaps({
             // We need a key to get the layer from the provider. 
             // Sign in with Bing Maps and you will get your key (for free)
-            key: 'Ap9VqFbJYRNkatdxt3KyzfJxXN_9GlfABRyX3k_JsQTkMQLfK_-AzDyJHI5nojyP',
+            key: 'Auz-HLLxbI4DVch12N1UWK7tO-WC1wi1i6-5g6fc8nPOZzS393E7D-osUFvYllho',
             imagerySet: 'Aerial', // or 'Road', 'AerialWithLabels', etc.
             // use maxZoom 19 to see stretched tiles instead of the Bing Maps
             // "no photos at this zoom level" tiles
