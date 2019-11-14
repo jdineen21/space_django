@@ -1,8 +1,10 @@
-# https://www.spacextrack.com/
+# space_django 
 
-To get development server running
+https://www.spacextrack.com/
 
-# Linux
+## To get development server running
+
+### Linux
 
 1. virtualenv --python=python3 --always-copy .venv/
 
@@ -14,4 +16,4 @@ To get development server running
 
 5. npm run production
 
-4. python manage.py runserver
+6. python manage.py runserver
