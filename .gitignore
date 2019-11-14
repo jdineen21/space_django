@@ -6,7 +6,7 @@ node_modules/
 
 static/images/
 static/video/
-static/base/js/
+static/js/
 
 .env
 
