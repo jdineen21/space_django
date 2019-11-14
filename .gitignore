@@ -1,12 +1,12 @@
 # List of files/folders to exclude
-/.idea
-/.vscode
+.idea/
+.vscode/
 
-/node_modules
+node_modules/
 
-/static/images
-/static/video
-/static/base/js/app.js
+static/images/
+static/video/
+static/base/js/
 
 .env
 
