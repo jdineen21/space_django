@@ -16,6 +16,6 @@ services:
       - 5900:8000
     environment:
       - DJANGO_SETTINGS_MODULE=space_django.settings.production
-    command: gunicorn space_django.wsgi:application --name space_django --bind=unix:/usr/src/app/run/gunicorn.sock --workers 3
+    command: gunicorn space_django.wsgi:application --name space_django --bind=unix:/usr/src/app/run/gunicorn.sock --workers 1
     depends_on:
       - intermediate-caching-service
