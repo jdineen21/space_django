@@ -7,6 +7,8 @@ services:
       - ./intermediate-caching-api:/usr/src/app
   website:
     build: ./
+    volumes:
+      - ./:/usr/src/app
     ports:
       - 5900:8000
     depends_on:
