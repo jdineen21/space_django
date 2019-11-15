@@ -9,6 +9,9 @@ services:
       - type: bind
         source: ./
         target: /usr/src/app/run/
+      - type: bind
+        source: ../database
+        target: /usr/src/app/database/
     ports:
       - 5900:8000
     environment:
