@@ -5,11 +5,14 @@ services:
     build: ./intermediate-caching-api
     volumes: 
       - ./intermediate-caching-api:/usr/src/app
-  website:
+  dev-service:
     build: ./
     volumes:
       - ./:/usr/src/app
     ports:
       - 5900:8000
+    environment:
+      - DJANGO_SETTINGS_MODULE=space_django.settings.development
+    command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - intermediate-caching-service
