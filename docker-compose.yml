@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  intermediate-caching-service:
+    build: ./intermediate-caching-api
+    volumes: 
+      - ./intermediate-caching-api:/usr/src/app
+    ports:
+      - 5000:5000
+  website:
+    build: ./
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - intermediate-caching-service
