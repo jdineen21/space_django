@@ -3,12 +3,9 @@ version: '3.3'
 services:
   intermediate-caching-service:
     build: ./intermediate-caching-api
-    volumes: 
-      - ./intermediate-caching-api:/usr/src/app
   gunicorn-service:
     build: ./
     volumes:
-      - ./:/usr/src/app
       - type: bind
         source: ./
         target: /usr/src/app/run/
