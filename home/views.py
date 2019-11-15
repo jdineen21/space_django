@@ -8,7 +8,7 @@ from .models import SignificantLaunch
 def index(request):
     next_launch = launches.get_next_launch()
     past_launches = launches.get_past_launches()
-    random_vid = 'https://filedn.com/lztIQAwoHWSj5qF2v4Viv7Q/Joe Public/orbit_wo_%s.mp4' % (random.randint(0, 12))
+    random_vid = 'static/video/orbit_wo_%s.mp4' % (random.randint(0, 12))
 
     # Get Significant Launches from DB
     significant_launches_flight_numbers = []

@@ -3,10 +3,12 @@
 .vscode/
 .venv/
 
+media/
 node_modules/
 
-static/images/
 static/js/
+static/images/
+static/video/
 
 .env
 
