@@ -3,4 +3,4 @@ from .base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.26', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['jdineen.co.uk', '192.168.0.26', '127.0.0.1', 'localhost']

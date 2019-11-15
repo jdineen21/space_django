@@ -1,7 +1,8 @@
-FROM python:3.8.0-alpine3.10
+FROM python:3.8.0-buster
 
 WORKDIR /usr/src/app
-COPY requirements.txt ./
+
+COPY ./ ./
 RUN pip install -r requirements.txt
 
 EXPOSE 8000
