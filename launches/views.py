@@ -19,11 +19,11 @@ def index(request):
     return render(request, 'launches/index/all.html', context)
 
 def detail(request, flight_number):
-    launches_all = launches.get_all_launches()
-    launches_past = launches.get_past_launches()
+    all_launches = launches.get_all_launches()
+    past_launches = launches.get_past_launches()
 
     launch = None
-    for launch_temp in launches_all:
+    for launch_temp in all_launches:
         if launch_temp['flight_number'] == flight_number:
             launch = launch_temp
     
@@ -34,7 +34,7 @@ def detail(request, flight_number):
     rocket = rockets.get_rocket_by_rocket_id(launch['rocket']['rocket_id'])
     
     launches_related = []
-    for launch_temp in launches_past:
+    for launch_temp in past_launches:
         if launch_temp['mission_id'] != []:
             if launch_temp['flight_number'] != flight_number:
                 if launch_temp['mission_id'] == launch['mission_id']:

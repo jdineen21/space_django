@@ -9,6 +9,7 @@
 {% block javascript %}
     <script type="text/javascript" src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.0.1/build/ol.js"></script>
     <script type="text/javascript" src="{% static 'js/maps.js' %}"></script>
+    {{ launchpad_imgs|json_script:"images" }}
     {{ launchpad.location|json_script:"location" }}
 {% endblock %}
 
@@ -86,10 +87,10 @@
                 </div>
             </div>
             <div class="side_content">
-                {% if launchpad_img %}
+                {% if launchpad_imgs %}
                     <div class="image_content">
                         <div class="content_nopadding">
-                            <img src="{{ launchpad_img }}">
+                             <div id="vertical_slider"></div> 
                         </div>
                     </div>
                 {% endif %}
