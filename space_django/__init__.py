@@ -1,2 +1,2 @@
 
-url_prefix = 'http://intermediate-caching-service:5000/'
+url_prefix = 'http://0.0.0.0:5000/'
