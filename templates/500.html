@@ -1,3 +1,8 @@
-<!-- templates/500.html -->
-<h1>500 Internal Server Error</h1>
-<p>The server has encountered a situation it doesn't know how to handle. Please try again later.</p>
+{% extends "base_error.html" %}
+
+{% block title %}Internal Server Error{% endblock %}
+
+{% block content %}
+    <h1>500 Internal Server Error</h1>
+    <p>The server has encountered a situation it doesn't know how to handle. Please try again later.</p>
+{% endblock %}

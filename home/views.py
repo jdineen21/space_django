@@ -27,5 +27,5 @@ def index(request):
     }
     return render(request, 'home/index.html', context)
 
-def contact(request):
-    return render(request, 'home/contact.html')
+def about(request):
+    return render(request, 'home/about.html')
