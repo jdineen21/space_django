@@ -1,84 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'general.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
-    {% block stylesheet %}{% endblock  %}
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
-    {% if debug %}
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152422335-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+    <head>
+        {% load static %}
+        <meta charset="utf-8">
+        <title>{% block title %}Default Title{% endblock %}</title>
+        <meta name="description" content="{% block description %}Default Description{% endblock %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            gtag('config', 'UA-152422335-1');
-        </script>
-    {% endif %}
-    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/sidebar.js' %}"></script>
-    {% block javascript %}{% endblock  %}
-    <title>{% block title %}Homepage{% endblock %}</title>
-</head>
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+        <link rel="stylesheet" type="text/css" href="{% static 'general.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+        {% block stylesheet %}{% endblock  %}
+        
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/sidebar.js' %}"></script>
+        {% block javascript %}{% endblock  %}
 
-<body>
-    <div id="topbar">
-        <div id="menu_burger">&#9776;</div>
-        <div id="img_container">
-            <img src={% static "assets/images/spacex_logo_white.png" %} alt="SpaceX Logo">
+        {% if debug %}
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152422335-1"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'UA-152422335-1');
+            </script>
+        {% endif %}
+    </head>
+    <body>
+        <div id="topbar">
+            <div id="menu_burger">&#9776;</div>
+            <div id="img_container">
+                <img src={% static "assets/images/spacex_logo_white.png" %} alt="SpaceX Logo">
+            </div>
         </div>
-        {% comment %} <div id="social_container">
-            <a href="https://twitter.com/spacex/">
-                <img src="{% static "base/images/twitter_logo_blue.png" %}" alt="SpaceX Twitter">
-            </a>
-        </div> {% endcomment %}
-    </div>
-    <div id="sidebar">
-        <a href="{% url 'home:index' %}">Home</a>
-        <a class="accordion">Launches</a>
-        <div class="panel">
-            <a href="{% url 'launches:index' %}">All</a>
-            <a href="{% url 'launches:next' %}">Next</a>
-            <a href="{% url 'launches:past' %}">Past</a>
-            <a href="{% url 'launches:upcoming' %}">Upcoming</a>
+        <div id="sidebar">
+            <a href="{% url 'home:index' %}">Home</a>
+            <a class="accordion">Launches</a>
+            <div class="panel">
+                <a href="{% url 'launches:index' %}">All</a>
+                <a href="{% url 'launches:next' %}">Next</a>
+                <a href="{% url 'launches:past' %}">Past</a>
+                <a href="{% url 'launches:upcoming' %}">Upcoming</a>
+            </div>
+            <a class="accordion">Launch Pads</a>
+            <div class="panel">
+                {% for launchpad in sidebar.launchpads %}
+                    <a href="{% url 'launchpads:detail' launchpad.site_id %}">{{ launchpad.name }}</a>
+                {% endfor %}
+            </div>
+            <a class="accordion">Landing Pads</a>
+            <div class="panel">
+                {% for landpad in sidebar.landpads %}
+                    <a href="{% url 'landpads:detail' landpad.id %}">{{ landpad.full_name }}</a>
+                {% endfor %}
+            </div>
+            <a class="accordion">Vehicles</a>
+            <div class="panel">
+                {% for rocket in sidebar.rockets %}
+                    <a href="{% url 'rockets:detail' rocket.rocket_id %}">{{ rocket.rocket_name }}</a>
+                {% endfor %}
+            </div>
+            <a class="accordion">Dragons</a>
+            <div class="panel">
+                {% for dragon in sidebar.dragons %}
+                    <a href="{% url 'dragons:detail' dragon.id %}">{{ dragon.name }}</a>
+                {% endfor %}
+            </div>
+            {% comment %} <a href="{% url 'home:about' %}">About</a> {% endcomment %}
         </div>
-        <a class="accordion">Launch Pads</a>
-        <div class="panel">
-            {% for launchpad in sidebar.launchpads %}
-                <a href="{% url 'launchpads:detail' launchpad.site_id %}">{{ launchpad.name }}</a>
-            {% endfor %}
+        <div id="content">
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
         </div>
-        <a class="accordion">Landing Pads</a>
-        <div class="panel">
-            {% for landpad in sidebar.landpads %}
-                <a href="{% url 'landpads:detail' landpad.id %}">{{ landpad.full_name }}</a>
-            {% endfor %}
-        </div>
-        <a class="accordion">Vehicles</a>
-        <div class="panel">
-            {% for rocket in sidebar.rockets %}
-                <a href="{% url 'rockets:detail' rocket.rocket_id %}">{{ rocket.rocket_name }}</a>
-            {% endfor %}
-        </div>
-        <a class="accordion">Dragons</a>
-        <div class="panel">
-            {% for dragon in sidebar.dragons %}
-                <a href="{% url 'dragons:detail' dragon.id %}">{{ dragon.name }}</a>
-            {% endfor %}
-        </div>
-        {% comment %} <a href="">Ships</a>
-        <div class="panel">
-            <p>Lorem ipsum...</p>
-        </div> {% endcomment %}
-        {% comment %} <a href="">About</a> {% endcomment %}
-        {% comment %} <a href="{% url 'home:contact' %}">About</a> {% endcomment %}
-    </div>
-    <div id="content">
-        <div class="container">
-            {% block content %}{% endblock %}
-        </div>
-    </div>
-</body>
+    </body>
 </html>
