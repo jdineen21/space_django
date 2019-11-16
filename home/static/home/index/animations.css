@@ -1,0 +1,87 @@
+/* animations */
+
+#menu_burger {
+    position: relative;
+    animation-name: burger;
+    animation-duration: 0.5s;
+    animation-delay: 1.5s;
+    animation-fill-mode: both;
+}
+
+@keyframes burger {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#img_container {
+    position: relative;
+    animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation-delay: 1s;
+}
+
+@keyframes slide-in-left {
+    0% {
+        -webkit-transform: translateX(-1000px);
+                transform: translateX(-1000px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateX(0);
+                transform: translateX(0);
+        opacity: 1;
+    }
+}
+  
+
+.floated_content h1 {
+    position: relative;
+    animation-name: upcoming;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+.significant_launches_header {
+    animation-delay: 1.25s;
+}
+
+.next_launch_header {
+    animation-delay: 2.5s;
+}
+
+.floated_content a {
+    position: relative;
+    animation-name: upcoming;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+.floated_content a:nth-child(1) {
+    animation-delay: 1.5s;
+}
+
+.floated_content a:nth-child(2) {
+    animation-delay: 1.75s;
+}
+
+.floated_content a:nth-child(3) {
+    animation-delay: 2s;
+}
+
+.floated_content a:nth-child(4) {
+    animation-delay: 2.25s;
+}
+
+@keyframes upcoming {
+    from {
+        right: -50em;
+    }
+    to {
+        right: 0;
+    }
+}
+
+/* end */
