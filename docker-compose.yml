@@ -7,7 +7,7 @@ services:
       - ./intermediate-caching-api:/usr/src/app
     ports:
       - 5000:5000
-  dev-service:
+  development-app-service:
     build: ./
     volumes:
       - ./:/usr/src/app/
