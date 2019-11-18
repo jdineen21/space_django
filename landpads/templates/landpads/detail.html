@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}{{ landpad.full_name }} | Landing Pad | SpaceXTrack.com{% endblock %}
+
+{% block description %}SpaceXTrack.com: SpaceX {{ landpad.full_name }}, {{ landpad.details }}{% endblock %}
+
 {% block stylesheet %}
     <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.0.1/css/ol.css">
     <link rel="stylesheet" type="text/css" href="{% static 'landpads/detail.css' %}">
@@ -11,8 +15,6 @@
     <script type="text/javascript" src="{% static 'js/maps.js' %}"></script>
     {{ landpad.location|json_script:"location" }}
 {% endblock %}
-
-{% block title %}{{ landpad.full_name }}{% endblock %}
 
 {% block content %}
     {% if not landpad.error %}

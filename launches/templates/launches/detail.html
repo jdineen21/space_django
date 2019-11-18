@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}{{ launch.mission_name }} {{ launch.rocket.rocket_name }} | Launch | SpaceXTrack.com{% endblock %}
+
+{% block description %}SpaceXTrack.com: SpaceX {{ launch.mission_name }} {{ launch.rocket.rocket_name }} Launch. {{ launch.details }}{% endblock %}
+
 {% block stylesheet %}
     <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.0.1/css/ol.css">
     <link rel="stylesheet" type="text/css" href="{% static 'launches/detail.css' %}">
@@ -12,8 +16,6 @@
     {{ launch.links.flickr_images|json_script:"images" }}
     {{ launchpad.location|json_script:"location" }}
 {% endblock %}
-
-{% block title %}{{ launch.mission_name }}{% endblock %}
 
 {% block content %}
     {% if not launch.error %}

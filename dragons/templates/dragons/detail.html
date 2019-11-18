@@ -2,6 +2,10 @@
 {% load static %}
 {% load humanize %}
 
+{% block title %}{{ dragon.name }} | Dragon | SpaceXTrack.com{% endblock %}
+
+{% block description %}SpaceXTrack.com: SpaceX {{ dragon.name }}, {{ dragon.description }}{% endblock %}
+
 {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{% static 'dragons/detail.css' %}">
 {% endblock %}
@@ -9,8 +13,6 @@
 {% block javascript %}
     {{ dragon.flickr_images|json_script:"images" }}
 {% endblock %}
-
-{% block title %}{{ dragon.name }}{% endblock %}
 
 {% block content %}
     {% if not dragon.error %}

@@ -3,6 +3,10 @@
 {% load static %}
 {% load humanize %}
 
+{% block title %}{{ rocket.rocket_name }} | Vehicle | SpaceXTrack.com{% endblock %}
+
+{% block description %}SpaceXTrack.com: SpaceX {{ rocket.rocket_name }}, {{ rocket.description }}{% endblock %}
+
 {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{% static 'rockets/detail.css' %}">
 {% endblock %}
@@ -10,8 +14,6 @@
 {% block javascript %}
     {{ rocket.flickr_images|json_script:"images" }}
 {% endblock %}
-
-{% block title %}{{ rocket.rocket_name }}{% endblock %}
 
 {% block content %}
     {% if not rocket.error %}
