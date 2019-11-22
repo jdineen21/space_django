@@ -24,11 +24,11 @@
                 <div class="content">
                     <h1 class="launchpad_header">{{ launchpad.site_name_long }}</h1>
                     {% if launchpad.status == "active" %}
-                        <h2 class="status_active">Active</h2>
+                        <div class="launchpad_status" style="background: #0f9131;">Active Launchpad</div>
                     {% elif launchpad.status == "under construction" %}
-                        <h2 class="status_under_construction">Under Construction</h2>
+                        <div class="launchpad_status" style="background: #ffbf00;">Launchpad Under Construction</div>
                     {% elif launchpad.status == "retired" %}
-                        <h2 class="status_retired">Retired</h2>
+                        <div class="launchpad_status" style="background: #ff0000;">Retired Launchpad</div>
                     {% endif %}
                     <h2>Launchpad Details</h2>
                     <p>{{ launchpad.details }}</p>

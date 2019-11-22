@@ -20,28 +20,13 @@
     margin-top: 0;
 }
 
-.status_active {
-    margin: 0;
-    padding: 0.5em 1em;
+.launchpad_status {
+    padding: 0.7em 1.1em;
     display: inline-block;
-    background: #0f9131;
     color: #ffffff;
-}
-
-.status_under_construction {
-    margin: 0;
-    padding: 0.5em 1em;
-    display: inline-block;
-    background: #ffbf00;
-    color: #ffffff;
-}
-
-.status_retired {
-    margin: 0;
-    padding: 0.5em 1em;
-    display: inline-block;
-    background: #ff0000;
-    color: #ffffff;
+    font-weight: 500;
+    font-size: 1em;
+    font-family: "Raleway";
 }
 
 .image_content,
