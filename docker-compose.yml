@@ -1,9 +1,0 @@
-version: '3.3'
-
-services:
-  intermediate-caching-service:
-    build: ./intermediate-caching-api
-    volumes: 
-      - ./intermediate-caching-api:/usr/src/app
-    ports:
-      - 5000:5000

@@ -13,9 +13,9 @@ export default class VerticalSlider extends React.Component {
         return (
             <Carousel dynamicHeight={true} showThumbs={false}>
                 {
-                    this.state.images.map((image) => 
-                        <div>
-                            <img src={image} />
+                    this.state.images.map((image, index) => 
+                        <div key={index}>
+                            <img key={image.id} src={image} />
                         </div>
                     )
                 }

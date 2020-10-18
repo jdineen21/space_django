@@ -1,4 +1,6 @@
+python-dotenv
 django
 gunicorn
 requests
-python-dotenv
+requests_cache
+flask

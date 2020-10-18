@@ -12,4 +12,5 @@ static/assets/
 .env
 
 *.pyc
+*.sqlite
 *.sqlite3

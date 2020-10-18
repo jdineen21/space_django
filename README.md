@@ -9,8 +9,9 @@ https://www.spacextrack.com/
   - cd space_django
 
 #### 2. Create and mount python virtual environment
-  - virtualenv --python=python3 --always-copy .venv/
-  - source .venv/bin/activate
+  - pip3 install virtualenv
+  - py -m venv .venv
+  - .\.venv\Scripts\activate
 
 #### 3. Install required python packages from requirements.txt
   - pip install -r requirements.txt
@@ -23,8 +24,5 @@ https://www.spacextrack.com/
   - cp .env.example .env
   - python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())' >> .env
 
-#### 6. Launch docker container
-  - docker-compose up
-
-#### 7. Launch django dev server
+#### 6. Launch django dev server
   - python manage.py runserver
