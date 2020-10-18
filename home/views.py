@@ -1,13 +1,13 @@
-import launches
 import random
+
+from launches.models import Launches
+from home.models import SignificantLaunch
 
 from django.shortcuts import render
 
-from .models import SignificantLaunch
-
 def index(request):
-    next_launch = launches.get_next_launch()
-    past_launches = launches.get_past_launches()
+    next_launch = Launches.next()
+    past_launches = Launches.past()
     random_vid = 'static/assets/video/orbit_wo_%s.mp4' % (random.randint(0, 12))
 
     # Get Significant Launches from DB

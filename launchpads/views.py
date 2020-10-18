@@ -1,20 +1,18 @@
 
 import random
 
-import launches
-import launchpads
+from launches.models import Launches
+from launchpads.models import Launchpads, LaunchpadImage
 
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.views import defaults
 
-from .models import LaunchpadImage
-
 def detail(request, site_id):
-    all_launchpads = launchpads.get_launchpads()
+    all_launchpads = Launchpads.all()
 
-    past_launches = launches.get_past_launches()
-    upcoming_launches = launches.get_upcoming_launches()
+    past_launches = Launches.past()
+    upcoming_launches = Launches.upcoming()
 
     launchpad = None
     for launchpad_temp in all_launchpads:
@@ -37,7 +35,6 @@ def detail(request, site_id):
     launchpad_images = []
     for launchpad_image in LaunchpadImage.objects.filter(site_id=site_id).values_list('image_location', flat=True):
         launchpad_images.append(launchpad_image)
-    print((launchpad_images))
 
     context = {
         'launchpad': launchpad,

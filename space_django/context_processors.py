@@ -1,13 +1,13 @@
-import launchpads
-import landpads
-import rockets
-import dragons
+from launchpads.models import Launchpads
+from landpads.models import Landpads
+from rockets.models import Rockets
+from dragons.models import Dragons
 
 def categories_processor(request):
-    all_launchpads = sorted(launchpads.get_launchpads(), key = lambda i:(i['status'], i['name']))
-    all_landpads = sorted(landpads.get_landpads(), key = lambda i:(i['status'], i['id']))
-    all_rockets = rockets.get_all_rockets()
-    all_dragons = dragons.get_all_dragons()
+    all_launchpads = sorted(Launchpads.all(), key = lambda i:(i['status'], i['name']))
+    all_landpads = sorted(Landpads.all(), key = lambda i:(i['status'], i['id']))
+    all_rockets = Rockets.all()
+    all_dragons = Dragons.all()
     
     context = {
         'sidebar': {

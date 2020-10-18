@@ -1,11 +1,12 @@
-import rockets
-import launches
+
+from rockets.models import Rockets
+from launches.models import Launches
 
 from django.shortcuts import render
 
 def detail(request, rocket_id):
-    rocket = rockets.get_rocket_by_rocket_id(rocket_id)
-    past_launches = launches.get_past_launches()
+    rocket = Rockets.by_rocket_id(rocket_id)
+    past_launches = Launches.past()
 
     # Recent Related Launchs
     related_launches = []
