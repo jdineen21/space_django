@@ -24,6 +24,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'spacextrack',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
         'OPTIONS': {
             'read_default_file': '/var/www/spacextrack.com/my.cnf',
         },
