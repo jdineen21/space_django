@@ -1,9 +1,10 @@
-import dragons
+
+from dragons.models import Dragons
 
 from django.shortcuts import render
 
 def detail(request, id):
-    dragon = dragons.get_dragon_by_id(id)
+    dragon = Dragons.by_id(id)
 
     context = {
         'dragon': dragon,

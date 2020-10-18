@@ -1,3 +1,7 @@
+body {
+    min-width: 800px;
+}
+
 .launch_details {
     float: left;
     width: 100%;
@@ -102,7 +106,7 @@
     width: 3em;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1600px) {
     .main_content {
         padding: 0;
         width: 100%;

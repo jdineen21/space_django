@@ -1,12 +1,13 @@
-import landpads
-import launches
+
+from landpads.models import Landpads
+from launches.models import Launches
 
 from django.shortcuts import render
 from django.views import defaults
 
 def detail(request, id):
-    all_landpads = landpads.get_landpads()
-    past_launches = launches.get_past_launches()
+    all_landpads = Landpads.all()
+    past_launches = Launches.past()
 
     landpad = None
     for landpad_temp in all_landpads:
