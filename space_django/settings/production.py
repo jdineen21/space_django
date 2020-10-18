@@ -23,6 +23,7 @@ CSRF_COOKIE_SECURE = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'spacextrack',
         'OPTIONS': {
             'read_default_file': '/var/www/spacextrack.com/my.cnf',
         },
