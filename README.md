@@ -2,7 +2,7 @@
 
 https://www.spacextrack.com/
 
-## Docker Development Server Setup
+## Development Server Setup
 
 #### 1. Clone repo and cd into it
   - git clone --recursive https://github.com/jdineen21/space_django
@@ -26,3 +26,8 @@ https://www.spacextrack.com/
 
 #### 6. Launch django dev server
   - python manage.py runserver
+
+## Deployment
+
+#### 1. Perform System Check
+  - python manage.py check --deploy --settings=space_django.settings.production
