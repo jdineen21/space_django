@@ -11,7 +11,7 @@ https://www.spacextrack.com/
 #### 2. Create and mount python virtual environment
   - pip3 install virtualenv
   - py -m venv .venv
-  - .\.venv\Scripts\activate
+  - .venv\Scripts\activate
 
 #### 3. Install required python packages from requirements.txt
   - pip install -r requirements.txt
