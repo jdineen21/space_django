@@ -111,12 +111,14 @@ table tr td {
 }
 
 #img_container {
-    padding-top: 0.6em;
+    margin: 0.5em 0;
+    height: 3em;
     float: left;
 }
 
 #img_container img {
     height: 2em;
+    margin-top: 0.15em;
 }
 
 #social_container {

@@ -29,9 +29,9 @@
     <body>
         <div id="topbar">
             <div id="menu_burger">&#9776;</div>
-            <div id="img_container">
+            <a href="{% url 'home:index' %}" id="img_container" style="display: block;">
                 <img src={% static "assets/images/spacex_logo_white_wo.png" %} alt="SpaceX Logo">
-            </div>
+            </a>
         </div>
         <div id="sidebar">
             <a href="{% url 'home:index' %}">Home</a>
