@@ -28,6 +28,7 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {
             'read_default_file': '/var/www/spacextrack.com/my.cnf',
+            'init_command': 'SET default_storage_engine=INNODB',
         },
     }
 }
