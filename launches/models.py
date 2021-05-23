@@ -1,19 +1,41 @@
 import datetime
 import space_django.api
+import logging
+
+from operator import itemgetter
+
+from launchpads.models import Launchpad
 
 from django.db import models
+
+class Launch(models.Model):
+    fairings = models.JSONField(null=True)
+    links = models.JSONField()
+    static_fire_datetime = models.DateTimeField(null=True)
+    tbd = models.BooleanField()
+    net = models.BooleanField()
+    window = models.IntegerField(null=True)
+    success = models.BooleanField(null=True)
+    details = models.TextField(null=True)
+    launchpad = models.ForeignKey(Launchpad, on_delete=models.DO_NOTHING)
+    auto_update = models.BooleanField()
+    launch_library_id = models.CharField(max_length=100, null=True)
+    flight_number = models.IntegerField()
+    name = models.CharField(max_length=100)
+    datetime_utc = models.DateTimeField()
+    datetime_local = models.DateTimeField()
+    datetime_precision = models.CharField(max_length=100, null=True)
+    upcoming = models.BooleanField()
+    id = models.CharField(max_length=24, primary_key=True)
+
+    def __str__(self):
+        return self.name
 
 class Launches:
 
     def all():
         all_launches = space_django.api.external_cached('launches/', 86400)
-
-        # Add datetime value to each dictionary in list
-        for i in range(len(all_launches)):
-            launch_datetime = datetime.datetime.fromtimestamp(all_launches[i]['launch_date_unix'])
-            all_launches[i]['launch_datetime'] = launch_datetime
-
-        return all_launches[::-1]
+        return sorted(all_launches, key=itemgetter('flight_number'), reverse=True)
 
     def next():
         return space_django.api.external_cached('launches/next/', 86400)
@@ -21,20 +43,20 @@ class Launches:
     def past():
         past_launches = space_django.api.external_cached('launches/past/', 86400)
 
-        # Add datetime value to each dictionary in list
-        for i in range(len(past_launches)):
-            launch_datetime = datetime.datetime.fromtimestamp(past_launches[i]['launch_date_unix'])
-            past_launches[i]['launch_datetime'] = launch_datetime
+        # # Add datetime value to each dictionary in list
+        # for i in range(len(past_launches)):
+        #     launch_datetime = datetime.datetime.fromtimestamp(past_launches[i]['date_unix'])
+        #     past_launches[i]['launch_datetime'] = launch_datetime
 
         return past_launches[::-1]
 
     def upcoming():
         upcoming_launches = space_django.api.external_cached('launches/upcoming/', 86400)
 
-        # Add datetime value to each dictionary in list
-        for i in range(len(upcoming_launches)):
-            launch_datetime = datetime.datetime.fromtimestamp(upcoming_launches[i]['launch_date_unix'])
-            upcoming_launches[i]['launch_datetime'] = launch_datetime
+        # # Add datetime value to each dictionary in list
+        # for i in range(len(upcoming_launches)):
+        #     launch_datetime = datetime.datetime.fromtimestamp(upcoming_launches[i]['date_unix'])
+        #     upcoming_launches[i]['launch_datetime'] = launch_datetime
 
         return upcoming_launches
 
@@ -42,8 +64,19 @@ class Launches:
         url_affix = 'launches/%s/' % flight_number
         launch_by_flight_number = space_django.api.external_cached(url_affix, 86400)
         
-        # Add datetime value to dictionary
-        launch_datetime = datetime.datetime.fromtimestamp(launch_by_flight_number['launch_date_unix'])
-        launch_by_flight_number['launch_datetime'] = launch_datetime
+        # # Add datetime value to dictionary
+        # launch_datetime = datetime.datetime.fromtimestamp(launch_by_flight_number['date_unix'])
+        # launch_by_flight_number['launch_datetime'] = launch_datetime
 
         return launch_by_flight_number
+    
+    def by_id(id):
+        url_affix = 'launches/%s/' % id
+        launch_by_id = space_django.api.external_cached(url_affix, 86400)
+
+        return launch_by_id
+
+    # def get_related(id):
+    #     all_launches = Launches.all()
+    #     for launch in all_launches:
+        

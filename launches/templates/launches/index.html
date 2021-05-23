@@ -23,17 +23,17 @@
                     <tr>
                         <td><p style="text-align: center;">{{ launch.flight_number }}</p></td>
                         <td class="mission_patch">
-                            {% if launch.links.mission_patch %}
-                                <img src="{{ launch.links.mission_patch_small }}">
+                            {% if launch.links.patch.small %}
+                                <img src="{{ launch.links.patch.small }}">
                             {% endif %}
                         </td>
-                        <td><a href="{% url 'launches:detail' launch.flight_number %}"><p>{{ launch.mission_name }}</p></a></td>
-                        <td><a href="{% url 'rockets:detail' launch.rocket.rocket_id %}"><p>{{ launch.rocket.rocket_name }}</p></a></td>
-                        <td><a href="{% url 'launchpads:detail' launch.launch_site.site_id %}"><p>{{ launch.launch_site.site_name }}</p></a></td>
-                        <td><p>{{ launch.launch_datetime|date:"D, d M Y" }}</p></td>
-                        {% if launch.launch_success == True %}
+                        <td><a href="{% url 'launches:detail' launch.flight_number %}"><p>{{ launch.name }}</p></a></td>
+                        {% comment %} <td><a href="{% url 'rockets:detail' launch.rocket %}"><p>{{ launch.rocket }}</p></a></td> {% endcomment %}
+                        <td><a href="{% url 'launchpads:detail' launch.launchpad %}"><p>{{ launch.launchpad }}</p></a></td>
+                        <td><p>{{ launch.datetime_local|date:"D, d M Y" }}</p></td>
+                        {% if launch.success == True %}
                             <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
-                        {% elif launch.launch_success == False %}
+                        {% elif launch.success == False %}
                             <td><div class="bool_box" style="background: #ff0000;">Failure</div></td>
                         {% elif launch.upcoming %}
                             <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>

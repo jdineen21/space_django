@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}{{ launch.mission_name }} {{ launch.rocket.rocket_name }} | Launch | SpaceXTrack.com{% endblock %}
+{% block title %}{{ launch.name }} {{ rocket.name }} | Launch | SpaceXTrack.com{% endblock %}
 
-{% block description %}SpaceXTrack.com: SpaceX {{ launch.mission_name }} {{ launch.rocket.rocket_name }} Launch. {{ launch.details }}{% endblock %}
+{% block description %}SpaceXTrack.com: SpaceX {{ launch.name }} {{ rocket.name }} Launch. {{ launch.details }}{% endblock %}
 
 {% block stylesheet %}
     <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.0.1/css/ol.css">
@@ -13,7 +13,7 @@
 {% block javascript %}
     <script type="text/javascript" src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.0.1/build/ol.js"></script>
     <script type="text/javascript" src="{% static 'js/maps.js' %}"></script>
-    {{ launch.links.flickr_images|json_script:"images" }}
+    {{ launch.links.flickr.original|json_script:"images" }}
     {{ launchpad.location|json_script:"location" }}
 {% endblock %}
 
@@ -25,12 +25,12 @@
                     <div class="content">
                         <div class="floated_content">
                             <ul>
-                                {% if launch.links.mission_patch_small %}
+                                {% if launch.links.patch.small %}
                                     <li class="mission_patch">
-                                        <img src="{{ launch.links.mission_patch_small }}" >
+                                        <img src="{{ launch.links.patch.small }}" >
                                     </li>
                                 {% endif %}
-                                {% if launch.links.presskit or launch.links.wikipedia or launch.links.video_link %}
+                                {% if launch.links.presskit or launch.links.wikipedia or launch.links.youtube_id %}
                                     <li>
                                         <ul>
                                             {% if launch.links.presskit %}
@@ -43,7 +43,7 @@
                                                     <a class="resource_link" style="background: #3e85f7;" href="{{ launch.links.wikipedia }}" target="_blank">Wikipedia</a>
                                                 </li>
                                             {% endif %}
-                                            {% if launch.links.video_link %}
+                                            {% if launch.links.youtube_id %}
                                                 <li>
                                                     <a class="resource_link" style="background: #ff0000;" href="https://www.youtube.com/watch?v={{ launch.links.youtube_id }}" target="_blank">Watch Launch</a>
                                                 </li>
@@ -53,10 +53,10 @@
                                 {% endif %}
                             </ul>
                         </div>
-                        <h1 class="launch_header">{{ launch.mission_name }} | {{ launch.rocket.rocket_name }}</h1>
-                        {% if launch.launch_success == True %}
+                        <h1 class="launch_header">{{ launch.name }} | {{ rocket.name }}</h1>
+                        {% if launch.success == True %}
                             <div class="launch_outcome" style="background: #0f9131;">Successful Launch</div>
-                        {% elif launch.launch_success == False %}
+                        {% elif launch.success == False %}
                             <div class="launch_outcome" style="background: #ff0000;">Launch Failure</div>
                         {% elif launch.upcoming == True %}
                             <div class="launch_outcome" style="background: #20b9e8;">Upcoming Launch</div>
@@ -65,12 +65,12 @@
                         <table>
                             <tr>
                                 <td>Date:</td>
-                                <td>{{ launch.launch_datetime|date:"D, d M Y" }}</td>
+                                <td>{{ launch.datetime_local|date:"D, d M Y" }}</td>
                             <tr>
-                            {% if launch.is_tentative == False and launch.launch_datetime|time != "midnight" %}
+                            {% if not launch.upcoming %}
                                 <tr>
                                     <td>Time:</td>
-                                    <td>{{ launch.launch_datetime|time }}</td>
+                                    <td>{{ launch.datetime_local|date:"h:i:s A" }}</td>
                                 <tr>
                             {% endif %}
                         </table>
@@ -84,13 +84,13 @@
                             {% endif %}
                             </p>
                         {% endif %}
-                        <h2>Launch Vehicle</h2>
-                        <a href="{% url 'rockets:detail' launch.rocket.rocket_id %}">
-                            {{ launch.rocket.rocket_name }}
-                        </a>
+                        {% comment %} <h2>Launch Vehicle</h2>
+                        <a href="{% url 'rockets:detail' rocket.id %}">
+                            {{ rocket.name }}
+                        </a> {% endcomment %}
                         <h2>Launch Site</h2>
-                        <a href="{% url 'launchpads:detail' launch.launch_site.site_id %}">
-                            {{ launch.launch_site.site_name_long }}
+                        <a href="{% url 'launchpads:detail' launch.launchpad.sanitized_name %}">
+                            {{ launch.launchpad.full_name }}
                         </a>
                         {% if launch.details %}
                             <div class="launch_details_container">
@@ -191,8 +191,8 @@
                                                     <img src="{{ launch.links.mission_patch_small }}">
                                                 {% endif %}
                                             </td>
-                                            <td><a href="{% url 'launches:detail' launch.flight_number %}"><p>{{ launch.mission_name }}</p></a></td>
-                                            <td><p>{{ launch.rocket.rocket_name }}</p></td>
+                                            <td><a href="{% url 'launches:detail' launch.flight_number %}"><p>{{ launch.name }}</p></a></td>
+                                            <td><p>{{ rocket.name }}</p></td>
                                             <td><a href="{% url 'launchpads:detail' launch.launch_site.site_id %}"><p>{{ launch.launch_site.site_name }}</p></a></td>
                                             <td><p>{{ launch.launch_datetime|date:"D, d M Y" }}</p></td>
                                             {% if launch.launch_success == True %}
@@ -211,7 +211,7 @@
                 {% endif %}
             </div>
             <div class="side_content">
-                {% if launch.links.flickr_images %}
+                {% if launch.links.flickr.original %}
                     <div class="image_content">
                         <div class="content_nopadding">
                             <div id="vertical_slider"></div> 
@@ -232,7 +232,7 @@
                             <a href="#">Contact</a>
                         </div>
                         <div class="page_links">
-                            <h4>{{ launch.mission_name }}</h4>
+                            <h4>{{ launch.name }}</h4>
                             <a href="#">Home</a>
                             <a href="#">About</a>
                             <a href="#">Contact</a>
