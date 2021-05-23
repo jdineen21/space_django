@@ -4,7 +4,12 @@ import logging
 
 from django.core.cache import cache
 
-url_prefix = 'https://api.spacexdata.com/v3/'
+url_prefix = 'https://api.spacexdata.com/v4/'
+
+def external(url_affix):
+    url = '%s%s' % (url_prefix, url_affix)
+    data = requests.get(url).json()
+    return data
 
 def external_cached(url_affix, cache_time):
     cache_key = url_affix
