@@ -19,6 +19,7 @@ source .venv/bin/activate
 
 #### 3. Install required python packages from requirements.txt
 ```
+pip install --upgrade pip
 pip install -r requirements/development.txt
 ```
 
