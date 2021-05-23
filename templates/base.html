@@ -45,7 +45,7 @@
             <a class="accordion">Launch Pads</a>
             <div class="panel">
                 {% for launchpad in sidebar.launchpads %}
-                    <a href="{% url 'launchpads:detail' launchpad.site_id %}">{{ launchpad.name }}</a>
+                    <a href="{% url 'launchpads:detail' launchpad.sanitized_name %}">{{ launchpad.name }}</a>
                 {% endfor %}
             </div>
             <a class="accordion">Landing Pads</a>
@@ -57,7 +57,7 @@
             <a class="accordion">Vehicles</a>
             <div class="panel">
                 {% for rocket in sidebar.rockets %}
-                    <a href="{% url 'rockets:detail' rocket.rocket_id %}">{{ rocket.rocket_name }}</a>
+                    <a href="{% url 'rockets:detail' rocket.id %}">{{ rocket.name }}</a>
                 {% endfor %}
             </div>
             <a class="accordion">Dragons</a>

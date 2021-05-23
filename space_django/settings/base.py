@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+
+    'django_q',
 ]
 
 MIDDLEWARE = [
@@ -112,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/London'
 
 USE_I18N = True
 
@@ -132,6 +134,16 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
+
+# django-q Q cluster configuration
+# https://django-q.readthedocs.io/en/latest/configure.html
+Q_CLUSTER = {
+    'name': 'space_django',
+    'orm': 'default',
+    'timeout': 60,
+    'retry': 120,
+    'workers': 4,
+}
