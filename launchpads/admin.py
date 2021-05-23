@@ -1,8 +1,12 @@
 from django.contrib import admin
 
-from .models import LaunchpadImage
+from .models import Launchpad, LaunchpadImage
 
-class LaunchpadImageAdmin(admin.ModelAdmin):
+class LaunchpadImageInline(admin.StackedInline):
+    model = LaunchpadImage
     list_display = ['site_id', 'image_location']
 
-admin.site.register(LaunchpadImage, LaunchpadImageAdmin)
+class LaunchpadAdmin(admin.ModelAdmin):
+    inlines = [LaunchpadImageInline]
+
+admin.site.register(Launchpad, LaunchpadAdmin)

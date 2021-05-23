@@ -3,7 +3,7 @@
 
 {% block title %}{{ launchpad.name }} Launchpad | SpaceXTrack.com{% endblock %}
 
-{% block description %}SpaceXTrack.com: SpaceX {{ launchpad.site_name_long }}, {{ launchpad.details }}{% endblock %}
+{% block description %}SpaceXTrack.com: SpaceX {{ launchpad.full_name }}, {{ launchpad.details }}{% endblock %}
 
 {% block stylesheet %}
     <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.0.1/css/ol.css">
@@ -22,7 +22,7 @@
         <div class="launchpad_details">
             <div class="main_content">
                 <div class="content">
-                    <h1 class="launchpad_header">{{ launchpad.site_name_long }}</h1>
+                    <h1 class="launchpad_header">{{ launchpad.full_name }}</h1>
                     {% if launchpad.status == "active" %}
                         <div class="launchpad_status" style="background: #0f9131;">Active Launchpad</div>
                     {% elif launchpad.status == "under construction" %}
@@ -35,30 +35,30 @@
                     <h2>Location</h2>
                     <table>
                         <tr>
-                            <td>Name:</td>
-                            <td>{{ launchpad.location.name }}</td>
+                            <td>Region:</td>
+                            <td>{{ launchpad.region }}</td>
                         </tr>
                         <tr>
-                            <td>Region:</td>
-                            <td>{{ launchpad.location.region }}</td>
+                            <td>Locality:</td>
+                            <td>{{ launchpad.locality }}</td>
                         </tr>
                     </table>
-                    <h2>Vehicles Launched</h2>
-                    <ul>
-                        {% for vehicle in launchpad.vehicles_launched %}
-                            <li>{{ vehicle }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% if past_launches_at_site %}
+                    {% if launchpad_launches %}
+                        {% comment %} <h2>Vehicles Launched</h2>
+                        <ul>
+                            {% for vehicle in launchpad.vehicles_launched %}
+                                <li>{{ vehicle }}</li>
+                            {% endfor %}
+                        </ul> {% endcomment %}
                         <h2>Past Launches</h2>
                         <table>
                             <tr>
                                 <td>Attempted Launches:</td>
-                                <td>{{ launchpad.attempted_launches }}</td>
+                                <td>{{ launchpad.launch_attempts }}</td>
                             </tr>
                             <tr>
                                 <td>Successful Launches:</td>
-                                <td>{{ launchpad.successful_launches }}</td>
+                                <td>{{ launchpad.launch_successes }}</td>
                             </tr>
                         </table>
                         <table>

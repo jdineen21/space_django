@@ -2,19 +2,35 @@ import space_django.api
 
 from django.db import models
 
-class Launchpads:
+class Launchpad(models.Model):
+    name = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=100)
+    sanitized_name = models.CharField(max_length=100)
+    locality = models.CharField(max_length=100)
+    region = models.CharField(max_length=100)
+    timezone = models.CharField(max_length=100)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    launch_attempts = models.IntegerField()
+    launch_successes = models.IntegerField()
+    details = models.TextField()
+    status = models.CharField(max_length=100)
+    id = models.CharField(max_length=24, primary_key=True)
 
-    def all():
-        return space_django.api.external_cached('launchpads/', 604800)
+    class Meta:
+        verbose_name = 'Launchpad'
+        verbose_name_plural = 'Launchpads'
 
-    def by_site_id(site_id):
-        url_affix = 'launchpads/%s/' % site_id
-        return space_django.api.external_cached(url_affix, 604800)
+    def __str__(self):
+        return self.name
 
 class LaunchpadImage(models.Model):
-    site_id = models.CharField(max_length=30)
+    launchpad = models.ForeignKey(Launchpad, on_delete=models.DO_NOTHING)
     image_location = models.CharField(max_length=200)
 
     class Meta:
         verbose_name = 'Launchpad Image'
         verbose_name_plural = 'Launchpad Images'
+    
+    def __str__(self):
+        return str(self.id)
