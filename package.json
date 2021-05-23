@@ -4,12 +4,11 @@
   "description": "",
   "main": "webpack.mix.js",
   "scripts": {
-    "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "npm run development -- --watch",
-    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "production": "mix --production"
   },
   "repository": {
     "type": "git",
@@ -23,13 +22,13 @@
   },
   "homepage": "https://github.com/jdineen21/space_django#readme",
   "devDependencies": {
-    "@babel/preset-react": "^7.6.3",
-    "cross-env": "^6.0.3",
-    "laravel-mix": "^5.0.6",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "@babel/preset-react": "^7.13.13",
+    "cross-env": "^7.0.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "dependencies": {
-    "react-responsive-carousel": "^3.1.51"
+    "laravel-mix": "^6.0.19",
+    "react-responsive-carousel": "^3.2.18"
   }
 }

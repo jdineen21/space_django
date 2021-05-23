@@ -14,7 +14,7 @@ let mix = require('laravel-mix');
 mix.scripts('resources/js/vanilla/maps.js', 'static/js/maps.js');
 mix.scripts('resources/js/vanilla/sidebar.js', 'static/js/sidebar.js');
 
-mix.react('resources/js/react/app.js', 'static/js/');
+mix.js('resources/js/react/app.js', 'static/js/').react();
 
 // Full API
 // mix.js(src, output);
