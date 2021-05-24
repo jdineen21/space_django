@@ -3,6 +3,7 @@ from space_django import api
 
 from .models import Launch
 from launchpads.models import Launchpad
+from rockets.models import Rocket
 
 from django.utils import dateparse
 
@@ -18,7 +19,7 @@ def update():
         launch['datetime_precision'] = dateparse.parse_datetime(launch['date_precision'])
         launch.pop('static_fire_date_utc', None)
         launch.pop('static_fire_date_unix', None)
-        launch.pop('rocket', None)
+        #launch.pop('rocket', None)
         launch.pop('crew', None)
         launch.pop('ships', None)
         launch.pop('capsules', None)
@@ -30,6 +31,7 @@ def update():
         launch.pop('date_local', None)
         launch.pop('date_precision', None)
         launch.pop('cores', None)
+        launch['rocket'] = Rocket.objects.get(id=launch['rocket'])
         launch['launchpad'] = Launchpad.objects.get(id=launch['launchpad'])
         launchs.append(Launch(**launch))
 

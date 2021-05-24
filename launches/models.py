@@ -5,6 +5,7 @@ import logging
 from operator import itemgetter
 
 from launchpads.models import Launchpad
+from rockets.models import Rocket
 
 from django.db import models
 
@@ -15,6 +16,7 @@ class Launch(models.Model):
     tbd = models.BooleanField()
     net = models.BooleanField()
     window = models.IntegerField(null=True)
+    rocket = models.ForeignKey(Rocket, on_delete=models.DO_NOTHING, null=True)
     success = models.BooleanField(null=True)
     details = models.TextField(null=True)
     launchpad = models.ForeignKey(Launchpad, on_delete=models.DO_NOTHING)
