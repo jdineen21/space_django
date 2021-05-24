@@ -12,7 +12,8 @@ from django.db import models
 class Launch(models.Model):
     fairings = models.JSONField(null=True)
     links = models.JSONField()
-    static_fire_datetime = models.DateTimeField(null=True)
+    static_fire_date_utc = models.DateTimeField(null=True)
+    static_fire_date_unix = models.IntegerField(null=True)
     tbd = models.BooleanField()
     net = models.BooleanField()
     window = models.IntegerField(null=True)
@@ -24,9 +25,10 @@ class Launch(models.Model):
     launch_library_id = models.CharField(max_length=100, null=True)
     flight_number = models.IntegerField()
     name = models.CharField(max_length=100)
-    datetime_utc = models.DateTimeField()
-    datetime_local = models.DateTimeField()
-    datetime_precision = models.CharField(max_length=100, null=True)
+    date_utc = models.DateTimeField(null=True)
+    date_unix = models.IntegerField(null=True)
+    date_local = models.DateTimeField(null=True)
+    date_precision = models.CharField(max_length=100, null=True)
     upcoming = models.BooleanField()
     id = models.CharField(max_length=24, primary_key=True)
 
