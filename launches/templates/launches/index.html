@@ -29,7 +29,7 @@
                         </td>
                         <td><a href="{% url 'launches:detail' launch.flight_number %}"><p>{{ launch.name }}</p></a></td>
                         {% comment %} <td><a href="{% url 'rockets:detail' launch.rocket %}"><p>{{ launch.rocket }}</p></a></td> {% endcomment %}
-                        <td><a href="{% url 'launchpads:detail' launch.launchpad %}"><p>{{ launch.launchpad }}</p></a></td>
+                        <td><a href="{% url 'launchpads:detail' launch.launchpad.sanitized_name %}"><p>{{ launch.launchpad }}</p></a></td>
                         <td><p>{{ launch.datetime_local|date:"D, d M Y" }}</p></td>
                         {% if launch.success == True %}
                             <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
