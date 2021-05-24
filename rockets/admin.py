@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Rocket
+
+class RocketAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Rocket, RocketAdmin)
