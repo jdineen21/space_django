@@ -1,4 +1,7 @@
+
 import space_django.api
+
+from rockets.models import Rocket
 
 from django.db import models
 
@@ -13,6 +16,7 @@ class Launchpad(models.Model):
     longitude = models.FloatField()
     launch_attempts = models.IntegerField()
     launch_successes = models.IntegerField()
+    rockets = models.ManyToManyField(Rocket, null=True)
     details = models.TextField()
     status = models.CharField(max_length=100)
     id = models.CharField(max_length=24, primary_key=True)
@@ -25,7 +29,7 @@ class Launchpad(models.Model):
         return self.name
 
 class LaunchpadImage(models.Model):
-    launchpad = models.ForeignKey(Launchpad, on_delete=models.DO_NOTHING)
+    launchpad = models.ForeignKey(Launchpad, on_delete=models.SET_NULL, null=True)
     image_location = models.CharField(max_length=200)
 
     class Meta:
