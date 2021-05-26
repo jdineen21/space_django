@@ -1,6 +1,6 @@
-from launchpads.models import Launchpad
+from spacex.models import Launchpad
 from landpads.models import Landpads
-from rockets.models import Rocket
+from spacex.models import Rocket
 from dragons.models import Dragons
 
 def categories_processor(request):

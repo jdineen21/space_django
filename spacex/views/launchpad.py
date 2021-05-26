@@ -1,6 +1,5 @@
 
-from launchpads.models import Launchpad
-from launches.models import Launch
+from spacex.models import Launchpad
 
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404

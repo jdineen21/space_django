@@ -29,13 +29,14 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # Application definition
 
 INSTALLED_APPS = [
-    'home.apps.HomeConfig',
-    'cores.apps.CoresConfig',
-    'landpads.apps.LandpadsConfig',
-    'launches.apps.LaunchesConfig',
-    'launchpads.apps.LaunchpadsConfig',
-    'rockets.apps.RocketsConfig',
-    'dragons.apps.DragonsConfig',
+    #'home.apps.HomeConfig',
+    #'cores.apps.CoresConfig',
+    #'landpads.apps.LandpadsConfig',
+    #'launches.apps.LaunchesConfig',
+    #'launchpads.apps.LaunchpadsConfig',
+    #'rockets.apps.RocketsConfig',
+    #'dragons.apps.DragonsConfig',
+    'spacex.apps.SpacexConfig',
     
     'django.contrib.admin',
     'django.contrib.auth',
