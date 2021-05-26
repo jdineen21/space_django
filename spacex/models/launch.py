@@ -27,5 +27,8 @@ class Launch(models.Model):
     upcoming = models.BooleanField()
     id = models.CharField(max_length=24, primary_key=True)
 
+    class Meta:
+        verbose_name_plural = "launches"
+
     def __str__(self):
         return self.name        

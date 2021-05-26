@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %}{{ rocket.name }} | Vehicle | SpaceXTrack.com{% endblock %}
+
+{% block description %}SpaceXTrack.com: SpaceX {{ rocket.name }}, {{ rocket.description }}{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'rockets/detail.css' %}">
+{% endblock %}
+
+{% block javascript %}
+    {{ rocket.flickr_images|json_script:"images" }}
+{% endblock %}
+
+{% block content %}
+    {% if not rocket.error %}
+        <div class="rocket_container">
+            <div class="main_content">
+                <div class="content">
+                    <h1 class="rocket_header">{{ rocket.company }} | {{ rocket.name }}</h1>
+                    {% if first_launch.links.mission_patch_small %}
+                        <img class="mission_patch" src="{{ first_launch.links.mission_patch_small }}" >
+                    {% endif %}
+                    <table>
+                        <tr>
+                            <td><b>First Flight:</b></td>
+                            <td>{{ rocket.first_flight }}</td>
+                        </tr>
+                    </table>
+                    {% if rocket.wikipedia %}
+                        <div class="buttons_container">
+                            {% if rocket.wikipedia %}
+                                <a class="wikipedia_link" href="{{ rocket.wikipedia }}" target="_blank">Wikipedia</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="mid_content_container">
+                        <div class="description_container">
+                            <h2>Description</h2>
+                            <p>{{ rocket.description }}</p>
+                            <h2>Stats</h2>
+                            <table class="stats_table">
+                                <tr>
+                                    <td>Success Rate</td>
+                                    <td>{{ rocket.success_rate_pct }}%</td>
+                                </tr>
+                                <tr>
+                                    <td>Mass</td>
+                                    <td>{{ rocket.mass.kg|intcomma }}kg ({{ rocket.mass.lb|intcomma }}lbs)</td>
+                                </tr>
+                                <tr>
+                                    <td>Height</td>
+                                    <td>{{ rocket.height.meters }}m ({{ rocket.height.feet }}ft)</td>
+                                </tr>
+                                <tr>
+                                    <td>Diameter</td>
+                                    <td>{{ rocket.diameter.meters }}m ({{ rocket.diameter.feet }}ft)</td>
+                                </tr>
+                                <tr>
+                                    <td>Cost per Launch</td>
+                                    <td>${{ rocket.cost_per_launch|intcomma }}</td>
+                                </tr>
+                            </table>
+                            <h2>Propulsion</h2>
+                            <h4>{{ rocket.engines.type|capfirst }} {{ rocket.engines.version }}</h4>
+                            <table>
+                                <tr>
+                                    <td>Number of Engines</td>
+                                    <td>{{ rocket.engines.number }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Layout</td>
+                                    <td>{{ rocket.engines.layout|capfirst }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Engine Loss Max</td>
+                                    <td>{{ rocket.engines.engine_loss_max }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Propellants</td>
+                                    <td>{{ rocket.engines.propellant_1|title }} & {{ rocket.engines.propellant_2|title }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Thrust to Weight Ratio</td>
+                                    <td>{{ rocket.engines.thrust_to_weight }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Thrust Sea Level</td>
+                                    <td>{{ rocket.engines.thrust_sea_level.kN }}kN</td>
+                                </tr>
+                                <tr>
+                                    <td>Thrust Vacuum</td>
+                                    <td>{{ rocket.engines.thrust_vacuum.kN }}kN</td>
+                                </tr>
+                                <tr>
+                                    <td>ISP Sea Level</td>
+                                    <td>{{ rocket.engines.isp.sea_level }}s</td>
+                                </tr>
+                                <tr>
+                                    <td>ISP Vacuum</td>
+                                    <td>{{ rocket.engines.isp.vacuum }}s</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="payload_container">
+                            <h2>Payload Configurations</h2>
+                            <div class="payload_type">
+                                {% for payload in rocket.payload_weights %}
+                                    <h3>{{ payload.name }}</h3>
+                                    <p>{{ payload.kg|intcomma }}kg</p>
+                                    <p>{{ payload.lb|intcomma }}lb</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side_content">
+                {% if rocket.flickr_images %}
+                    <div class="image_content">
+                        <div class="content_nopadding">
+                            <div id="vertical_slider"></div> 
+                        </div>
+                    </div>
+                {% endif %}
+                {% if recent_related_launches %}
+                    <div class="recent_related_launches">
+                        <div class="content">
+                            <h2 style="margin-top: 0;">{{ rocket.name }} Recent Launches</h2>
+                            <table>
+                                <tr class="first_row">
+                                    <td><h3>Mission Name</h3></td>
+                                    <td><h3>Vehicle</h3></td>
+                                    <td><h3>Launch Date</h3></td>
+                                    <td><h3 class="center_align">Launch</h3></td>
+                                </tr>
+                                {% for launch in recent_related_launches %}
+                                    <tr>
+                                        <td><p><a href="{% url 'launches:detail' launch.flight_number %}">{{ launch.mission_name }}</a></p></td>
+                                        <td><p><a href="{% url 'rockets:detail' launch.rocket.rocket_id %}">{{ launch.rocket.name }}</a></p></td>
+                                        <td>{{ launch.launch_datetime|date }}</td>
+                                        {% if launch.launch_success == True %}
+                                            <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
+                                        {% elif launch.launch_success == False %}
+                                            <td><div class="bool_box" style="background: #ff0000;">Failure</div></td>
+                                        {% elif launch.upcoming %}
+                                            <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
+                                        {% endif %}
+                                    </tr>   
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <h2>Error</h2>
+        <p>{{ rocket.error }}</p>
+    {% endif %}
+{% endblock %}

@@ -1,8 +1,8 @@
 
-from spacex.models import Launchpad
-
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+
+from spacex.models import Launchpad
 
 def detail(request, sanitized_name):
     launchpad = get_object_or_404(Launchpad, sanitized_name=sanitized_name)

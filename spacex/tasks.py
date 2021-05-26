@@ -1,30 +1,59 @@
 
-import logging
-
 from space_django import api
 
-from .models import Launchpad
-from rockets.models import Rocket
-from launches.models import Launch
+from spacex.models import Launch, Launchpad, Rocket
 
-def update():
-    data = api.external('launchpads/')
+class Database:
 
-    for i, launchpad_data in enumerate(data):
-        launches = launchpad_data['launches']
-        rockets = launchpad_data['rockets']
+    def update():
+        launches_data = api.external('launches/')
+        launchpads_data = api.external('launchpads/')
+        rockets_data = api.external('rockets/')
 
-        launchpad_data.pop('launches', None)
-        launchpad_data.pop('rockets', None)
+        print('-- ROCKETS --')
+        for rocket in rockets_data:
+            object, created = Rocket.objects.update_or_create(**rocket)
 
-        sanitized_name = launchpad_data['name'].replace(' ','_').lower()
+            print(('[CREATED] %s') % object.name if created else ('[UPDATED] %s') % object.name)
 
-        object, created = Launchpad.objects.update_or_create(sanitized_name=sanitized_name, **launchpad_data)
+        print('-- LAUNCHPADS --')
+        for launchpad_data in launchpads_data:
+            rockets = launchpad_data['rockets']
 
-        print(('[CREATED] %s') % object.name if created else ('[UPDATED] %s') % object.name)
+            launchpad_data.pop('launches', None)
+            launchpad_data.pop('rockets', None)
 
-        for rocket in rockets:
-            object.rockets.set(rocket)
+            sanitized_name = launchpad_data['name'].replace(' ','_').lower()
 
-def purge():
-    Launchpad.objects.all().delete()
+            object, created = Launchpad.objects.update_or_create(sanitized_name=sanitized_name, **launchpad_data)
+
+            print(('[CREATED] %s') % object.name if created else ('[UPDATED] %s') % object.name)
+
+            for rocket in rockets:
+                object.rockets.add(rocket)
+
+        print('-- LAUNCHES --')
+        for launch_data in launches_data:
+            # rockets = launches_data['rockets']
+            # launchpads = launches_data['launchpad']
+
+            launch_data.pop('crew', None)
+            launch_data.pop('ships', None)
+            launch_data.pop('capsules', None)
+            launch_data.pop('payloads', None)
+            launch_data.pop('failures', None)
+            launch_data.pop('cores', None)
+            launch_data.pop('launches', None)
+            launch_data.pop('rockets', None)
+            launch_data['rocket'] = Rocket.objects.get(id=launch_data['rocket'])
+            launch_data['launchpad'] = Launchpad.objects.get(id=launch_data['launchpad'])
+
+            object, created = Launch.objects.update_or_create(**launch_data)
+
+            print(('[CREATED] %s') % object.name if created else ('[UPDATED] %s') % object.name)
+
+            # for rocket in rockets:
+            #     object.rockets.add(rocket)
+
+    def purge():
+        Launchpad.objects.all().delete()

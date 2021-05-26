@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'launches/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="launches_container">
+        <div class="content">
+            <h1>{% block header %}{% endblock %}</h1>
+            <table class="launches_table">
+                <tr class="first_row">
+                    <td><h3>Flight<br>no.</h3></td>
+                    <td><h3>Mission<br>Patch</h3></td>
+                    <td><h3>Mission Name</h3></td>
+                    <td><h3>Vehicle</h3></td>
+                    <td><h3>Launch Site</h3></td>
+                    <td><h3>Launch Date</h3></td>
+                    <td><h3>Launch</h3></td>
+                </tr>
+                {% for launch in launches %}
+                    <tr>
+                        <td><p style="text-align: center;">{{ launch.flight_number }}</p></td>
+                        <td class="mission_patch">
+                            {% if launch.links.patch.small %}
+                                <img src="{{ launch.links.patch.small }}">
+                            {% endif %}
+                        </td>
+                        <td><a href="{% url 'launches:detail' launch.flight_number %}"><p>{{ launch.name }}</p></a></td>
+                        {% comment %} <td><a href="{% url 'rockets:detail' launch.rocket %}"><p>{{ launch.rocket }}</p></a></td> {% endcomment %}
+                        <td><a href="{% url 'launchpads:detail' launch.launchpad.sanitized_name %}"><p>{{ launch.launchpad }}</p></a></td>
+                        <td><p>{{ launch.datetime_local|date:"D, d M Y" }}</p></td>
+                        {% if launch.success == True %}
+                            <td><div class="bool_box" style="background: #0f9131;">Success</div></td>
+                        {% elif launch.success == False %}
+                            <td><div class="bool_box" style="background: #ff0000;">Failure</div></td>
+                        {% elif launch.upcoming %}
+                            <td><div class="bool_box" style="background: #20b9e8;">Upcoming</div></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock  %}
