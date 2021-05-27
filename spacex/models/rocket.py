@@ -12,6 +12,7 @@ class Rocket(models.Model):
     payload_weights = models.JSONField()
     flickr_images = models.JSONField()
     name = models.CharField(max_length=100)
+    sanitized_name = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
     active = models.BooleanField()
     stages = models.IntegerField()

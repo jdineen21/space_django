@@ -24,5 +24,5 @@ urlpatterns = [
     path('launchpads/<str:sanitized_name>/', views.launchpad.detail, name='launchpad.detail'),
 
     # ex: rockets/falcon9/
-    path('rockets/<str:id>/', views.rocket.detail, name='rocket.detail'),
+    path('rockets/<str:sanitized_name>/', views.rocket.detail, name='rocket.detail'),
 ]

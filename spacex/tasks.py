@@ -1,6 +1,7 @@
 
-from space_django import api
+from django.utils.text import slugify
 
+from space_django import api
 from spacex.models import Launch, Launchpad, Rocket
 
 class Database:
@@ -11,8 +12,10 @@ class Database:
         rockets_data = api.external('rockets/')
 
         print('-- ROCKETS --')
-        for rocket in rockets_data:
-            object, created = Rocket.objects.update_or_create(**rocket)
+        for rocket_data in rockets_data:
+            sanitized_name = slugify(rocket_data['name'])
+
+            object, created = Rocket.objects.update_or_create(sanitized_name=sanitized_name, **rocket_data)
 
             print(('[CREATED] %s') % object.name if created else ('[UPDATED] %s') % object.name)
 
@@ -23,7 +26,7 @@ class Database:
             launchpad_data.pop('launches', None)
             launchpad_data.pop('rockets', None)
 
-            sanitized_name = launchpad_data['name'].replace(' ','_').lower()
+            sanitized_name = slugify(launchpad_data['name'])
 
             object, created = Launchpad.objects.update_or_create(sanitized_name=sanitized_name, **launchpad_data)
 
@@ -56,4 +59,6 @@ class Database:
             #     object.rockets.add(rocket)
 
     def purge():
+        Launch.objects.all().delete()
         Launchpad.objects.all().delete()
+        Rocket.objects.all().delete()

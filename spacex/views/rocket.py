@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404
 
 from spacex.models import Rocket
 
-def detail(request, id):
-    rocket = get_object_or_404(Rocket, id=id)
+def detail(request, sanitized_name):
+    rocket = get_object_or_404(Rocket, sanitized_name=sanitized_name)
 
     context = {
         'rocket': rocket,

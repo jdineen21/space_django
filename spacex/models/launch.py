@@ -5,6 +5,7 @@ from .rocket import Rocket
 from .launchpad import Launchpad
 
 class Launch(models.Model):
+    significant = models.BooleanField(default=False)
     fairings = models.JSONField(null=True)
     links = models.JSONField()
     static_fire_date_utc = models.DateTimeField(null=True)
@@ -32,10 +33,3 @@ class Launch(models.Model):
 
     def __str__(self):
         return self.name
-
-class SignificantLaunch(models.Model):
-    flight_number = models.IntegerField()
-
-    class Meta:
-        verbose_name = 'Significant Launch'
-        verbose_name_plural = 'Significant Launches'
