@@ -29,43 +29,43 @@
     <body>
         <div id="topbar">
             <div id="menu_burger">&#9776;</div>
-            <a href="{% url 'home:index' %}" id="img_container" style="display: block;">
+            <a href="{% url 'spacex:home.index' %}" id="img_container" style="display: block;">
                 <img src={% static "assets/images/spacex_logo_white_wo.png" %} alt="SpaceX Logo">
             </a>
         </div>
         <div id="sidebar">
-            <a href="{% url 'home:index' %}">Home</a>
+            <a href="{% url 'spacex:home.index' %}">Home</a>
             <a class="accordion">Launches</a>
             <div class="panel">
-                <a href="{% url 'launches:index' %}">All</a>
-                <a href="{% url 'launches:next' %}">Next</a>
-                <a href="{% url 'launches:past' %}">Past</a>
-                <a href="{% url 'launches:upcoming' %}">Upcoming</a>
+                <a href="{% url 'spacex:launch.index' %}">All</a>
+                <a href="{% url 'spacex:launch.next' %}">Next</a>
+                <a href="{% url 'spacex:launch.past' %}">Past</a>
+                <a href="{% url 'spacex:launch.upcoming' %}">Upcoming</a>
             </div>
             <a class="accordion">Launch Pads</a>
             <div class="panel">
                 {% for launchpad in sidebar.launchpads %}
-                    <a href="{% url 'launchpads:detail' launchpad.sanitized_name %}">{{ launchpad.name }}</a>
+                    <a href="{% url 'spacex:launchpad.detail' launchpad.sanitized_name %}">{{ launchpad.name }}</a>
                 {% endfor %}
             </div>
-            <a class="accordion">Landing Pads</a>
+            {% comment %} <a class="accordion">Landing Pads</a>
             <div class="panel">
                 {% for landpad in sidebar.landpads %}
-                    <a href="{% url 'landpads:detail' landpad.id %}">{{ landpad.full_name }}</a>
+                    <a href="{% url 'landpads.detail' landpad.id %}">{{ landpad.full_name }}</a>
                 {% endfor %}
-            </div>
+            </div> {% endcomment %}
             <a class="accordion">Vehicles</a>
             <div class="panel">
                 {% for rocket in sidebar.rockets %}
-                    <a href="{% url 'rockets:detail' rocket.id %}">{{ rocket.name }}</a>
+                    <a href="{% url 'spacex:rocket.detail' rocket.id %}">{{ rocket.name }}</a>
                 {% endfor %}
             </div>
-            <a class="accordion">Dragons</a>
+            {% comment %} <a class="accordion">Dragons</a>
             <div class="panel">
                 {% for dragon in sidebar.dragons %}
                     <a href="{% url 'dragons:detail' dragon.id %}">{{ dragon.name }}</a>
                 {% endfor %}
-            </div>
+            </div> {% endcomment %}
             {% comment %} <a href="{% url 'home:about' %}">About</a> {% endcomment %}
         </div>
         <div id="content">

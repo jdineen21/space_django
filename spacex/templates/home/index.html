@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}SpaceX Updates Information | SpaceXTrack.com{% endblock %}
+
+{% block description %}SpaceXTrack.com: SpaceX Updates Launches, Launch Pads, Landings, Landing Pads, Vehicles, Dragons, Missions, Payloads, Blocks. Regularly Updated.{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/index/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/index/animations.css' %}">
+{% endblock %}
+
+{% block content %}
+    <video autoplay muted loop id="video" width="1920" height="1080">
+        <source src="{{ random_vid }}" type="video/mp4">
+    </video>
+    <div class="main_content">
+        <div class="floated_content">
+            <div class="significant_launches">
+                <h1 class="significant_launches_header">Significant Launches</h1>
+                <ul>
+                    {% for launch in significant_launches %}
+                        <a href="{% url 'launches:detail' launch.flight_number %}">
+                            <li>
+                                <img src="{{ launch.links.mission_patch_small }}">
+                                <div class="sig_text">
+                                    <h2>{{ launch.mission_name }}</h2>
+                                    <p>{{ launch.launch_datetime|date }}</p>
+                                </div>
+                            </li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% comment %} <div class="next_launch">
+                <h1 class="next_launch_header">Next Launch</h1>
+                <h2 class="next_launch_mission_name">{{ next_launch.mission_name }}</h2>
+                <div class="countdown">
+                    <table>
+                        <tr>
+                            <td>Days</td>
+                            <td>Hours</td>
+                            <td>Mins</td>
+                            <td>Secs</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>12</td>
+                            <td>45</td>
+                            <td>4</td>
+                        </tr>
+                    </table>
+                </div>
+            </div> {% endcomment %}
+        </div>
+    </div>
+{% endblock %}

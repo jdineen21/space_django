@@ -31,4 +31,11 @@ class Launch(models.Model):
         verbose_name_plural = "launches"
 
     def __str__(self):
-        return self.name        
+        return self.name
+
+class SignificantLaunch(models.Model):
+    flight_number = models.IntegerField()
+
+    class Meta:
+        verbose_name = 'Significant Launch'
+        verbose_name_plural = 'Significant Launches'

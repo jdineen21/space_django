@@ -89,7 +89,7 @@
                             {{ rocket.name }}
                         </a> {% endcomment %}
                         <h2>Launch Site</h2>
-                        <a href="{% url 'launchpads:detail' launch.launchpad.sanitized_name %}">
+                        <a href="{% url 'spacex:launchpad.detail' launch.launchpad.sanitized_name %}">
                             {{ launch.launchpad.full_name }}
                         </a>
                         {% if launch.details %}
