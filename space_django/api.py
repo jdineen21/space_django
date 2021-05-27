@@ -11,6 +11,11 @@ def external(url_affix):
     data = requests.get(url).json()
     return data
 
+def external_json(url_affix):
+    url = '%s%s' % (url_prefix, url_affix)
+    data = requests.get(url).text
+    return data
+
 def external_cached(url_affix, cache_time):
     cache_key = url_affix
     data = cache.get(cache_key, 'has expired')

@@ -1,6 +1,8 @@
 
 from django.db import models
 
+from space_django import api
+
 from .rocket import Rocket
 from .launchpad import Launchpad
 
@@ -21,6 +23,7 @@ class Launch(models.Model):
     launch_library_id = models.CharField(max_length=100, null=True)
     flight_number = models.IntegerField()
     name = models.CharField(max_length=100)
+    sanitized_name = models.CharField(max_length=100)
     date_utc = models.DateTimeField(null=True)
     date_unix = models.IntegerField(null=True)
     date_local = models.DateTimeField(null=True)
@@ -33,3 +36,6 @@ class Launch(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_dataset():
+        return api.external('launches/')
