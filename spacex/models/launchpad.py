@@ -1,9 +1,8 @@
 
 from django.db import models
 
-from space_django import api
-
 from .rocket import Rocket
+
 
 class Launchpad(models.Model):
     name = models.CharField(max_length=100)
@@ -27,6 +26,3 @@ class Launchpad(models.Model):
 
     def __str__(self):
         return self.name
-    
-    def get_dataset():
-        return api.external('launchpads/')

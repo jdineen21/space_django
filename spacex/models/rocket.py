@@ -1,7 +1,6 @@
 
 from django.db import models
 
-from space_django import api
 
 class Rocket(models.Model):
     height = models.JSONField()
@@ -30,6 +29,3 @@ class Rocket(models.Model):
 
     def __str__(self):
         return self.name
-    
-    def get_dataset():
-        return api.external('rockets/')

@@ -1,10 +1,9 @@
 
 from django.db import models
 
-from space_django import api
-
-from .rocket import Rocket
 from .launchpad import Launchpad
+from .rocket import Rocket
+
 
 class Launch(models.Model):
     significant = models.BooleanField(default=False)
@@ -18,7 +17,8 @@ class Launch(models.Model):
     rocket = models.ForeignKey(Rocket, on_delete=models.SET_NULL, null=True)
     success = models.BooleanField(null=True)
     details = models.TextField(null=True)
-    launchpad = models.ForeignKey(Launchpad, on_delete=models.SET_NULL, null=True)
+    launchpad = models.ForeignKey(
+        Launchpad, on_delete=models.SET_NULL, null=True)
     auto_update = models.BooleanField()
     launch_library_id = models.CharField(max_length=100, null=True)
     flight_number = models.IntegerField()
@@ -36,6 +36,3 @@ class Launch(models.Model):
 
     def __str__(self):
         return self.name
-    
-    def get_dataset():
-        return api.external('launches/')
