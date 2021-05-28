@@ -15,7 +15,7 @@ class Launchpad(models.Model):
     longitude = models.FloatField()
     launch_attempts = models.IntegerField()
     launch_successes = models.IntegerField()
-    rockets = models.ManyToManyField(Rocket, null=True)
+    rockets = models.ManyToManyField(Rocket)
     details = models.TextField()
     status = models.CharField(max_length=100)
     id = models.CharField(max_length=24, primary_key=True)
