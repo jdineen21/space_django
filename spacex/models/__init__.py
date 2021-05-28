@@ -1,4 +1,3 @@
 from .launch import Launch
-from .launchpad import Launchpad
-from .launchpadimage import LaunchpadImage
+from .launchpad import Launchpad, LaunchpadImage
 from .rocket import Rocket
