@@ -48,12 +48,12 @@
                     <a href="{% url 'spacex:launchpad.detail' launchpad.sanitized_name %}">{{ launchpad.name }}</a>
                 {% endfor %}
             </div>
-            {% comment %} <a class="accordion">Landing Pads</a>
+            <a class="accordion">Landing Pads</a>
             <div class="panel">
                 {% for landpad in sidebar.landpads %}
-                    <a href="{% url 'landpads.detail' landpad.id %}">{{ landpad.full_name }}</a>
+                    <a href="{% url 'spacex:landpad.detail' landpad.sanitized_name %}">{{ landpad.name }}</a>
                 {% endfor %}
-            </div> {% endcomment %}
+            </div>
             <a class="accordion">Vehicles</a>
             <div class="panel">
                 {% for rocket in sidebar.rockets %}

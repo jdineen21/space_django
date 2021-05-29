@@ -1,0 +1,52 @@
+    
+.main_content {
+    margin-bottom: 0.5em;
+    padding-right: 0.5em;
+    float: left;
+    width: 70%;
+}
+
+.side_content {
+    margin-bottom: 0.5em;
+    float: right;
+    width: 30%;
+}
+
+.landpad_header {
+    margin-top: 0;
+}
+
+.status_active {
+    margin: 0;
+    padding: 0.5em 1em;
+    display: inline-block;
+    background: #0f9131;
+    color: #ffffff;
+}
+
+.status_under_construction {
+    margin: 0;
+    padding: 0.5em 1em;
+    display: inline-block;
+    background: #ffbf00;
+    color: #ffffff;
+}
+
+.status_retired {
+    margin: 0;
+    padding: 0.5em 1em;
+    display: inline-block;
+    background: #ff0000;
+    color: #ffffff;
+}
+
+@media (max-width: 1000px) {
+    .main_content {
+        padding: 0;
+        width: 100%;
+    }
+
+    .side_content {
+        width: 100%;
+    }
+}

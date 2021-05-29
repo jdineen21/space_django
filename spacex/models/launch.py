@@ -1,9 +1,7 @@
-
 from django.db import models
 
 from .launchpad import Launchpad
 from .rocket import Rocket
-
 
 class Launch(models.Model):
     significant = models.BooleanField(default=False)
