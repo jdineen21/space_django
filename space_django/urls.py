@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+admin.site.site_header = 'space-track.com Admin'
+admin.site.site_title = 'space-track.com Admin Portal'
+admin.site.index_title = 'Welcome to the space-track.com Admin Portal'
+
 urlpatterns = [
     #path('', include('home.urls')),
     #path('cores/', include('cores.urls')),
