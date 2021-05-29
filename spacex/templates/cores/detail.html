@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cores/detail.css' %}">
+{% endblock %}
+
+{% block title %}{{ launch.mission_name }}{% endblock %}
+
+{% block content %}
+    {% if not launch.error %}
+        <div class="core_content">
+            <h1>{{ core.core_serial }}</h1>
+            <h2>Block {{ core.block }}</h2>
+            {% if core.status == "active" %}
+                <h2 class="status_active">Active</h2>
+            {% elif core.status == "inactive" %}
+                <h2 class="status_inactive">Inactive</h2>
+            {% elif core.status == "lost" %}
+                <h2 class="status_lost">Lost</h2>
+            {% endif %}
+            <p>Original Launch Date {{ core.original_launch }}</p>
+            <h2>Core Notes</h2>
+            <p>{{ core.details }}</p>
+            <h2>Missions</h2>
+            <ul>
+                {% for mission in core.missions %}
+                    <li>
+                        <p>{{ mission.name }}</p>
+                        <p><a href="{% url 'launches:detail' mission.flight %}">{{ mission.flight }}</a></p>
+                    </li>
+                {% endfor %}
+            </ul>
+            <h2>Core Stats</h2>
+            <table>
+                <tr>
+                    <td>Reuse Count</td>
+                    <td>{{ core.reuse_count }}</td>
+                </tr>
+                <tr>
+                    <td>RTLS Attempts</td>
+                    <td>{{ core.rtls_attempts }}</td>
+                </tr>
+                <tr>
+                    <td>RTLS Landings</td>
+                    <td>{{ core.rtls_landings }}</td>
+                </tr>
+                <tr>
+                    <td>ASDS Attempts</td>
+                    <td>{{ core.asds_attempts }}</td>
+                </tr>
+                <tr>
+                    <td>ASDS Landings</td>
+                    <td>{{ core.asds_landings }}</td>
+                </tr>
+            </table>
+        </div>
+    {% else %}
+        <h2>Error</h2>
+        <p>{{ launch.error }}</p>
+    {% endif %}
+{% endblock %}

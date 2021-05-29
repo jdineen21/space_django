@@ -7,7 +7,8 @@ class LaunchAdmin(admin.ModelAdmin):
     ]
     list_display = [
         'flight_number',
-        'name', 'rocket',
+        'name', 
+        'rocket',
         'significant',
         'success',
     ]
