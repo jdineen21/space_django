@@ -12,6 +12,9 @@ urlpatterns = [
     # ex: cores/5/
     path('cores/<str:serial>/', views.core.detail, name='core.detail'),
 
+    # ex: dragons/dragon-1/
+    path('dragons/<str:sanitized_name>/', views.dragon.detail, name='dragon.detail'),
+
     # ex: landpads/lz-2/
     path('landpads/<str:sanitized_name>/', views.landpad.detail, name='landpad.detail'),
 

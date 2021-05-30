@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.paginator import Paginator
 
+from .crew import Crew
 from .launchpad import Launchpad
 from .rocket import Rocket
 
@@ -16,6 +17,7 @@ class Launch(models.Model):
     rocket = models.ForeignKey(Rocket, on_delete=models.SET_NULL, null=True)
     success = models.BooleanField(null=True)
     details = models.TextField(null=True)
+    crew = models.ManyToManyField(Crew)
     launchpad = models.ForeignKey(Launchpad, on_delete=models.SET_NULL, null=True)
     auto_update = models.BooleanField()
     launch_library_id = models.CharField(max_length=100, null=True)

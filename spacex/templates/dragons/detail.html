@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}{{ dragon.name }} | Dragon | SpaceXTrack.com{% endblock %}
+
+{% block description %}SpaceXTrack.com: SpaceX {{ dragon.name }}, {{ dragon.description }}{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'dragons/detail.css' %}">
+{% endblock %}
+
+{% block javascript %}
+    {{ dragon.flickr_images|json_script:"images" }}
+{% endblock %}
+
+{% block content %}
+    {% if not dragon.error %}
+        <div class="dragon_details">
+            <div class="main_content">
+                <div class="content">
+                    <div class="floated_content">
+                        <img id="dragon_img" src={% static "assets/images/dragon_logo.jpg" %}>
+                    </div>
+                    <h1 class="dragon_header">{{ dragon.name }}</h1>
+                    <table>
+                        <tr>
+                            <td><b>First Flight:</b></td>
+                            <td>{{ dragon.first_flight }}</td>
+                        </tr>
+                    </table>
+                    {% if dragon.wikipedia %}
+                        <div class="buttons_container">
+                            <a class="wikipedia_link" href="{{ dragon.wikipedia }}" target="_blank">Wikipedia</a>
+                        </div>
+                    {% endif %}
+                    {% if dragon.description %}
+                        <div class="dragon_description">
+                            <h2>Dragon Description</h2>
+                            <p>{{ dragon.description }}</p>
+                        </div>
+                    {% endif %}
+                    <div class="stats_container">
+                        <div class="section_container">
+                            <h2>Stats</h2>
+                            <table class="stats_table">
+                                <tr>
+                                    <td>Dry Mass</td>
+                                    <td>{{ dragon.dry_mass_kg|intcomma }}kg ({{ dragon.dry_mass_lb|intcomma }}lbs)</td>
+                                </tr>
+                                <tr>
+                                    <td>Launch Payload Mass</td>
+                                    <td>{{ dragon.launch_payload_mass.kg|intcomma }}kg ({{ dragon.launch_payload_mass.lb|intcomma }}lbs)</td>
+                                </tr>
+                                <tr>
+                                    <td>Launch Payload Volume</td>
+                                    <td>{{ dragon.launch_payload_vol.cubic_meters|intcomma }}m&sup3; ({{ dragon.launch_payload_vol.cubic_feet|intcomma }}ft&sup3;)</td>
+                                </tr>
+                                <tr>
+                                    <td>Return Payload Mass</td>
+                                    <td>{{ dragon.return_payload_mass.kg|intcomma }}kg ({{ dragon.return_payload_mass.lb|intcomma }}lb)</td>
+                                </tr>
+                                <tr>
+                                    <td>Return Payload Volume</td>
+                                    <td>{{ dragon.return_payload_vol.cubic_meters|intcomma }}m&sup3; ({{ dragon.return_payload_vol.cubic_feet|intcomma }}ft&sup3;)</td>
+                                </tr>
+                                <tr>
+                                    <td>Height</td>
+                                    <td>{{ dragon.height_w_trunk.meters }}m ({{ dragon.height_w_trunk.feet }}ft)</td>
+                                </tr>
+                                <tr>
+                                    <td>Diameter</td>
+                                    <td>{{ dragon.diameter.meters }}m ({{ dragon.diameter.feet }}ft)</td>
+                                </tr>
+                            </table>
+                            <h2>Thrusters</h2>
+                            {% for thruster in dragon.thrusters %}
+                                <h4>{{ thruster.type }}</h4>
+                                <table>
+                                    <tr>
+                                        <td>Number of Thrusters</td>
+                                        <td>{{ thruster.amount }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Number of Pods</td>
+                                        <td>{{ thruster.pods }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fuels</td>
+                                        <td>{{ thruster.fuel_1|title }} & {{ thruster.fuel_1|title }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ISP</td>
+                                        <td>{{ thruster.isp }}s</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thrust</td>
+                                        <td>{{ thruster.thrust.kN }}kN</td>
+                                    </tr>
+                                </table>
+                            {% endfor %}
+                        </div>
+                        <div class="section_container">
+                            <h2>Heat Sheild</h2>
+                            <table class="stats_table">
+                                <tr>
+                                    <td>Material</td>
+                                    <td>{{ dragon.heat_shield.material }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Diameter</td>
+                                    <td>{{ dragon.heat_shield.size_meters }}m</td>
+                                </tr>
+                                <tr>
+                                    <td>Operating Temperature</td>
+                                    <td>{{ dragon.heat_shield.temp_degrees }}&#8451;</td>
+                                </tr>
+                                <tr>
+                                    <td>Development Partner</td>
+                                    <td>{{ dragon.heat_shield.dev_partner }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side_content">
+                {% if dragon.flickr_images %}
+                    <div class="image_content">
+                        <div class="content_nopadding">
+                            <div id="vertical_slider"></div> 
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <h2>Error</h2>
+        <p>{{ dragon.error }}</p>
+    {% endif %}
+{% endblock %}

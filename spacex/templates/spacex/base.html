@@ -44,6 +44,10 @@
                                 {% for rocket in sidebar.rockets %}
                                     <li><a href={% url 'spacex:rocket.detail' rocket.sanitized_name %}>{{ rocket.name }}</a></li>
                                 {% endfor %}
+                                <li class="menu-text">Dragons</li>
+                                {% for dragon in sidebar.dragons %}
+                                    <li><a href={% url 'spacex:dragon.detail' dragon.sanitized_name %}>{{ dragon.name }}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <div class="off-canvas-content" data-off-canvas-content>

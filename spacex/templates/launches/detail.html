@@ -10,67 +10,93 @@
             <div class="callout clearfix">
                 <div class="grid-x grid-margin-x">
                     <div class="cell auto">
-                        <h1>{{ launch.name }}</h1>
-                        <nav aria-label="Pagination">
-                            <ul class="pagination">
-                                {% if page_obj.has_previous %}
-                                    <li class="pagination-previous"><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Previous launch">Previous <span class="show-for-sr">launch</span></a></li>
-                                    <li><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Launch {{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-                                {% else %}
-                                    <li class="pagination-previous disabled">Previous <span class="show-for-sr">launch</span></li>
-                                {% endif %}
-                                <li class="current"><span class="show-for-sr">You're on launch</span> {{ page_obj.number }}</li>
-                                {% if page_obj.has_next %}
-                                    <li><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Launch {{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
-                                    <li class="pagination-next"><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
-                                {% else %}
-                                    <li class="pagination-next disabled">Next <span class="show-for-sr">launch</span></li>
-                                {% endif %}
-                            </ul>
-                        </nav>
                         <div class="grid-x">
-                            <div class="cell shrink">
-                                {% if launch.success == True %}
-                                    <div class="callout success display-inline">Successful Launch</div>
-                                {% elif launch.success == False %}
-                                    <div class="callout alert">Launch Failure</div>
-                                {% elif launch.upcoming == True %}
-                                    <div class="callout primary">Upcoming Launch</div>
-                                {% endif %}
+                            <div class="cell auto">
+                                <h2>{{ launch.name }}</h2>
+                                <div class="grid-x">
+                                    <div class="cell shrink">
+                                        {% if launch.success == True %}
+                                            <div class="callout success display-inline">Successful Launch</div>
+                                        {% elif launch.success == False %}
+                                            <div class="callout alert">Launch Failure</div>
+                                        {% elif launch.upcoming == True %}
+                                            <div class="callout primary">Upcoming Launch</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cell auto">
+                                <div class="grid-y">
+                                    <div class="cell">
+                                        <nav aria-label="Pagination float-right">
+                                            <ul class="pagination float-right">
+                                                {% if page_obj.has_previous %}
+                                                    <li class="pagination-previous"><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Previous launch">Prev <span class="show-for-sr">launch</span></a></li>
+                                                    <li><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Launch {{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+                                                {% else %}
+                                                    <li class="pagination-previous disabled">Prev <span class="show-for-sr">launch</span></li>
+                                                {% endif %}
+                                                <li class="current"><span class="show-for-sr">You're on launch</span> {{ page_obj.number }}</li>
+                                                {% if page_obj.has_next %}
+                                                    <li><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Launch {{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+                                                    <li class="pagination-next"><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+                                                {% else %}
+                                                    <li class="pagination-next disabled">Next <span class="show-for-sr">launch</span></li>
+                                                {% endif %}
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    {% if launch.links.presskit or launch.links.wikipedia or launch.links.youtube_id %}
+                                        <div class="cell">
+                                            <div class="grid-y">
+                                                {% if launch.links.wikipedia %}
+                                                    <div class="cell text-right">
+                                                        <a href={{ launch.links.webcast }} class="alert button" target="_blank">Watch Webcast</a>
+                                                    </div>
+                                                {% endif %}
+                                                {% if launch.links.wikipedia %}
+                                                    <div class="cell text-right">
+                                                        <a href={{ launch.links.wikipedia }} class="secondary button" target="_blank">Wikipedia</a>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>       
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                         <div class="callout">
                             <h4>Flight Summary</h4>
                             <hr>
-                            <div class="grid-x small-up-1 medium-up-2 large-up-2" data-equalizer data-equalize-by-row="true">
-                                <div class="cell">
+                            <div class="grid-x">
+                                <div class="cell small-3">
                                     <p>Flight Number</p>
                                 </div>
-                                <div class="cell">
+                                <div class="cell small-9">
                                     <p>{{ launch.flight_number }}</p>
                                 </div>
-                                <div class="cell">
+                                <div class="cell small-3">
                                     <p>Date</p>
                                 </div>
-                                <div class="cell">
+                                <div class="cell small-9">
                                     <p>{{ launch.date_local|date:"D, d M Y" }}</p>
                                 </div>
-                                <div class="cell">
+                                <div class="cell small-3">
                                     <p>Time</p>
                                 </div>
-                                <div class="cell">
+                                <div class="cell small-9">
                                     <p>{{ launch.date_local|date:"h:i:s A" }}</p>
                                 </div>
-                                <div class="cell">
+                                <div class="cell small-3">
                                     <p>Rocket</p>
                                 </div>
-                                <div class="cell">
+                                <div class="cell small-9">
                                     <p><a href={% url 'spacex:rocket.detail' launch.rocket.sanitized_name %}>{{ launch.rocket.name }}</a></p>
                                 </div>
-                                <div class="cell">
+                                <div class="cell small-3">
                                     <p>Launchpad</p>
                                 </div>
-                                <div class="cell">
+                                <div class="cell small-9">
                                     <p><a href={% url 'spacex:launchpad.detail' launch.launchpad.sanitized_name %}>{{ launch.launchpad.full_name }}</a></p>
                                 </div>
                             </div>
@@ -82,8 +108,8 @@
                             <li class="tabs-title is-active"><a data-tabs-target="rocket-panel" aria-selected="true">Rocket</a></li>
                             <li class="tabs-title"><a data-tabs-target="payload-panel">Payload</a></li>
                             <li class="tabs-title"><a data-tabs-target="launchpad-panel">Launchpad</a></li>
-                            {% if launch.crew %}
-                                <li class="tabs-title"><a data-tabs-target="panel4">Crew</a></li>
+                            {% if launch.crew.all %}
+                                <li class="tabs-title"><a data-tabs-target="crew-panel">Crew</a></li>
                             {% endif %}
                             {% if launch.core %}
                                 <li class="tabs-title"><a data-tabs-target="core-panel">Core</a></li>
@@ -114,6 +140,26 @@
                                 {% endif %}
                                 <p>{{ launch.launchpad.details }}</p>
                             </div>
+                            <div class="tabs-panel" id="crew-panel">
+                                <div class="grid-x">
+                                    {% for crew in launch.crew.all %}
+                                        <div class="cell">
+                                            <div class="media-object">
+                                                <div class="media-object-section">
+                                                    <div class="thumbnail">
+                                                        <img src={{ crew.image }} width="100px">
+                                                    </div>
+                                                </div>
+                                                <div class="media-object-section">
+                                                    <h4>{{ crew.name }}</h4>
+                                                    <p>{{ crew.agency }}</p>
+                                                    <a href={{ crew.wikipedia }} class="secondary button" target="_blank">Wikipedia</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
                             <div class="tabs-panel" id="core-panel">
                                 {% for core in launch.core_set.all  %}
                                     <h4>{{ core.serial }}</h4>
@@ -134,33 +180,10 @@
                             <p>The launch date is to be determined.</p>
                         {% endif %}
                     </div>
-                    <div class="cell shrink">
+                    <div class="cell small-3">
                         <div class="grid-y">
                             {% if launch.links.patch.small %}
-                                <div class="cell thumbnail">
-                                    <img src="{{ launch.links.patch.small }}" >
-                                </div>
-                            {% endif %}
-                            {% if launch.links.presskit or launch.links.wikipedia or launch.links.youtube_id %}
-                                <div class="cell">
-                                    <div class="grid-y">
-                                        {% if launch.links.wikipedia %}
-                                            <div class="cell text-right">
-                                                <a href={{ launch.links.webcast }} class="alert button" target="_blank">Watch Webcast</a>
-                                            </div>
-                                        {% endif %}
-                                        {% if launch.links.wikipedia %}
-                                            <div class="cell text-right">
-                                                <a href={{ launch.links.wikipedia }} class="secondary button" target="_blank">Wikipedia</a>
-                                            </div>
-                                        {% endif %}
-                                        {% if launch.links.presskit %}
-                                            <div class="cell text-right">
-                                                <a href={{ launch.links.presskit }} class="button" target="_blank">Download Press Kit</a>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
+                                <img class="cell" src="{{ launch.links.patch.small }}" >
                             {% endif %}
                         </div>
                     </div>
@@ -173,8 +196,6 @@
                     <div class="cell">
                         <div class="orbit-slide" role="region" aria-label="Favorite Space Pictures" data-orbit>
                             <ul class="orbit-container">
-                                {% comment %} <button class="orbit-previous" aria-label="previous"><span class="show-for-sr">Previous Slide</span>&#9664;</button>
-                                <button class="orbit-next" aria-label="next"><span class="show-for-sr">Next Slide</span>&#9654;</button> {% endcomment %}
                                 {% for url in launch.links.flickr.original %}
                                     {% if forloop.first %}
                                         <li class="is-active orbit-slide">
