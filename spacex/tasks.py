@@ -7,7 +7,7 @@ from django.core import serializers
 from django.utils.text import slugify
 from space_django import api
 
-from spacex.models import Core, Landpad, Launch, Launchpad, Rocket
+from spacex.models import Core, Landpad, Launch, Launchpad, Payload, Rocket
 
 global models
 
@@ -16,6 +16,7 @@ models = [
     Landpad,
     Launch,
     Launchpad,
+    Payload,
     Rocket,
 ]
 

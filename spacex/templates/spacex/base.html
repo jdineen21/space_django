@@ -1,0 +1,74 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        {% load static %}
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>{% block title %}Default Title{% endblock %} | trackspace.info</title>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
+        {% block stylesheet %}{% endblock  %}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+        {% block javascript %}{% endblock  %}
+    </head>
+    <body>
+        <div class="grid-x cell">
+            <div class="grid-x">
+                <div class="cell small-12">
+                    <div class="off-canvas-wrapper">
+                        <div class="off-canvas position-left" id="offCanvasLeft1" data-off-canvas>
+                            <button class="close-button" aria-label="Close menu" type="button" data-close>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <ul class="vertical menu">
+                                <li><a href={% url 'spacex:home.index' %}>Home</a></li>
+                                <li class="menu-text">Launches</li>
+                                <li><a href={% url 'spacex:launch.index' %}>All</a></li>
+                                <li><a href={% url 'spacex:launch.next' %}>Next</a></li>
+                                <li><a href={% url 'spacex:launch.past' %}>Past</a></li>
+                                <li><a href={% url 'spacex:launch.upcoming' %}>Upcoming</a></li>
+                                <li class="menu-text">Launchpads</li>
+                                {% for launchpad in sidebar.launchpads %}
+                                    <li><a href={% url 'spacex:launchpad.detail' launchpad.sanitized_name %}>{{ launchpad.name }}</a></li>
+                                {% endfor %}
+                                <li class="menu-text">Landpads</li>
+                                {% for landpad in sidebar.landpads %}
+                                    <li><a href={% url 'spacex:landpad.detail' landpad.sanitized_name %}>{{ landpad.name }}</a></li>
+                                {% endfor %}
+                                <li class="menu-text">Rockets</li>
+                                {% for rocket in sidebar.rockets %}
+                                    <li><a href={% url 'spacex:rocket.detail' rocket.sanitized_name %}>{{ rocket.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="off-canvas-content" data-off-canvas-content>
+                            <div class="grid-x">
+                                <div class="cell small-12">
+                                    <div class="title-bar">
+                                        <div class="title-bar-left">
+                                            <button class="menu-icon" type="button" data-toggle="offCanvasLeft1"></button>
+                                            <span class="title-bar-title">
+                                                <div class="media-object-section">
+                                                    <a href="{% url 'spacex:home.index' %}">
+                                                        <img src={% static "assets/images/trackspace-logo.png" %} alt="Track Space Logo" style="height:4em;">
+                                                    </a>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% block body %}{% endblock  %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$(document).foundation();</script>
+    </body>
+</html>

@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.paginator import Paginator
 
 from .launchpad import Launchpad
 from .rocket import Rocket
@@ -29,7 +30,12 @@ class Launch(models.Model):
     id = models.CharField(max_length=24, primary_key=True)
 
     class Meta:
+        verbose_name = 'launch'
         verbose_name_plural = 'launches'
+        ordering = ['flight_number']
 
     def __str__(self):
         return self.name
+    
+    def get_paginator(self):
+        return Paginator(Launch.objects.all(), 1)

@@ -1,6 +1,8 @@
-
+from django.core.paginator import EmptyPage, InvalidPage, Paginator
+from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+
 
 from spacex.models import Launch
 
@@ -12,13 +14,17 @@ def index(request):
     }
     return render(request, 'launches/index/all.html', context)
 
-def detail(request, flight_number):
-    launch = get_object_or_404(Launch, flight_number=flight_number)
-    rocket = launch.rocket
-    
+def detail(request, page_number):
+    p = Paginator(Launch.objects.all(), 1)
+
+    try:
+        page_obj = p.page(page_number)
+    except EmptyPage:
+        raise Http404()
+
     context = {
-        'launch': launch,
-        'rocket': rocket,
+        'launch': page_obj.object_list.first(),
+        'page_obj': page_obj,
         #'launches_related': launches_related[:7],
     }
     return render(request, 'launches/detail.html', context)

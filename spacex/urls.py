@@ -18,7 +18,7 @@ urlpatterns = [
     # ex: launches/
     path('launches/', views.launch.index, name='launch.index'),
     # ex: launches/5/
-    path('launches/<int:flight_number>/', views.launch.detail, name='launch.detail'),
+    path('launches/<int:page_number>/', views.launch.detail, name='launch.detail'),
     # ex: launches/next/
     path('launches/next/', views.launch.next, name='launch.next'),
     # ex: launches/past/
