@@ -19,6 +19,7 @@ class Payload(models.Model):
     orbit = models.CharField(max_length=100, null=True)
     reference_system = models.CharField(max_length=100, null=True)
     regime = models.CharField(max_length=100, null=True)
+    lifespan_years = models.IntegerField(null=True)
     id = models.CharField(max_length=24, primary_key=True)
 
     class Meta:

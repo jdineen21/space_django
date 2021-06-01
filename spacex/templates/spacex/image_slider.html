@@ -1,0 +1,22 @@
+<div class="grid-x">
+    <div class="cell">
+        {% comment %} <div class="orbit-slide" role="region" aria-label="Related Images" data-orbit>
+            <ul class="orbit-container">
+                {% for url in slider_images %}
+                    {% if forloop.first %}
+                        <li class="is-active orbit-slide">
+                            <img class="orbit-image" src={{ url }} alt="Image {{ forloop.counter }}">
+                        </li>
+                    {% else %}
+                        <li class="orbit-slide">
+                            <img class="orbit-image" src={{ url }} alt="Image {{ forloop.counter }}">
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div> {% endcomment %}
+        {% for url in slider_images %}
+            <img src={{ url }} alt="Image {{ forloop.counter }}">
+        {% endfor %}
+    </div>
+</div>

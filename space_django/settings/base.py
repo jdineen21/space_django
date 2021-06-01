@@ -138,13 +138,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
-
-# django-q Q cluster configuration
-# https://django-q.readthedocs.io/en/latest/configure.html
-Q_CLUSTER = {
-    'name': 'space_django',
-    'orm': 'default',
-    'timeout': 60,
-    'retry': 120,
-    'workers': 4,
-}

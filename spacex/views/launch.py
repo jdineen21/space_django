@@ -23,8 +23,9 @@ def detail(request, page_number):
         raise Http404()
 
     context = {
-        'launch': page_obj.object_list.first(),
         'page_obj': page_obj,
+        'launch': page_obj.object_list.first(),
+        'slider_images': page_obj.object_list.first().links['flickr']['original'],
         #'launches_related': launches_related[:7],
     }
     return render(request, 'launches/detail.html', context)

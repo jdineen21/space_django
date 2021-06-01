@@ -17,11 +17,11 @@
         {% block javascript %}{% endblock  %}
     </head>
     <body>
-        <div class="grid-x cell">
+        <div class="grid-container full">
             <div class="grid-x">
-                <div class="cell small-12">
+                <div class="cell">
                     <div class="off-canvas-wrapper">
-                        <div class="off-canvas position-left" id="offCanvasLeft1" data-off-canvas>
+                        <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
                             <button class="close-button" aria-label="Close menu" type="button" data-close>
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -52,10 +52,10 @@
                         </div>
                         <div class="off-canvas-content" data-off-canvas-content>
                             <div class="grid-x">
-                                <div class="cell small-12">
+                                <div class="cell">
                                     <div class="title-bar">
                                         <div class="title-bar-left">
-                                            <button class="menu-icon" type="button" data-toggle="offCanvasLeft1"></button>
+                                            <button class="menu-icon" type="button" data-toggle="offCanvasLeft"></button>
                                             <span class="title-bar-title">
                                                 <div class="media-object-section">
                                                     <a href="{% url 'spacex:home.index' %}">
@@ -66,8 +66,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% block body %}{% endblock  %}
                             </div>
-                            {% block body %}{% endblock  %}
                         </div>
                     </div>
                 </div>
