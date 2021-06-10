@@ -5,9 +5,26 @@
 {% block title %}{{ launch.name }}{% endblock %}
 
 {% block body %}
-    <div class="grid-x grid-padding-x grid-padding-y">
+    <div class="grid-x">
         <div class="cell small-6" id="launch-detail" data-something>
-            <div class="grid-y">
+            <div class="grid-y grid-padding-x">
+                <div class="cell">
+                    <nav aria-label="Pagination">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Previous launch">Previous launch</span></a></li>
+                                <li><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Launch {{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+                            {% endif %}
+                            <li class="current"><span class="show-for-sr">You're on launch</span> {{ page_obj.number }}</li>
+                            {% if page_obj.has_next %}
+                                <li><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Launch {{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+                                <li><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Next page">Next launch</span></a></li>
+                            {% else %}
+                                <li class="disabled">Next launch</span></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
                 <div class="cell">
                     <div class="grid-x">
                         <div class="cell auto">
@@ -24,40 +41,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="cell shrink">
-                            <div class="grid-x align-right">
-                                <div class="cell">
-                                    <nav class="float-right" aria-label="Pagination">
-                                        <ul class="pagination">
-                                            {% if page_obj.has_previous %}
-                                                <li class="pagination-previous"><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Previous launch">Prev <span class="show-for-sr">launch</span></a></li>
-                                                <li><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Launch {{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-                                            {% else %}
-                                                <li class="pagination-previous disabled">Prev <span class="show-for-sr">launch</span></li>
-                                            {% endif %}
-                                            <li class="current"><span class="show-for-sr">You're on launch</span> {{ page_obj.number }}</li>
-                                            {% if page_obj.has_next %}
-                                                <li><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Launch {{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
-                                                <li class="pagination-next"><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
-                                            {% else %}
-                                                <li class="pagination-next disabled">Next <span class="show-for-sr">launch</span></li>
-                                            {% endif %}
-                                        </ul>
-                                    </nav>
-                                </div>
-                                {% if launch.links.wikipedia or launch.links.youtube_id %}
-                                    <div class="cell small-4">
-                                        <div class="button-group stacked">
-                                            {% if launch.links.wikipedia %}
-                                                <a href={{ launch.links.webcast }} class="button tiny alert" target="_blank">Watch Webcast</a>
-                                            {% endif %}
-                                            {% if launch.links.wikipedia %}
-                                                <a href={{ launch.links.wikipedia }} class="button tiny secondary" target="_blank">Wikipedia</a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
+                        <div class="cell shrink align-right">
+                            {% if launch.links.wikipedia or launch.links.youtube_id %}
+                                {% if launch.links.wikipedia %}
+                                    <a href={{ launch.links.webcast }} class="button alert" target="_blank">Watch Webcast</a>
                                 {% endif %}
-                            </div>
+                                {% if launch.links.wikipedia %}
+                                    <a href={{ launch.links.wikipedia }} class="button secondary" target="_blank">Wikipedia</a>
+                                {% endif %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -158,150 +150,70 @@
                         </div>
                     </div>
                 </div>
-                <div class="cell">
-                    <ul class="tabs" data-tabs id="launch-tabs">
-                        <li class="tabs-title is-active"><a data-tabs-target="rocket-panel" aria-selected="true">Rocket</a></li>
-                        <li class="tabs-title"><a data-tabs-target="payload-panel">Payload</a></li>
-                        <li class="tabs-title"><a data-tabs-target="launchpad-panel">Launchpad</a></li>
-                        {% if launch.crew.all %}
-                            <li class="tabs-title"><a data-tabs-target="crew-panel">Crew</a></li>
-                        {% endif %}
-                        {% if launch.core %}
-                            <li class="tabs-title"><a data-tabs-target="core-panel">Core</a></li>
-                        {% endif %}
-                    </ul>
-                    <div class="tabs-content" data-tabs-content="launch-tabs">
-                        <div class="tabs-panel is-active" id="rocket-panel">
-                            <a href={% url 'spacex:rocket.detail' launch.rocket.sanitized_name %} class="button float-right">More Info</a>
-                            <h4>{{ launch.rocket.name }}</h4>
-                            <hr>
-                            {% if launch.rocket.active == True %}
-                                <div class="callout success">Active</div>
-                            {% else %}
-                                <div class="callout alert">Retired</div>
-                            {% endif %}
-                            <p>{{ launch.rocket.description }}</p>
-                        </div>
-                        <div class="tabs-panel" id="payload-panel">
-                            <ul class="accordion" data-accordion>
-                                {% for payload in launch.payload_set.all %}
-                                    <li class="accordion-item{% if forloop.first %} is-active{% endif %}" data-accordion-item>
-                                        <!-- Accordion tab title -->
-                                        <a class="accordion-title">
-                                            <p>{{ payload.name }} - {{ payload.type }}</p>
-                                            {% for customer in payload.nationalities %}
-                                                <div class="label">{{ customer }}</div>
-                                            {% endfor %}
-                                            {% for customer in payload.customers %}
-                                                <div class="label secondary">{{ customer }}</div>
-                                            {% endfor %}
-                                        </a>
-
-                                        <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
-                                        <div class="accordion-content" data-tab-content>
-                                            <div class="callout small">
-                                                <div class="grid-x">
-                                                    <div class="cell">
-                                                        {% for customer in payload.nationalities %}
-                                                            <div class="label">{{ customer }}</div>
-                                                        {% endfor %}
-                                                    </div>
-                                                    <div class="cell">
-                                                        {% for customer in payload.customers %}
-                                                            <div class="label secondary">{{ customer }}</div>
-                                                        {% endfor %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <td>Mass</td>
-                                                        <td>Orbit</td>
-                                                        <td>Lifespan</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{{ payload.mass_kg }}kg</td>
-                                                        <td>{{ payload.regime|title  }} Orbit ({{ payload.orbit }})</td>
-                                                        <td>{{ payload.lifespan_years }}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </li>
-                                    <!-- ... -->
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="tabs-panel" id="launchpad-panel">
-                            <h4>{{ launch.launchpad.full_name }}</h4>
-                            {% if launch.launchpad.active == True %}
-                                <div class="callout success">Active</div>
-                            {% else %}
-                                <div class="callout alert">Retired</div>
-                            {% endif %}
-                            <p>{{ launch.launchpad.details }}</p>
-                        </div>
-                        <div class="tabs-panel" id="crew-panel">
-                            <div class="grid-x">
-                                {% for crew in launch.crew.all %}
-                                    <div class="cell">
-                                        <div class="media-object">
-                                            <div class="media-object-section">
-                                                <div class="thumbnail">
-                                                    <img src={{ crew.image }} width="100px">
-                                                </div>
-                                            </div>
-                                            <div class="media-object-section">
-                                                <h4>{{ crew.name }}</h4>
-                                                <p>{{ crew.agency }}</p>
-                                                <a href={{ crew.wikipedia }} class="secondary button" target="_blank">Wikipedia</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="tabs-panel" id="core-panel">
-                            {% for core in launch.core_set.all  %}
-                                <h4>{{ core.serial }}</h4>
-                            {% endfor %}
-                            <h4>{{ launch.launchpad.full_name }}</h4>
-                            {% if launch.launchpad.active == True %}
-                                <div class="callout success">Active</div>
-                            {% else %}
-                                <div class="callout alert">Retired</div>
-                            {% endif %}
-                            <p>{{ launch.launchpad.details }}</p>
-                        </div>
-                    </div>
-                </div>
             </div>
-            {% if launch.upcoming %}
-                <p>Launch date is tentative, stated launch date is accurate to the {{ launch.date_precision }}.</p>
-            {% endif %}
-            {% if launch.tbd %}
-                <p>The launch date is to be determined.</p>
-            {% endif %}
         </div>
         <div class="cell small-2">
-            <div class="grid-y grid-margin-y">
+            <div class="grid-y grid-margin-x grid-padding-y">
                 {% if launch.links.patch.small %}
                     <img class="cell" src="{{ launch.links.patch.small }}" >
                 {% endif %}
-                <div class="cell">
-                    {% for crew in launch.crew.all %}
-                        <div class="card">
-                            <div class="card-section" style="background: #e6e6e6;">
-                                {{ crew.name }}
-                                <span class="label float-right">{{ crew.agency }}</span>
-                            </div>
-                            <img src={{ crew.image }}>
-                        </div>
-                    {% endfor %}
-                </div>
+                {% if launch.crew.count > 0 %}
+                    <div class="cell">
+                        <ul class="accordion" data-accordion>
+                            <h4>Crew Summary</h4>
+                            {% for crew in launch.crew.all %}
+                                <li class="accordion-item{% if forloop.first %} is-active{% endif %}" data-accordion-item>
+                                    <a class="accordion-title">
+                                        {{ crew.name }}
+                                        <span class="label float-right">{{ crew.agency }}</span>
+                                    </a>
+
+                                    <div class="accordion-content" data-tab-content>
+                                        <img src={{ crew.image }}>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% else %}
+                    <div class="cell">
+                        <ul class="accordion" data-accordion>
+                            <h4>Payload Summary</h4>
+                            {% for payload in launch.payload_set.all %}
+                                <li class="accordion-item{% if forloop.first %} is-active{% endif %}" data-accordion-item>
+                                    <a class="accordion-title">
+                                        <p>{{ payload.name }} - {{ payload.type }}</p>
+                                        {% for customer in payload.nationalities %}
+                                            <div class="label">{{ customer }}</div>
+                                        {% endfor %}
+                                        {% for customer in payload.customers %}
+                                            <div class="label secondary">{{ customer }}</div>
+                                        {% endfor %}
+                                    </a>
+
+                                    <div class="accordion-content" data-tab-content>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Mass</td>
+                                                    <td>Orbit</td>
+                                                    <td>Lifespan</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{ payload.mass_kg }}kg</td>
+                                                    <td>{{ payload.regime|title  }} Orbit ({{ payload.orbit }})</td>
+                                                    <td>{{ payload.lifespan_years }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <div class="cell small-4" data-sticky-container>
