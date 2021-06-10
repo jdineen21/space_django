@@ -2,6 +2,7 @@ from django.db import models
 from django.core.paginator import Paginator
 
 from .crew import Crew
+from .image import Image
 from .launchpad import Launchpad
 from .rocket import Rocket
 
@@ -9,6 +10,7 @@ class Launch(models.Model):
     significant = models.BooleanField(default=False)
     fairings = models.JSONField(null=True)
     links = models.JSONField()
+    #images = models.ManyToManyField(Image)
     static_fire_date_utc = models.DateTimeField(null=True)
     static_fire_date_unix = models.IntegerField(null=True)
     tbd = models.BooleanField()
