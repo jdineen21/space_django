@@ -22,11 +22,14 @@ def detail(request, page_number):
     except EmptyPage:
         raise Http404()
 
+    launch = page_obj.object_list.first()
+    similar_launches = Launch.objects.filter(name__icontains=launch.name.split()[0]).reverse()
+
     context = {
         'page_obj': page_obj,
-        'launch': page_obj.object_list.first(),
+        'launch': launch,
         'slider_images': page_obj.object_list.first().links['flickr']['original'],
-        #'launches_related': launches_related[:7],
+        'similar_launches': similar_launches[:5],
     }
     return render(request, 'launches/detail.html', context)
 

@@ -43,3 +43,4 @@ class Launch(models.Model):
     
     def get_paginator(self):
         return Paginator(Launch.objects.all(), 1)
+    

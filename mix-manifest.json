@@ -1,5 +1,6 @@
 {
-    "/static/js/app.js": "/static/js/app.js",
-    "/static/js/maps.js": "/static/js/maps.js",
-    "/static/js/sidebar.js": "/static/js/sidebar.js"
+    "/static/js/foundation.js": "/static/js/foundation.js",
+    "/static/css/foundation.css": "/static/css/foundation.css",
+    "/static/css/motion-ui.min.css": "/static/css/motion-ui.min.css",
+    "/static/js/jquery.min.js": "/static/js/jquery.min.js"
 }
