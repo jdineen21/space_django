@@ -7,10 +7,14 @@ from .launchpad import Launchpad
 from .rocket import Rocket
 
 class Launch(models.Model):
+    IMAGE_PATHS = [
+        ('patch', 'links.patch.large'),
+        ('image', 'links.flickr.original'),
+    ]
     significant = models.BooleanField(default=False)
     fairings = models.JSONField(null=True)
     links = models.JSONField()
-    #images = models.ManyToManyField(Image)
+    images = models.ManyToManyField(Image)
     static_fire_date_utc = models.DateTimeField(null=True)
     static_fire_date_unix = models.IntegerField(null=True)
     tbd = models.BooleanField()
@@ -43,4 +47,12 @@ class Launch(models.Model):
     
     def get_paginator(self):
         return Paginator(Launch.objects.all(), 1)
+    
+    def get_images(id, type):
+        images = []
+        for o in Launch.objects.get(id=id).images.filter(type=type):
+            images.append(o.image.url)
+        if len(images) == 1:
+            images = images[0]
+        return images
     

@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}{{ launch.name }}{% endblock %}
+{% block title %}{{ launch.name }} Launch{% endblock %}
 
 {% block body %}
     <div class="grid-x">
@@ -165,9 +165,9 @@
             </div>
         </div>
         <div class="cell small-2">
-            <div class="grid-y grid-margin-x grid-margin-y">
-                {% if launch.links.patch.large %}
-                    <img class="cell" src="{{ launch.links.patch.large }}" >
+            <div class="grid-y grid-margin-x grid-padding-y">
+                {% if patch_images %}
+                    <img class="cell" src="{{ patch_images }}" >
                 {% endif %}
                 {% if launch.crew.count > 0 %}
                     <div class="cell">
@@ -180,7 +180,7 @@
                                         <span class="label float-right">{{ crew.agency }}</span>
                                     </a>
                                     <div class="accordion-content" data-tab-content>
-                                        <img src={{ crew.image }}>
+                                        <img src={{ crew.images.first.image.url }}>
                                     </div>
                                 </li>
                             {% endfor %}

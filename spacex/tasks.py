@@ -1,4 +1,3 @@
-import validators
 import requests
 import logging
 import json
@@ -7,7 +6,6 @@ from pathlib import Path
 from flatten_dict import flatten
 
 from django.core import serializers
-from django.core.files import File
 from django.db import IntegrityError
 from django.utils.text import slugify
 from space_django import api
@@ -30,26 +28,31 @@ models = [
 
 class Database:
 
+    def write_image(url, choice):
+        response = requests.get(url)
+        filename = Path(url).name
+
+        with open('media/%s' % (filename), 'wb') as file:
+            file.write(response.content)
+
+        return Image.objects.update_or_create(type=choice, source=url, image=filename)
+
     def testing():
         api_data = api.external('launches/5eb87d23ffd86e000604b36e')
         
-        Image.IMAGE_TYPE_CHOICES
+        if hasattr(Launch, 'IMAGE_PATHS'):
+            image_objects = []
+            for choice, key in Launch.IMAGE_PATHS:
+                image_urls = flatten(api_data, reducer='dot')[key]
+                if isinstance(image_urls, list):
+                    for url in image_urls:
+                        image_objects.append(Database.write_image(url, choice))
+                else:
+                    image_objects.append(Database.write_image(image_urls, choice))
 
-        for k, v in flatten(api_data, reducer='underscore', enumerate_types=(list,)).items():
-            if isinstance(v, str):
-                if validators.url(v):
-                    path = Path(v)
-                    if path.suffix in ['.jpg', '.png']:
-                        response = requests.get(v)
-                        file = open('media/%s' % (path.name), 'wb')
-                        file.write(response.content)
-                        file.close()
+        logging.debug(image_objects)
+
         return True
-
-    def images():
-        response = requests.get('https://images2.imgbox.com/66/d2/oVB1ofaZ_o.png')
-        open('media/%s' % (response.url.split('/')[-1]), 'wb')
-        print(response.url)
     
     def update():
         logging.info('Starting Database Update')
@@ -60,6 +63,29 @@ class Database:
             for api_data in api.external(model._meta.verbose_name_plural.title().lower()):
                 if 'name' in api_data:
                     api_data['sanitized_name'] = slugify(api_data['name'])
+
+                if hasattr(model, 'IMAGE_PATHS'):
+                    api_data['images'] = []
+                    for choice, key in model.IMAGE_PATHS:
+                        image_sources = flatten(api_data, reducer='dot')[key]
+                        if isinstance(image_sources, str):
+                            image_sources = image_sources.split()
+
+                        if image_sources is not None:
+                            for url in list(image_sources):
+                                image, etag = Image.write(url)
+                                data.append({
+                                    'pk': url,
+                                    'model': 'spacex.image',
+                                    'fields': {
+                                        'type': choice, 
+                                        'source': url,
+                                        'etag': etag,
+                                        'image': image,
+                                    },
+                                })
+                                api_data['images'].append(url)
+
                 data.append({
                     'pk': api_data['id'],
                     'model': 'spacex.%s' % (model.__name__.lower()),
@@ -78,7 +104,7 @@ class Database:
                 deserialized_object.save()
                 deserialized_count += 1
             except IntegrityError as e:
-                logging.error('Failed object deserialization "IntegrityError: %s at %s %s"' % (e, model._meta.verbose_name.title(), data[index]['fields']['id']))
+                logging.error('Failed object deserialization "IntegrityError: %s at %s %s"' % (e, data[index]['model'], data[index]['fields']['id']))
         
         logging.info('Deserialized %s total objects' % (deserialized_count))
         logging.info('Completed Database Update')

@@ -1,10 +1,16 @@
 from django.db import models
 
+from .image import Image
+
 class Crew(models.Model):
+    IMAGE_PATHS = [
+        ('portrait', 'image'),
+    ]
     name = models.CharField(max_length=100)
     sanitized_name = models.CharField(max_length=100)
     agency = models.CharField(max_length=100)
     image = models.CharField(max_length=100)
+    images = models.ManyToManyField(Image)
     wikipedia = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
     id = models.CharField(max_length=24, primary_key=True)

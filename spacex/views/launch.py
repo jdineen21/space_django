@@ -1,3 +1,4 @@
+from spacex.models.image import Image
 from django.core.paginator import EmptyPage, InvalidPage, Paginator
 from django.http import Http404
 from django.shortcuts import render
@@ -28,7 +29,8 @@ def detail(request, page_number):
     context = {
         'page_obj': page_obj,
         'launch': launch,
-        'slider_images': page_obj.object_list.first().links['flickr']['original'],
+        'patch_images': Launch.get_images(launch.id, 'patch'),
+        'slider_images': Launch.get_images(launch.id, 'image'),
         'similar_launches': similar_launches[:5],
     }
     return render(request, 'launches/detail.html', context)
