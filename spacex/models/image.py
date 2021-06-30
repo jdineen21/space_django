@@ -33,21 +33,22 @@ class Image(models.Model):
         verbose_name_plural = 'Images'
 
     def __str__(self):
-        return self.name
+        return self.image.url
 
     def write(model, data):
         serialized_data = []
+        image_sources = []
         for choice, key in model.IMAGE_PATHS:
+            Path(settings.MEDIA_ROOT, model.__name__.lower(), choice).mkdir(parents=True, exist_ok=True)
             path = Path(model.__name__.lower(), choice)
-            path.mkdir(parents=True, exist_ok=True)
 
-            image_sources = flatten(data, reducer='dot')[key]
-            if isinstance(image_sources, str):
-                image_sources = [image_sources]
-
-            if isinstance(image_sources, list):
-                for index, url in enumerate(list(image_sources)):
-                    if len(image_sources) == 1:
+            image_urls = flatten(data, reducer='dot')[key]
+            if isinstance(image_urls, str):
+                image_sources.append(image_urls)
+            
+            if isinstance(image_urls, list):
+                for index, url in enumerate(list(image_urls)):
+                    if len(image_urls) == 1:
                         filename = '%s%s' % (data['sanitized_name'], Path(url).suffix)
                     else:
                         filename = '%s-%s%s' % (data['sanitized_name'], index+1, Path(url).suffix)
@@ -56,7 +57,7 @@ class Image(models.Model):
                     
                     etag = Image.write_to_disk(filepath, url)
                     serialized_data.append({
-                        'pk': filename,
+                        'pk': url,
                         'model': 'spacex.image',
                         'fields': {
                             'name': filename,
@@ -66,6 +67,8 @@ class Image(models.Model):
                             'image': str(filepath),
                         },
                     })
+                    image_sources.append(url)
+
         return image_sources, serialized_data
 
     def write_to_disk(filepath, url):

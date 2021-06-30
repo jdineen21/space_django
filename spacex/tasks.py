@@ -42,7 +42,7 @@ class Database:
 
                 if hasattr(model, 'IMAGE_PATHS'):
                     data['images'], serialized_image_data = Image.write(model, data)
-                    serialized_data += serialized_image_data
+                    serialized_data.extend(serialized_image_data)
 
                 serialized_data.append({
                     'pk': data['id'],

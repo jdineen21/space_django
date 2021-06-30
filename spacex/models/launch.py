@@ -48,11 +48,3 @@ class Launch(models.Model):
     def get_paginator(self):
         return Paginator(Launch.objects.all(), 1)
     
-    def get_images(id, type):
-        images = []
-        for o in Launch.objects.get(id=id).images.filter(type=type):
-            images.append(o.image.url)
-        if len(images) == 1:
-            images = images[0]
-        return images
-    

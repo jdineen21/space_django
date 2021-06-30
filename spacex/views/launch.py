@@ -25,12 +25,13 @@ def detail(request, page_number):
 
     launch = page_obj.object_list.first()
     similar_launches = Launch.objects.filter(name__icontains=launch.name.split()[0]).reverse()
+    images = Launch.objects.get(flight_number=123).images.all()
 
     context = {
         'page_obj': page_obj,
         'launch': launch,
-        'patch_images': Launch.get_images(launch.id, 'patch'),
-        'slider_images': Launch.get_images(launch.id, 'image'),
+        'patch_images': images.filter(type='patch').first(),
+        'slider_images': images.filter(type='image'),
         'similar_launches': similar_launches[:5],
     }
     return render(request, 'launches/detail.html', context)
