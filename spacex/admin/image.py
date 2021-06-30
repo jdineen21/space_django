@@ -1,6 +1,6 @@
 from django.contrib import admin
 
 class ImageAdmin(admin.ModelAdmin):
-    search_fields = ['image', 'type']
-    #list_display = ['source', 'image', 'type', 'etag']
+    search_fields = ['name', 'type']
+    list_display = ['name']
     list_filter = ['type']
