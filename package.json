@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/jdineen21/space_django#readme",
   "devDependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.22.0",
     "cross-env": "^5.0.1",
     "foundation-sites": "^6.4.1",
     "jquery": "^3.3.1",
