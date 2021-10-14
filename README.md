@@ -12,8 +12,9 @@ cd space_django
 
 #### 2. Create and mount python virtual environment
 ```
-pip3 install virtualenv
-python3 -m venv .venv
+python -m pip install --upgrade pip
+pip install virtualenv
+python -m venv .venv
 source .venv/bin/activate
 ```
 
@@ -47,8 +48,12 @@ python manage.py runserver
 python manage.py check --deploy --settings=space_django.settings.production
 ```
 
-## pip Tips
-Show outdated packages
+## Tips
+Show outdated pip packages
 ```
 pip list --outdated --format=freeze
+```
+NPM commands
+```
+npm audit
 ```
