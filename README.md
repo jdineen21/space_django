@@ -36,9 +36,10 @@ cp .env.example .env
 python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())' >> .env
 ```
 
-#### 6. Launch django dev server
+#### ./6. Launch django dev server
 ```
-python manage.py runserver
+./manage.py migrate
+./manage.py runserver
 ```
 
 ## Deployment
