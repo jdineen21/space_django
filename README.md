@@ -52,7 +52,11 @@ python manage.py check --deploy --settings=space_django.settings.production
 ## Tips
 Show outdated pip packages
 ```
-pip list --outdated --format=freeze
+pip list --outdated
+```
+Update pip package
+```
+pip install --upgrade Django
 ```
 NPM commands
 ```

@@ -18,7 +18,7 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 # Caching
-# https://docs.djangoproject.com/en/3.1/ref/settings/#caching
+# https://docs.djangoproject.com/en/4.0/ref/settings/#caching
 
 CACHES = {
     'default': {

@@ -6,13 +6,16 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Caching
-# https://docs.djangoproject.com/en/3.1/ref/settings/#caching
+# https://docs.djangoproject.com/en/4.0/ref/settings/#caching
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
+
+# Logging
+# https://docs.djangoproject.com/en/4.0/ref/settings/#logging
 
 LOGGING = {
     'version': 1,
@@ -24,6 +27,13 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console'],
-        'level': 'DEBUG',
+        'level': 'INFO',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
     },
 }
