@@ -1,8 +1,13 @@
 
 from django.db import models
 
+from .image import Image
 
 class Rocket(models.Model):
+    IMAGE_PATHS = [
+        ('image', 'flickr_images'),
+    ]
+    images = models.ManyToManyField(Image)
     height = models.JSONField()
     diameter = models.JSONField()
     mass = models.JSONField()

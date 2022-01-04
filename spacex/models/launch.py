@@ -11,29 +11,38 @@ class Launch(models.Model):
         ('patch', 'links.patch.large'),
         ('image', 'links.flickr.original'),
     ]
-    significant = models.BooleanField(default=False)
-    fairings = models.JSONField(null=True)
-    links = models.JSONField()
     images = models.ManyToManyField(Image)
-    static_fire_date_utc = models.DateTimeField(null=True)
-    static_fire_date_unix = models.IntegerField(null=True)
+    significant = models.BooleanField(default=False)
+    fairings = models.JSONField(
+        blank=True,
+        null=True,
+    )
+    links = models.JSONField()
+    static_fire_date_utc = models.DateTimeField(
+        blank=True, 
+        null=True,
+    )
+    static_fire_date_unix = models.IntegerField(
+        blank=True,
+        null=True,
+    )
     tbd = models.BooleanField()
     net = models.BooleanField()
-    window = models.IntegerField(null=True)
+    window = models.IntegerField(blank=True, null=True)
     rocket = models.ForeignKey(Rocket, on_delete=models.SET_NULL, null=True)
-    success = models.BooleanField(null=True)
-    details = models.TextField(null=True)
+    success = models.BooleanField(blank=True, null=True)
+    details = models.TextField(blank=True, null=True)
     crew = models.ManyToManyField(Crew)
     launchpad = models.ForeignKey(Launchpad, on_delete=models.SET_NULL, null=True)
     auto_update = models.BooleanField()
-    launch_library_id = models.CharField(max_length=100, null=True)
+    launch_library_id = models.CharField(max_length=100, blank=True, null=True)
     flight_number = models.IntegerField()
     name = models.CharField(max_length=100)
     sanitized_name = models.CharField(max_length=100)
-    date_utc = models.DateTimeField(null=True)
-    date_unix = models.IntegerField(null=True)
-    date_local = models.DateTimeField(null=True)
-    date_precision = models.CharField(max_length=100, null=True)
+    date_utc = models.DateTimeField(blank=True, null=True)
+    date_unix = models.IntegerField(blank=True, null=True)
+    date_local = models.DateTimeField(blank=True, null=True)
+    date_precision = models.CharField(max_length=100, blank=True, null=True)
     upcoming = models.BooleanField()
     id = models.CharField(max_length=24, primary_key=True)
 

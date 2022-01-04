@@ -3,6 +3,7 @@ import logging
 
 from pathlib import Path
 from flatten_dict import flatten
+from django.utils.text import slugify
 
 from django.db import models
 from django.conf import settings
@@ -17,7 +18,7 @@ class Image(models.Model):
         ('portrait', 'Portrait'),
     ]
     name = models.CharField(max_length=100)
-    source = models.URLField(primary_key=True, max_length=200)
+    source = models.URLField(max_length=200, primary_key=True)
     type = models.CharField(max_length=10, choices=IMAGE_TYPE_CHOICES)
     etag = models.CharField(max_length=100)
     image = models.ImageField(
@@ -35,6 +36,25 @@ class Image(models.Model):
     def __str__(self):
         return self.image.url
 
+    # def get_image_sources(image_urls: list):
+    #     filename = '%s%s' % (data['sanitized_name'], Path(image_urls).suffix)
+
+    #     filepath = Path(path, filename)
+
+    #     etag = Image.write_to_disk(filepath, image_urls)
+    #     serialized_data.append({
+    #         'pk': image_urls,
+    #         'model': 'spacex.image',
+    #         'fields': {
+    #             'name': filename,
+    #             'source': image_urls,
+    #             'type': choice,
+    #             'etag': etag,
+    #             'image': str(filepath),
+    #         },
+    #     })
+    #     image_sources.append(image_urls)
+
     def write(model, data):
         serialized_data = []
         image_sources = []
@@ -44,6 +64,18 @@ class Image(models.Model):
 
             image_urls = flatten(data, reducer='dot')[key]
             if isinstance(image_urls, str):
+                filename = '%s%s' % (data['sanitized_name'], Path(image_urls).suffix)
+
+                filepath = Path(path, filename)
+
+                etag = Image.write_to_disk(filepath, image_urls)
+                serialized_data.append({
+                    'name': filename,
+                    'source': image_urls,
+                    'type': choice,
+                    'etag': etag,
+                    'image': str(filepath),
+                })
                 image_sources.append(image_urls)
             
             if isinstance(image_urls, list):
@@ -54,31 +86,27 @@ class Image(models.Model):
                         filename = '%s-%s%s' % (data['sanitized_name'], index+1, Path(url).suffix)
                     
                     filepath = Path(path, filename)
-                    
+                                        
                     etag = Image.write_to_disk(filepath, url)
                     serialized_data.append({
-                        'pk': url,
-                        'model': 'spacex.image',
-                        'fields': {
-                            'name': filename,
-                            'source': url,
-                            'type': choice,
-                            'etag': etag,
-                            'image': str(filepath),
-                        },
+                        'name': filename,
+                        'source': url,
+                        'type': choice,
+                        'etag': etag,
+                        'image': str(filepath),
                     })
                     image_sources.append(url)
 
         return image_sources, serialized_data
 
     def write_to_disk(filepath, url):
-        headers = requests.head(url, allow_redirects=True).headers
-        # try:
-        #     if Image.objects.get(source=url).etag != headers['etag']:
-        #         logging.debug('Etag change writing image %s/%s' % (str(filepath)))
-        #         Image.download_to_disk(filepath, url)
-        # except Image.DoesNotExist:
-        #     Image.download_to_disk(filepath, url)
+        headers = requests.head(url, stream=True, allow_redirects=True).headers
+        try:
+            if Image.objects.get(source=url).etag != headers['etag']:
+                logging.debug('Etag change writing image %s/%s' % (str(filepath)))
+                Image.download_to_disk(filepath, url)
+        except Image.DoesNotExist:
+            Image.download_to_disk(filepath, url)
         return headers['etag']
     
     def download_to_disk(filepath, url):
@@ -87,5 +115,6 @@ class Image(models.Model):
         except ConnectionError as e:
             logging.error('Failed connection "ConnectionError: %s"' % (e))
 
-        with open(str(filepath), 'wb') as file:
+        # This media addition needs cleaning up
+        with open(str(Path('media', filepath)), 'wb') as file:
             file.write(response.content)

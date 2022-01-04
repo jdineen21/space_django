@@ -1,6 +1,12 @@
 from django.db import models
 
+from .image import Image
+
 class Dragon(models.Model):
+    IMAGE_PATHS = [
+        ('image', 'flickr_images'),
+    ]
+    images = models.ManyToManyField(Image)
     heat_shield = models.JSONField()
     launch_payload_mass = models.JSONField()
     launch_payload_vol = models.JSONField()

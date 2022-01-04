@@ -1,14 +1,11 @@
-import requests
+import functools
 import logging
 import json
-
-from pathlib import Path
-from flatten_dict import flatten
+import itertools
 
 from django.core import serializers
 from django.db import IntegrityError
 from django.utils.text import slugify
-from django.conf import settings
 from space_django import api
 
 from spacex.models import Core, Crew, Dragon, Landpad, Launch, Launchpad, Payload, Rocket
@@ -28,46 +25,39 @@ models = [
 ]
 
 class Database:
-    
+
     def update():
-        logging.info('Starting Database Update')
-        serialized_data = []
-        setup_total = 0
+        logging.info('Starting Database Setup')
+
+        model_data_pairs = []
         for model in models:
-            setup_count = 0
-            for data in api.external(model._meta.verbose_name_plural.title().lower()):
-                
-                if 'name' in data:
-                    data['sanitized_name'] = slugify(data['name'])
+            data_block = api.external(model._meta.verbose_name_plural.title().lower())
+            for data in data_block:
+                model_data_pairs.append([model, data])
 
-                if hasattr(model, 'IMAGE_PATHS'):
-                    data['images'], serialized_image_data = Image.write(model, data)
-                    serialized_data.extend(serialized_image_data)
-
-                serialized_data.append({
-                    'pk': data['id'],
-                    'model': 'spacex.%s' % (model.__name__.lower()),
-                    'fields': data,
-                })
-                setup_count += 1
-
-            logging.info('Setup %s %s objects' % (setup_count, model._meta.verbose_name.title()))
-            setup_total += setup_count
+        for model, data in model_data_pairs:
+            if 'name' in data:
+                data['sanitized_name'] = slugify(data['name'])
+            
+            if hasattr(model, 'IMAGE_PATHS'):
+                data['images'], images_data = Image.write(model, data)
+                image_data_pairs = [[Image, image_data] for image_data in images_data]
+                model_data_pairs.extend(image_data_pairs)
         
-        logging.info('Setup %s total objects for deserialization' % (setup_total))
+        serialized = [{'pk': model._meta.pk.name, 'model': 'spacex.%s' % (model.__name__.lower()), 'fields': data} for model, data in model_data_pairs]
+        serialized.reverse()
+        print(len(serialized))
 
         deserialized_count = 0
-        for index, deserialized_object in enumerate(serializers.deserialize('json', json.dumps(serialized_data, indent=4), ignorenonexistent=True)):
+        for index, deserialized_object in enumerate(serializers.deserialize('json', json.dumps(serialized, indent=4), ignorenonexistent=True)):
             try:
                 deserialized_object.save()
                 deserialized_count += 1
             except IntegrityError as e:
-                logging.error('Failed object deserialization "IntegrityError: %s at %s"' % (e, serialized_data[index]['model']))
-        
+                logging.error('Failed object deserialization "IntegrityError: %s at %s id %s"' % (e, serialized[index]['model'], serialized[index]['pk']))
         logging.info('Deserialized %s total objects' % (deserialized_count))
         logging.info('Completed Database Update')
-        return True
-
+    
     def purge():
         for model in models:
             model.objects.all().delete()

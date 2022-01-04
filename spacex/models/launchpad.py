@@ -1,9 +1,13 @@
 from django.db import models
 
+from .image import Image
 from .rocket import Rocket
 
-
 class Launchpad(models.Model):
+    IMAGE_PATHS = [
+        ('image', 'images.large'),
+    ]
+    images = models.ManyToManyField(Image)
     name = models.CharField(max_length=100)
     full_name = models.CharField(max_length=100)
     sanitized_name = models.CharField(max_length=100)

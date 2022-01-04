@@ -6,11 +6,11 @@ class Crew(models.Model):
     IMAGE_PATHS = [
         ('portrait', 'image'),
     ]
+    images = models.ManyToManyField(Image)
     name = models.CharField(max_length=100)
     sanitized_name = models.CharField(max_length=100)
     agency = models.CharField(max_length=100)
     image = models.CharField(max_length=100)
-    images = models.ManyToManyField(Image)
     wikipedia = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
     id = models.CharField(max_length=24, primary_key=True)
