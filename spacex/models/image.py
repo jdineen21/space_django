@@ -36,25 +36,6 @@ class Image(models.Model):
     def __str__(self):
         return self.image.url
 
-    # def get_image_sources(image_urls: list):
-    #     filename = '%s%s' % (data['sanitized_name'], Path(image_urls).suffix)
-
-    #     filepath = Path(path, filename)
-
-    #     etag = Image.write_to_disk(filepath, image_urls)
-    #     serialized_data.append({
-    #         'pk': image_urls,
-    #         'model': 'spacex.image',
-    #         'fields': {
-    #             'name': filename,
-    #             'source': image_urls,
-    #             'type': choice,
-    #             'etag': etag,
-    #             'image': str(filepath),
-    #         },
-    #     })
-    #     image_sources.append(image_urls)
-
     def write(model, data):
         serialized_data = []
         image_sources = []
