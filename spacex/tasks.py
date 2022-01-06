@@ -26,6 +26,12 @@ models = [
 
 class Database:
 
+    # TODO 
+    # - Split images and data and log whats been done clearly
+    # - Comment what the code does
+    # - Cleanup Image.write function
+    # - Remove print length
+    # - Double check the logic behind the image many to many relationship
     def update():
         logging.info('Starting Database Setup')
 
