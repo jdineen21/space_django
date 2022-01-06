@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "spacex/base.html" %}
 {% load static %}
 
 {% block title %}{{ landpad.full_name }} | Landing Pad | SpaceXTrack.com{% endblock %}
@@ -16,7 +16,7 @@
     {{ landpad.location|json_script:"location" }}
 {% endblock %}
 
-{% block content %}
+{% block body %}
     {% if not landpad.error %}
         <div class="landpad_container">
             <div class="main_content">

@@ -1,4 +1,5 @@
-{% extends "base.html" %}
+{% extends "spacex/base.html" %}
+
 {% load static %}
 {% load humanize %}
 
@@ -6,15 +7,7 @@
 
 {% block description %}SpaceXTrack.com: SpaceX {{ dragon.name }}, {{ dragon.description }}{% endblock %}
 
-{% block stylesheet %}
-    <link rel="stylesheet" type="text/css" href="{% static 'dragons/detail.css' %}">
-{% endblock %}
-
-{% block javascript %}
-    {{ dragon.flickr_images|json_script:"images" }}
-{% endblock %}
-
-{% block content %}
+{% block body %}
     {% if not dragon.error %}
         <div class="dragon_details">
             <div class="main_content">

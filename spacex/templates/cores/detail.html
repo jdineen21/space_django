@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "spacex/base.html" %}
 {% load static %}
 
 {% block stylesheet %}
@@ -7,7 +7,7 @@
 
 {% block title %}{{ launch.mission_name }}{% endblock %}
 
-{% block content %}
+{% block body %}
     {% if not launch.error %}
         <div class="core_content">
             <h1>{{ core.core_serial }}</h1>

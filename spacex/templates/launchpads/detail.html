@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "spacex/base.html" %}
 {% load static %}
 
 {% block title %}{{ launchpad.name }} Launchpad | SpaceXTrack.com{% endblock %}
@@ -17,7 +17,7 @@
     {{ launchpad.location|json_script:"location" }}
 {% endblock %}
 
-{% block content %}
+{% block body %}
     {% if not launchpad.error %}
         <div class="launchpad_details">
             <div class="main_content">

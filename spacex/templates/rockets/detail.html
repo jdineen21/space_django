@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "spacex/base.html" %}
 
 {% load static %}
 {% load humanize %}
@@ -15,7 +15,7 @@
     {{ rocket.flickr_images|json_script:"images" }}
 {% endblock %}
 
-{% block content %}
+{% block body %}
     {% if not rocket.error %}
         <div class="rocket_container">
             <div class="main_content">

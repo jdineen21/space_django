@@ -1,0 +1,20 @@
+{% load static %}
+
+<div class="top-bar">
+    <div class="top-bar-left">
+        <button class="menu-icon" type="button" data-toggle="offCanvasLeft"></button>
+        <span class="title-bar-title">
+            <div class="media-object-section">
+                <a href="{% url 'spacex:home.index' %}">
+                    <img src={% static "assets/images/trackspace-logo.png" %} alt="Track Space Logo" style="height:4em;">
+                </a>
+            </div>
+        </span>
+    </div>
+    <div class="top-bar-right">
+        <ul class="menu">
+            <li><input type="search" placeholder="Search"></li>
+            <li><button type="button" class="button">Search</button></li>
+        </ul>
+    </div>
+</div>

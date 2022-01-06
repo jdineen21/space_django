@@ -16,11 +16,11 @@ def index(request):
     }
     return render(request, 'launches/index/all.html', context)
 
-def detail(request, flight_number):
+def detail(request, page_number):
     p = Paginator(Launch.objects.all(), 1)
 
     try:
-        page_obj = p.page(flight_number)
+        page_obj = p.page(page_number)
     except EmptyPage:
         raise Http404()
 

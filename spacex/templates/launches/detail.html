@@ -5,12 +5,12 @@
 {% block title %}{{ launch.name }} Launch{% endblock %}
 
 {% block body %}
-    <div class="grid-container fluid">
+    <div class="grid-container full">
         <div class="grid-x grid-padding-x grid-padding-y">
-            <div class="cell small-6" id="launch-detail" data-something>
+            <div class="cell small-7" id="launch-detail" data-something>
                 <div class="grid-x">
                     <div class="cell">
-                        <div class="grid-x">
+                        <div class="grid-x align-justify">
                             <div class="cell auto">
                                 <h2>{{ launch.name }}</h2>
                                 <div class="grid-x">
@@ -25,32 +25,38 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="cell shrink align-right">
-                                <nav aria-label="Pagination">
-                                    <div class="callout small secondary">
-                                        <ul class="pagination">
-                                            {% if page_obj.has_previous %}
-                                                <li class="pagination-previous"><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Previous launch">Previous launch</span></a></li>
-                                                <li><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Launch {{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-                                            {% endif %}
-                                            <li class="current"><span class="show-for-sr">You're on launch</span> {{ page_obj.number }}</li>
-                                            {% if page_obj.has_next %}
-                                                <li><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Launch {{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
-                                                <li class="pagination-next"><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Next page">Next launch</span></a></li>
-                                            {% else %}
-                                                <li class="pagination-next disabled">Next launch</span></li>
-                                            {% endif %}
-                                        </ul>
+                            <div class="cell shrink">
+                                <div class="grid-y">
+                                    <div class="cell">
+                                        <nav aria-label="Pagination">
+                                            <div class="callout small secondary">
+                                                <ul class="pagination">
+                                                    {% if page_obj.has_previous %}
+                                                        <li class="pagination-previous"><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Previous launch">Previous launch</span></a></li>
+                                                        <li><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Launch {{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+                                                    {% endif %}
+                                                    <li class="current"><span class="show-for-sr">You're on launch</span> {{ page_obj.number }}</li>
+                                                    {% if page_obj.has_next %}
+                                                        <li><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Launch {{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+                                                        <li class="pagination-next"><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Next page">Next launch</span></a></li>
+                                                    {% else %}
+                                                        <li class="pagination-next disabled">Next launch</span></li>
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+                                        </nav>
                                     </div>
-                                </nav>
-                                {% if launch.links.wikipedia or launch.links.youtube_id %}
-                                    {% if launch.links.wikipedia %}
-                                        <a href={{ launch.links.webcast }} class="button alert" target="_blank">Watch Webcast</a>
-                                    {% endif %}
-                                    {% if launch.links.wikipedia %}
-                                        <a href={{ launch.links.wikipedia }} class="button secondary" target="_blank">Wikipedia</a>
-                                    {% endif %}
-                                {% endif %}
+                                    <div class="cell text-right">
+                                        {% if launch.links.wikipedia or launch.links.youtube_id %}
+                                            {% if launch.links.wikipedia %}
+                                                <a href={{ launch.links.webcast }} class="button alert" target="_blank">Watch Webcast</a>
+                                            {% endif %}
+                                            {% if launch.links.wikipedia %}
+                                                <a href={{ launch.links.wikipedia }} class="button secondary" target="_blank">Wikipedia</a>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -59,12 +65,14 @@
                             <h4>Flight Summary</h4>
                             <hr>
                             <div class="grid-x">
-                                <div class="cell small-3">
-                                    <p>Flight Number</p>
-                                </div>
-                                <div class="cell small-9">
-                                    <p>{{ launch.flight_number }}</p>
-                                </div>
+                                {% if launch.upcoming == False %}
+                                    <div class="cell small-3">
+                                        <p>Flight Number</p>
+                                    </div>
+                                    <div class="cell small-9">
+                                        <p>{{ launch.flight_number }}</p>
+                                    </div>
+                                {% endif %}
                                 <div class="cell small-3">
                                     <p>Date</p>
                                 </div>
@@ -167,6 +175,15 @@
                     </div>
                 </div>
             </div>
+            <div class="cell small-3" data-sticky-container>
+                <div class="grid-x grid-padding-y">
+                    <div class="cell" data-sticky-container>
+                        <div class="sticky" data-sticky data-options="marginTop:0;" data-anchor="launch-detail">
+                            {% include 'spacex/image_slider.html'  %}
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="cell small-2">
                 <div class="grid-x">
                     {% if patch_images %}
@@ -179,8 +196,10 @@
                                 {% for crew in launch.crew.all %}
                                     <li class="accordion-item{% if forloop.first %} is-active{% endif %}" data-accordion-item>
                                         <a class="accordion-title">
-                                            {{ crew.name }}
-                                            <span class="label float-right">{{ crew.agency }}</span>
+                                            <div class="grid-x">
+                                                <div class="cell small-6 align-self-middle">{{ crew.name }}</div>
+                                                <div class="cell small-6"><span class="label float-right">{{ crew.agency }}</span></div>
+                                            </div>
                                         </a>
                                         <div class="accordion-content" data-tab-content>
                                             <img src={{ crew.images.first.image.url }}>
@@ -259,15 +278,6 @@
                                 </li>
                             {% endfor %}
                         </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="cell small-4" data-sticky-container>
-                <div class="grid-x">
-                    <div class="cell" data-sticky-container>
-                        <div class="sticky" data-sticky data-options="marginTop:0;" data-anchor="launch-detail">
-                            {% include 'spacex/image_slider.html'  %}
-                        </div>
                     </div>
                 </div>
             </div>

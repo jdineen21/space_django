@@ -1,9 +1,6 @@
 // webpack.mix.js
 let mix = require('laravel-mix');
 
-mix.copy('node_modules/foundation-sites/dist/js/foundation.esm.js.map', 'static/js');
-mix.copy('node_modules/motion-ui/dist/motion-ui.min.css', 'static/css');
-mix.copy('node_modules/jquery/dist/jquery.min.js', 'static/js');
+mix.sass('resources/scss/styles.scss', 'static/css/styles.min.css')
 
-mix.sass('resources/assets/sass/foundation.scss', 'static/css');
-mix.js('resources/assets/js/foundation.js', 'static/js');
+mix.js('resources/js/foundation.js', 'static/js');

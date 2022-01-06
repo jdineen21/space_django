@@ -1,17 +1,13 @@
-{% extends "base.html" %}
+{% extends "spacex/base.html" %}
+
 {% load static %}
 
 {% block title %}SpaceX Updates Information | SpaceXTrack.com{% endblock %}
 
 {% block description %}SpaceXTrack.com: SpaceX Updates Launches, Launch Pads, Landings, Landing Pads, Vehicles, Dragons, Missions, Payloads, Blocks. Regularly Updated.{% endblock %}
 
-{% block stylesheet %}
-    <link rel="stylesheet" type="text/css" href="{% static 'home/index/index.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'home/index/animations.css' %}">
-{% endblock %}
-
-{% block content %}
-    <video autoplay muted loop id="video" width="1920" height="1080">
+{% block body %}
+    {% comment %} <video autoplay muted loop id="video" width="1920" height="1080">
         <source src="{{ random_vid }}" type="video/mp4">
     </video>
     <div class="main_content">
@@ -51,7 +47,7 @@
                         </tr>
                     </table>
                 </div>
-            </div> {% endcomment %}
+            </div>
         </div>
-    </div>
+    </div> {% endcomment %}
 {% endblock %}

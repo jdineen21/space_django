@@ -5,6 +5,6 @@ from spacex.models import Dragon
 
 def detail(request, sanitized_name):
     context = {
-        'core': get_object_or_404(Dragon, sanitized_name=sanitized_name),
+        'dragon': get_object_or_404(Dragon, sanitized_name=sanitized_name),
     }
-    return render(request, 'cores/detail.html', context)
+    return render(request, 'dragons/detail.html', context)

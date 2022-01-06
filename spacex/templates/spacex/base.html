@@ -10,7 +10,7 @@
 
         <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}"/>
 
-        <link rel="stylesheet" href="{% static 'css/foundation.css' %}">
+        <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/motion-ui.min.css' %}" />
         {% block stylesheet %}{% endblock  %}
 
@@ -54,50 +54,7 @@
                 </div>
             </div>
             <div class="off-canvas-content" data-off-canvas-content>
-                <div class="top-bar">
-                    <div class="top-bar-left">
-                        <button class="menu-icon" type="button" data-toggle="offCanvasLeft"></button>
-                        <span class="title-bar-title">
-                            <div class="media-object-section">
-                                <a href="{% url 'spacex:home.index' %}">
-                                    <img src={% static "assets/images/trackspace-logo.png" %} alt="Track Space Logo" style="height:4em;">
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                    <div class="top-bar-left">
-                        <ul class="dropdown menu" data-dropdown-menu>
-                            <li>
-                                <a href="#">One</a>
-                                <ul class="menu vertical">
-                                    <li><a href="#">One</a></li>
-                                    <li><a href="#">Two</a></li>
-                                    <li><a href="#">Three</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Two</a></li>
-                            <li><a href="#">Three</a></li>
-                        </ul>
-                    </div>
-                    <div class="top-bar-right">
-                        <ul class="menu">
-                            <li><input type="search" placeholder="Search"></li>
-                            <li><button type="button" class="button">Search</button></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="title-bar">
-                    <div class="title-bar-left">
-                        <button class="menu-icon" type="button" data-toggle="offCanvasLeft"></button>
-                        <span class="title-bar-title">
-                            <div class="media-object-section">
-                                <a href="{% url 'spacex:home.index' %}">
-                                    <img src={% static "assets/images/trackspace-logo.png" %} alt="Track Space Logo" style="height:4em;">
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </div>
+                {% include 'spacex/top_bar.html'  %}
                 {% block body %}{% endblock %}
             </div>
         </div>
