@@ -19,62 +19,86 @@
         {% block javascript %}{% endblock  %}
     </head>
     <body>
-        <div class="grid-container full">
-            <div class="grid-x">
-                <div class="cell">
-                    <div class="off-canvas-wrapper">
-                        <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
-                            <button class="close-button" aria-label="Close menu" type="button" data-close>
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <ul class="vertical menu">
-                                <li><a href={% url 'spacex:home.index' %}>Home</a></li>
-                                <li class="menu-text">Launches</li>
-                                <li><a href={% url 'spacex:launch.index' %}>All</a></li>
-                                <li><a href={% url 'spacex:launch.next' %}>Next</a></li>
-                                <li><a href={% url 'spacex:launch.past' %}>Past</a></li>
-                                <li><a href={% url 'spacex:launch.upcoming' %}>Upcoming</a></li>
-                                <li class="menu-text">Launchpads</li>
-                                {% for launchpad in sidebar.launchpads %}
-                                    <li><a href={% url 'spacex:launchpad.detail' launchpad.sanitized_name %}>{{ launchpad.name }}</a></li>
-                                {% endfor %}
-                                <li class="menu-text">Landpads</li>
-                                {% for landpad in sidebar.landpads %}
-                                    <li><a href={% url 'spacex:landpad.detail' landpad.sanitized_name %}>{{ landpad.name }}</a></li>
-                                {% endfor %}
-                                <li class="menu-text">Rockets</li>
-                                {% for rocket in sidebar.rockets %}
-                                    <li><a href={% url 'spacex:rocket.detail' rocket.sanitized_name %}>{{ rocket.name }}</a></li>
-                                {% endfor %}
-                                <li class="menu-text">Dragons</li>
-                                {% for dragon in sidebar.dragons %}
-                                    <li><a href={% url 'spacex:dragon.detail' dragon.sanitized_name %}>{{ dragon.name }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="off-canvas-content" data-off-canvas-content>
-                            <div class="grid-y">
-                                <div class="cell">
-                                    <div class="title-bar">
-                                        <div class="title-bar-left">
-                                            <button class="menu-icon" type="button" data-toggle="offCanvasLeft"></button>
-                                            <span class="title-bar-title">
-                                                <div class="media-object-section">
-                                                    <a href="{% url 'spacex:home.index' %}">
-                                                        <img src={% static "assets/images/trackspace-logo.png" %} alt="Track Space Logo" style="height:4em;">
-                                                    </a>
-                                                </div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cell">
-                                    {% block body %}{% endblock %}
-                                </div>
-                            </div>
-                        </div>
+        <div class="off-canvas-wrapper">
+            <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+                <div class="grid-x">
+                    <div class="cell">
+                        <button class="close-button" aria-label="Close menu" type="button" data-close>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <ul class="vertical menu">
+                            <li><a href={% url 'spacex:home.index' %}>Home</a></li>
+                            <li class="menu-text">Launches</li>
+                            <li><a href={% url 'spacex:launch.index' %}>All</a></li>
+                            <li><a href={% url 'spacex:launch.next' %}>Next</a></li>
+                            <li><a href={% url 'spacex:launch.past' %}>Past</a></li>
+                            <li><a href={% url 'spacex:launch.upcoming' %}>Upcoming</a></li>
+                            <li class="menu-text">Launchpads</li>
+                            {% for launchpad in sidebar.launchpads %}
+                                <li><a href={% url 'spacex:launchpad.detail' launchpad.sanitized_name %}>{{ launchpad.name }}</a></li>
+                            {% endfor %}
+                            <li class="menu-text">Landpads</li>
+                            {% for landpad in sidebar.landpads %}
+                                <li><a href={% url 'spacex:landpad.detail' landpad.sanitized_name %}>{{ landpad.name }}</a></li>
+                            {% endfor %}
+                            <li class="menu-text">Rockets</li>
+                            {% for rocket in sidebar.rockets %}
+                                <li><a href={% url 'spacex:rocket.detail' rocket.sanitized_name %}>{{ rocket.name }}</a></li>
+                            {% endfor %}
+                            <li class="menu-text">Dragons</li>
+                            {% for dragon in sidebar.dragons %}
+                                <li><a href={% url 'spacex:dragon.detail' dragon.sanitized_name %}>{{ dragon.name }}</a></li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
+            </div>
+            <div class="off-canvas-content" data-off-canvas-content>
+                <div class="top-bar">
+                    <div class="top-bar-left">
+                        <button class="menu-icon" type="button" data-toggle="offCanvasLeft"></button>
+                        <span class="title-bar-title">
+                            <div class="media-object-section">
+                                <a href="{% url 'spacex:home.index' %}">
+                                    <img src={% static "assets/images/trackspace-logo.png" %} alt="Track Space Logo" style="height:4em;">
+                                </a>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="top-bar-left">
+                        <ul class="dropdown menu" data-dropdown-menu>
+                            <li>
+                                <a href="#">One</a>
+                                <ul class="menu vertical">
+                                    <li><a href="#">One</a></li>
+                                    <li><a href="#">Two</a></li>
+                                    <li><a href="#">Three</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Two</a></li>
+                            <li><a href="#">Three</a></li>
+                        </ul>
+                    </div>
+                    <div class="top-bar-right">
+                        <ul class="menu">
+                            <li><input type="search" placeholder="Search"></li>
+                            <li><button type="button" class="button">Search</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="title-bar">
+                    <div class="title-bar-left">
+                        <button class="menu-icon" type="button" data-toggle="offCanvasLeft"></button>
+                        <span class="title-bar-title">
+                            <div class="media-object-section">
+                                <a href="{% url 'spacex:home.index' %}">
+                                    <img src={% static "assets/images/trackspace-logo.png" %} alt="Track Space Logo" style="height:4em;">
+                                </a>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                {% block body %}{% endblock %}
             </div>
         </div>
         <script>$(document).foundation();</script>
