@@ -32,9 +32,6 @@
                             {% include 'launches/related.html' %}
                         </div>
                     {% endif %}
-                    <div class="cell">
-                        {% include 'launches/payload_summary.html' %}
-                    </div>
                     <div class="grid-y">
                         {% for url in slider_images %}
                             <div class="cell" data-open="imageModal{{ forloop.counter }}">

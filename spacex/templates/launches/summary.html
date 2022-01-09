@@ -30,35 +30,39 @@
                         {% endif %}
                     </div>
                 </div>
-                {% comment %} <div class="cell small-6 text-right">
-                    
-                </div> {% endcomment %}
                 <div class="cell large-6">
-                    {% include 'launches/launchpad.html' %}
+                    <div class="grid-y">
+                        <div class="cell">
+                            {% include 'launches/launchpad.html' %}
+                        </div>
+                        {% if launch.crew.count > 0 %}
+                            <div class="cell">
+                                <ul class="accordion" data-accordion>
+                                    {% for crew in launch.crew.all %}
+                                        <li class="accordion-item{% if forloop.first %} is-active{% endif %}" data-accordion-item>
+                                            <a class="accordion-title">
+                                                <div class="grid-x">
+                                                    <div class="cell small-6 align-self-middle">{{ crew.name }}</div>
+                                                    <div class="cell small-6"><span class="label float-right">{{ crew.agency }}</span></div>
+                                                </div>
+                                            </a>
+                                            <div class="accordion-content" data-tab-content>
+                                                <img src={{ crew.images.first.image.url }}>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="cell large-6">
-                    {% include 'launches/rocket.html' %}
+                    <div class="grid-y">
+                        <div class="cell">{% include 'launches/rocket.html' %}</div>
+                        <div class="cell">{% include 'launches/payload_summary.html' %}</div>
+                    </div>
                 </div>
             </div>
         </div>
-        {% if launch.crew.count > 0 %}
-        <div class="cell">
-            <ul class="accordion" data-accordion>
-                {% for crew in launch.crew.all %}
-                    <li class="accordion-item{% if forloop.first %} is-active{% endif %}" data-accordion-item>
-                        <a class="accordion-title">
-                            <div class="grid-x">
-                                <div class="cell small-6 align-self-middle">{{ crew.name }}</div>
-                                <div class="cell small-6"><span class="label float-right">{{ crew.agency }}</span></div>
-                            </div>
-                        </a>
-                        <div class="accordion-content" data-tab-content>
-                            <img src={{ crew.images.first.image.url }}>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
     </div>    
 </div>
