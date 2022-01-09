@@ -1,0 +1,36 @@
+<div class="callout">
+    <h4>{{ launch.rocket.name }}</h4>
+    <div class="grid-y">
+        <div class="cell">
+            <div class="grid-x grid-margin-x">
+                <div class="cell small-4">
+                    {% if launch.rocket.active == True %}
+                        <div class="callout success text-center">Active</div>
+                    {% else %}
+                        <div class="callout alert">Retired</div>
+                    {% endif %}
+                    <a href={% url 'spacex:rocket.detail' launch.rocket.sanitized_name %} class="button">Read More</a>
+                </div>
+                <div class="cell small-8">
+                    <div class="grid-x grid-margin-x grid-margin-y">
+                        <div class="cell auto">
+                            <p>Number of Flights</p>
+                            <div class="stat">{{ launch.rocket.launch_set.all.count }}</div>
+                        </div>
+                        <div class="cell auto">
+                            <p>Flight Success Rate</p>
+                            <div class="stat">{{ launch.rocket.success_rate_pct }}%</div>
+                        </div>
+                        <div class="cell">
+                            <p>{{ launch.rocket.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell">
+            <p>Date of First Flight</p>
+            <div class="stat">{{ launch.rocket.first_flight|date:"jS F Y" }}</div>
+        </div>
+    </div>
+</div>

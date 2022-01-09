@@ -1,0 +1,71 @@
+<div class="callout">
+    <ul class="accordion" data-accordion>
+        <h5>Payload Summary</h4>
+        <hr>
+        {% for payload in launch.payload_set.all %}
+            <li class="accordion-item{% if forloop.first %} is-active{% endif %}" data-accordion-item>
+                <a class="accordion-title">{{ payload.name }} - {{ payload.type }}</a>
+                <div class="accordion-content" data-tab-content>
+                    <table class="stack unstriped" style="margin: 0;">
+                        <tr><th colspan="2" style="background: #e6e6e6">Spacecraft properties</th></tr>
+                        <tr>
+                            <th>Type</th>
+                            <td>{{ payload.type }}</td>
+                        </tr>
+                        <tr>
+                            <th>Customers</th>
+                            <td>
+                                <ul>
+                                    {% for customer in payload.customers %}
+                                        <li>{{ customer }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Nationalitites</th>
+                            <td>
+                                <ul>
+                                    {% for nationality in payload.nationalities %}
+                                        <li>{{ nationality }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Manufacturers</th>
+                            <td>
+                                <ul>
+                                    {% for manufacturer in payload.manufacturers %}
+                                        <li>{{ manufacturer }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Mass</th>
+                            <td>{{ payload.mass_kg }}kg</td>
+                        </tr>
+                        <tr><th colspan="2" style="background: #e6e6e6">Orbital parameters</th></tr>
+                        <tr>
+                            <th>Reference System</th>
+                            <td>{{ payload.reference_system|title }}</td>
+                        </tr>
+                        <tr>
+                            <th>Regime</th>
+                            <td>{{ payload.regime|title }}</td>
+                        </tr>
+                        <tr>
+                            <th>Orbit</th>
+                            <td>{{ payload.orbit }}</td>
+                        </tr>
+                        <tr>
+                            <th>Lifespan</th>
+                            <td>{{ payload.lifespan_years }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

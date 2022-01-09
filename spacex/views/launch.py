@@ -25,8 +25,9 @@ def detail(request, page_number):
         raise Http404()
 
     launch = page_obj.object_list.first()
-    similar_launches = Launch.objects.filter(name__icontains=re.split(' |-', launch.name)[0]).reverse()
+    similar_launches = Launch.objects.filter(name__icontains=re.split(' |-', launch.name)[0]).exclude(id=launch.id).reverse()
     images = launch.images.all()
+    launchpad_image = launch.launchpad.images.all().first()
 
     context = {
         'page_obj': page_obj,
@@ -34,6 +35,7 @@ def detail(request, page_number):
         'patch_images': images.filter(type='patch').first(),
         'slider_images': images.filter(type='image'),
         'similar_launches': similar_launches[:6],
+        'launchpad_image': launchpad_image,
     }
     return render(request, 'launches/detail.html', context)
 

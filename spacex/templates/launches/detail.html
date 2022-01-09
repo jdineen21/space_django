@@ -5,177 +5,18 @@
 {% block title %}{{ launch.name }} Launch{% endblock %}
 
 {% block body %}
-    <div class="grid-container full">
-        <div class="grid-x grid-padding-x grid-padding-y">
-            <div class="cell small-7" id="launch-detail" data-something>
-                <div class="grid-x">
+    <div class="grid-container fluid">
+        <div class="grid-x grid-margin-x">
+            <div class="cell" style="padding-top: 1rem;">{% include 'launches/title_callout.html' %}</div>
+            <div class="cell xlarge-9">
+                {% include 'launches/summary.html' %}
+                {% comment %} {% if launch.crew.count > 0 %}
                     <div class="cell">
-                        <div class="grid-x align-justify">
-                            <div class="cell auto">
-                                <h2>{{ launch.name }}</h2>
-                                <div class="grid-x">
-                                    <div class="cell shrink">
-                                        {% if launch.success == True %}
-                                            <div class="callout success display-inline">Successful Launch</div>
-                                        {% elif launch.success == False %}
-                                            <div class="callout alert">Launch Failure</div>
-                                        {% elif launch.upcoming == True %}
-                                            <div class="callout primary">Upcoming Launch</div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cell shrink">
-                                <div class="grid-y">
-                                    <div class="cell">
-                                        <nav aria-label="Pagination">
-                                            <div class="callout small secondary">
-                                                <ul class="pagination">
-                                                    {% if page_obj.has_previous %}
-                                                        <li class="pagination-previous"><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Previous launch">Previous launch</span></a></li>
-                                                        <li><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Launch {{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-                                                    {% endif %}
-                                                    <li class="current"><span class="show-for-sr">You're on launch</span> {{ page_obj.number }}</li>
-                                                    {% if page_obj.has_next %}
-                                                        <li><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Launch {{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
-                                                        <li class="pagination-next"><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Next page">Next launch</span></a></li>
-                                                    {% else %}
-                                                        <li class="pagination-next disabled">Next launch</span></li>
-                                                    {% endif %}
-                                                </ul>
-                                            </div>
-                                        </nav>
-                                    </div>
-                                    <div class="cell text-right">
-                                        {% if launch.links.wikipedia or launch.links.youtube_id %}
-                                            {% if launch.links.wikipedia %}
-                                                <a href={{ launch.links.webcast }} class="button alert" target="_blank">Watch Webcast</a>
-                                            {% endif %}
-                                            {% if launch.links.wikipedia %}
-                                                <a href={{ launch.links.wikipedia }} class="button secondary" target="_blank">Wikipedia</a>
-                                            {% endif %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'launches/crew_summary.html' %}
                     </div>
-                    <div class="cell">
-                        <div class="callout">
-                            <h4>Flight Summary</h4>
-                            <hr>
-                            <div class="grid-x">
-                                {% if launch.upcoming == False %}
-                                    <div class="cell small-3">
-                                        <p>Flight Number</p>
-                                    </div>
-                                    <div class="cell small-9">
-                                        <p>{{ launch.flight_number }}</p>
-                                    </div>
-                                {% endif %}
-                                <div class="cell small-3">
-                                    <p>Date</p>
-                                </div>
-                                <div class="cell small-9">
-                                    <p>{{ launch.date_local|date:"D, d M Y" }}</p>
-                                </div>
-                                <div class="cell small-3">
-                                    <p>Time</p>
-                                </div>
-                                <div class="cell small-9">
-                                    <p>{{ launch.date_local|date:"h:i:s A" }}</p>
-                                </div>
-                                <div class="cell small-3">
-                                    <p>Rocket</p>
-                                </div>
-                                <div class="cell small-9">
-                                    <p><a href={% url 'spacex:rocket.detail' launch.rocket.sanitized_name %}>{{ launch.rocket.name }}</a></p>
-                                </div>
-                                <div class="cell small-3">
-                                    <p>Launchpad</p>
-                                </div>
-                                <div class="cell small-9">
-                                    <p><a href={% url 'spacex:launchpad.detail' launch.launchpad.sanitized_name %}>{{ launch.launchpad.full_name }}</a></p>
-                                </div>
-                            </div>
-                            <div class="callout secondary">
-                                <p>{{ launch.details }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cell">
-                        <div class="card">
-                            <div class="card-divider">
-                                <h4>Rocket - {{ launch.rocket.name }}</h4>
-                            </div>
-                            <div class="card-section">
-                                <div class="grid-x grid-margin-x">
-                                    <div class="cell small-4">
-                                        {% if launch.rocket.active == True %}
-                                            <div class="callout success text-center">Active</div>
-                                        {% else %}
-                                            <div class="callout alert">Retired</div>
-                                        {% endif %}
-                                        <img class="thumbnail" src={{ launch.rocket.flickr_images.0 }} alt="Photo of Uranus.">
-                                        <a href={% url 'spacex:rocket.detail' launch.rocket.sanitized_name %} class="button">Read More</a>
-                                        <p>Date of First Flight</p>
-                                        <div class="stat">{{ launch.rocket.first_flight|date:"jS F Y" }}</div>
-                                    </div>
-                                    <div class="cell small-8">
-                                        <div class="grid-x grid-margin-x grid-margin-y">
-                                            <div class="cell">
-                                                <div class="grid-x grid-margin-x">
-                                                    <div class="cell auto">
-                                                        <p>Number of Flights</p>
-                                                        <div class="stat">{{ launch.rocket.launch_set.all.count }}</div>
-                                                    </div>
-                                                    <div class="cell auto">
-                                                        <p>Flight Success Rate</p>
-                                                        <div class="stat">{{ launch.rocket.success_rate_pct }}%</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="cell">
-                                                <p>{{ launch.rocket.description }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cell">
-                        <div class="card">
-                            <div class="card-divider">
-                                <h4>Launchpad - {{ launch.launchpad.full_name }}</h4>
-                            </div>
-                            <div class="card-section">
-                                {% if launch.launchpad.status == 'active' %}
-                                    <div class="callout success">Active</div>
-                                {% else %}
-                                    <div class="callout alert">Retired</div>
-                                {% endif %}
-                                <p>{{ launch.launchpad.details }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cell">
-                        <div class="card">
-                            <div class="card-divider">
-                                <h4>Related Launches</h4>
-                            </div>
-                            <div class="card-section">
-                                <ul>
-                                    {% for similar_launch in similar_launches %}
-                                        <li><a href={% url 'spacex:launch.detail' similar_launch.flight_number %}>{{ similar_launch.name }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endif %} {% endcomment %}
             </div>
-            <div class="cell small-3" data-sticky-container>
+            {% comment %} <div class="cell small-4" data-sticky-container>
                 <div class="grid-x grid-padding-y">
                     <div class="cell" data-sticky-container>
                         <div class="sticky" data-sticky data-options="marginTop:0;" data-anchor="launch-detail">
@@ -183,103 +24,33 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="cell small-2">
+            </div> {% endcomment %}
+            <div class="cell small-3 show-for-xlarge">
                 <div class="grid-x">
-                    {% if patch_images %}
-                        <img class="cell" src="{{ patch_images }}" >
-                    {% endif %}
-                    {% if launch.crew.count > 0 %}
+                    {% if similar_launches %}
                         <div class="cell">
-                            <ul class="accordion" data-accordion>
-                                <h4>Crew Summary</h4>
-                                {% for crew in launch.crew.all %}
-                                    <li class="accordion-item{% if forloop.first %} is-active{% endif %}" data-accordion-item>
-                                        <a class="accordion-title">
-                                            <div class="grid-x">
-                                                <div class="cell small-6 align-self-middle">{{ crew.name }}</div>
-                                                <div class="cell small-6"><span class="label float-right">{{ crew.agency }}</span></div>
-                                            </div>
-                                        </a>
-                                        <div class="accordion-content" data-tab-content>
-                                            <img src={{ crew.images.first.image.url }}>
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                            </ul>
+                            {% include 'launches/related.html' %}
                         </div>
                     {% endif %}
                     <div class="cell">
-                        <ul class="accordion" data-accordion>
-                            <h4>Payload Summary</h4>
-                            {% for payload in launch.payload_set.all %}
-                                <li class="accordion-item{% if forloop.first %} is-active{% endif %}" data-accordion-item>
-                                    <a class="accordion-title">{{ payload.name }} - {{ payload.type }}</a>
-                                    <div class="accordion-content" data-tab-content>
-                                        <table class="stack unstriped" style="margin: 0;">
-                                            <tr><th colspan="2" style="background: #e6e6e6">Spacecraft properties</th></tr>
-                                            <tr>
-                                                <th>Type</th>
-                                                <td>{{ payload.type }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Customers</th>
-                                                <td>
-                                                    <ul>
-                                                        {% for customer in payload.customers %}
-                                                            <li>{{ customer }}</li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Nationalitites</th>
-                                                <td>
-                                                    <ul>
-                                                        {% for nationality in payload.nationalities %}
-                                                            <li>{{ nationality }}</li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Manufacturers</th>
-                                                <td>
-                                                    <ul>
-                                                        {% for manufacturer in payload.manufacturers %}
-                                                            <li>{{ manufacturer }}</li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Mass</th>
-                                                <td>{{ payload.mass_kg }}kg</td>
-                                            </tr>
-                                            <tr><th colspan="2" style="background: #e6e6e6">Orbital parameters</th></tr>
-                                            <tr>
-                                                <th>Reference System</th>
-                                                <td>{{ payload.reference_system|title }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Regime</th>
-                                                <td>{{ payload.regime|title }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Orbit</th>
-                                                <td>{{ payload.orbit }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Lifespan</th>
-                                                <td>{{ payload.lifespan_years }}</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                        {% include 'launches/payload_summary.html' %}
+                    </div>
+                    <div class="grid-y">
+                        {% for url in slider_images %}
+                            <div class="cell" data-open="imageModal{{ forloop.counter }}">
+                                <img class="thumbnail" src={{ url }} alt="Image {{ forloop.counter }}">
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
+                {% for url in slider_images %}
+                    <div class="large reveal" id="imageModal{{ forloop.counter }}" data-reveal>
+                        <img src={{ url }} alt="Image {{ forloop.counter }}">
+                        <button class="close-button" data-close aria-label="Close reveal" type="button">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

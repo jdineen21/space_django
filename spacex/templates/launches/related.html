@@ -1,0 +1,9 @@
+<div class="callout">
+    <h4>Related Launches</h4>
+    <hr>
+    <ul class="vertical menu">
+        {% for similar_launch in similar_launches %}
+            <li><a class="button" href={% url 'spacex:launch.detail' similar_launch.flight_number %}>{{ similar_launch.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
