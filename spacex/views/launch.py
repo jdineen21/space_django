@@ -1,10 +1,8 @@
 import re
 
-from spacex.models.image import Image
-from django.core.paginator import EmptyPage, InvalidPage, Paginator
+from django.core.paginator import EmptyPage, Paginator
 from django.http import Http404
 from django.shortcuts import render
-from django.shortcuts import get_object_or_404
 
 from spacex.models import Launch
 

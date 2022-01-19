@@ -80,7 +80,7 @@ $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
 $black: #0a0a0a;
 $white: #fefefe;
-$body-background: $white;
+$body-background: $light-gray;
 $body-font-color: $black;
 $body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $body-safe-padding: false;
@@ -90,7 +90,7 @@ $global-padding: 1rem;
 $global-position: 1rem;
 $global-weight-normal: normal;
 $global-weight-bold: bold;
-$global-radius: 0;
+$global-radius: 0.1rem;
 $global-menu-padding: 0.7rem 1rem;
 $global-menu-nested-margin: 1rem;
 $global-text-direction: ltr;
@@ -166,7 +166,7 @@ $header-styles: (
 );
 $header-text-rendering: optimizeLegibility;
 $small-font-size: 80%;
-$header-small-font-color: $medium-gray;
+$header-small-font-color: $dark-gray;
 $paragraph-lineheight: 1.6;
 $paragraph-margin-bottom: 1rem;
 $paragraph-text-rendering: optimizeLegibility;
@@ -330,7 +330,7 @@ $buttongroup-radius-on-each: true;
 // 13. Callout
 // -----------
 
-$callout-background: $white;
+$callout-background: $light-gray;
 $callout-background-fade: 85%;
 $callout-border: 1px solid rgba($black, 0.25);
 $callout-margin: 0 0 1rem 0;
@@ -885,8 +885,8 @@ $xy-grid: true;
 $grid-container: $global-width;
 $grid-columns: 12;
 $grid-margin-gutters: (
-  small: 20px,
-  medium: 30px
+  small: 10px,
+  medium: 15px
 );
 $grid-padding-gutters: $grid-margin-gutters;
 $grid-container-padding: $grid-padding-gutters;

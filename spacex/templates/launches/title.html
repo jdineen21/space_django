@@ -20,21 +20,19 @@
                     <div class="grid-y">
                         <div class="cell">
                             <nav aria-label="Pagination">
-                                <div class="callout small secondary">
-                                    <ul class="pagination">
-                                        {% if page_obj.has_previous %}
-                                            <li class="pagination-previous"><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Previous launch">Previous launch</span></a></li>
-                                            <li><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Launch {{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
-                                        {% endif %}
-                                        <li class="current"><span class="show-for-sr">You're on launch</span> {{ page_obj.number }}</li>
-                                        {% if page_obj.has_next %}
-                                            <li><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Launch {{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
-                                            <li class="pagination-next"><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Next page">Next launch</span></a></li>
-                                        {% else %}
-                                            <li class="pagination-next disabled">Next launch</span></li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
+                                <ul class="pagination">
+                                    {% if page_obj.has_previous %}
+                                        <li class="pagination-previous"><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Previous launch">Previous launch</span></a></li>
+                                        <li><a href={% url 'spacex:launch.detail' page_obj.previous_page_number %} aria-label="Launch {{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+                                    {% endif %}
+                                    <li class="current"><span class="show-for-sr">You're on launch</span> {{ page_obj.number }}</li>
+                                    {% if page_obj.has_next %}
+                                        <li><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Launch {{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+                                        <li class="pagination-next"><a href={% url 'spacex:launch.detail' page_obj.next_page_number %} aria-label="Next page">Next launch</span></a></li>
+                                    {% else %}
+                                        <li class="pagination-next disabled">Next launch</span></li>
+                                    {% endif %}
+                                </ul>
                             </nav>
                         </div>
                         {% if launch.links.wikipedia or launch.links.youtube_id %}

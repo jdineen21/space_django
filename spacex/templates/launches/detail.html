@@ -4,50 +4,59 @@
 
 {% block title %}{{ launch.name }} Launch{% endblock %}
 
+{% comment %} {% if launch.crew.count > 0 %}
+    <div class="cell">
+        {% include 'launches/crew_summary.html' %}
+    </div>
+{% endif %} {% endcomment %}
+
+{% comment %} <div class="cell small-4" data-sticky-container>
+    <div class="grid-x grid-padding-y">
+        <div class="cell" data-sticky-container>
+            <div class="sticky" data-sticky data-options="marginTop:0;" data-anchor="launch-detail">
+                {% include 'spacex/image_slider.html'  %}
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+
 {% block body %}
     <div class="grid-container fluid">
-        <div class="grid-x grid-margin-x">
-            <div class="cell" style="padding-top: 1rem;">{% include 'launches/title_callout.html' %}</div>
-            <div class="cell xlarge-9">
-                {% include 'launches/summary.html' %}
-                {% comment %} {% if launch.crew.count > 0 %}
-                    <div class="cell">
-                        {% include 'launches/crew_summary.html' %}
-                    </div>
-                {% endif %} {% endcomment %}
-            </div>
-            {% comment %} <div class="cell small-4" data-sticky-container>
-                <div class="grid-x grid-padding-y">
-                    <div class="cell" data-sticky-container>
-                        <div class="sticky" data-sticky data-options="marginTop:0;" data-anchor="launch-detail">
-                            {% include 'spacex/image_slider.html'  %}
+        <div class="grid-y medium-grid-frame">
+            <div class="cell" style="padding-top: 1rem;">{% include 'launches/title.html' %}</div>
+            <div class="cell medium-cell-block-container">
+                <div class="grid-x grid-margin-x">
+                    <div class="cell xlarge-9 medium-cell-block-y">{% include 'launches/summary.html' %}</div>
+                    <div class="cell xlarge-3 show-for-xlarge medium-cell-block-y">
+                        <div class="grid-x">
+                            {% if similar_launches %}
+                                <div class="cell">
+                                    {% include 'launches/related.html' %}
+                                </div>
+                            {% endif %}
+                            <div class="cell">
+                                <div class="grid-y">
+                                    {% for url in slider_images %}
+                                        <div class="cell" data-open="imageModal{{ forloop.counter }}">
+                                            <img class="thumbnail" src={{ url }} alt="Image {{ forloop.counter }}">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div> {% endcomment %}
-            <div class="cell small-3 show-for-xlarge">
-                <div class="grid-x">
-                    {% if similar_launches %}
-                        <div class="cell">
-                            {% include 'launches/related.html' %}
-                        </div>
-                    {% endif %}
-                    <div class="grid-y">
                         {% for url in slider_images %}
-                            <div class="cell" data-open="imageModal{{ forloop.counter }}">
-                                <img class="thumbnail" src={{ url }} alt="Image {{ forloop.counter }}">
+                            <div class="large reveal" id="imageModal{{ forloop.counter }}" data-reveal>
+                                <img src={{ url }} alt="Image {{ forloop.counter }}">
+                                <button class="close-button" data-close aria-label="Close reveal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                         {% endfor %}
                     </div>
                 </div>
-                {% for url in slider_images %}
-                    <div class="large reveal" id="imageModal{{ forloop.counter }}" data-reveal>
-                        <img src={{ url }} alt="Image {{ forloop.counter }}">
-                        <button class="close-button" data-close aria-label="Close reveal" type="button">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endfor %}
+            </div>
+            <div class="cell shrink footer">
+                <div class="callout"><h3>Here's my footer</h3></div>
             </div>
         </div>
     </div>

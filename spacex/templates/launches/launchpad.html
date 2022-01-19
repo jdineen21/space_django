@@ -1,11 +1,9 @@
-<div class="callout">
-    <h4>{{ launch.launchpad.full_name }}</h4>
-    {% if launch.launchpad.status == 'active' %}
-        <div class="callout success">Active</div>
-    {% else %}
-        <div class="callout alert">Retired</div>
-    {% endif %}
-    <img src={{ launch.rocket.flickr_images.0 }} alt="Photo of launchpad {{ launch.launchpad.full_name }}">
-    <hr>
-    <p>{{ launch.launchpad.details }}</p>
-</div>
+<h4>{{ launch.launchpad.full_name }}</h4>
+{% if launch.launchpad.status == 'active' %}
+    <div class="callout success">Active</div>
+{% else %}
+    <div class="callout alert">Retired</div>
+{% endif %}
+<img src={{ launch.rocket.flickr_images.0 }} alt="Photo of launchpad {{ launch.launchpad.full_name }}">
+<hr>
+<p>{{ launch.launchpad.details }}</p>
