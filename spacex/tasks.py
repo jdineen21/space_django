@@ -44,7 +44,7 @@ class Database:
         for model, data in model_data_pairs:
             if 'name' in data:
                 data['sanitized_name'] = slugify(data['name'])
-            
+
             if hasattr(model, 'IMAGE_PATHS'):
                 data['images'], images_data = Image.write(model, data)
                 image_data_pairs = [[Image, image_data] for image_data in images_data]
@@ -60,7 +60,7 @@ class Database:
                 deserialized_object.save()
                 deserialized_count += 1
             except IntegrityError as e:
-                logging.error('Failed object deserialization "IntegrityError: %s at %s id %s"' % (e, serialized[index]['model'], serialized[index]['pk']))
+                logging.error('Failed object deserialization "IntegrityError: %s at %s id %s"' % (e, serialized[index]['model'], serialized[index]['fields'][serialized[index]['pk']]))
         logging.info('Deserialized %s total objects' % (deserialized_count))
         logging.info('Completed Database Update')
     

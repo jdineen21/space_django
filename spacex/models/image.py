@@ -1,3 +1,4 @@
+
 import requests
 import logging
 
@@ -81,21 +82,33 @@ class Image(models.Model):
         return image_sources, serialized_data
 
     def write_to_disk(filepath, url):
-        headers = requests.head(url, stream=True, allow_redirects=True).headers
         try:
-            if Image.objects.get(source=url).etag != headers['etag']:
-                logging.debug('Etag change writing image %s/%s' % (str(filepath)))
+            headers = requests.head(url, stream=True, allow_redirects=True, timeout=2.50).headers
+            try:
+                if Image.objects.get(source=url).etag != headers['etag']:
+                    logging.debug('Etag change writing image %s/%s' % (str(filepath)))
+                    Image.download_to_disk(filepath, url)
+            except Image.DoesNotExist:
                 Image.download_to_disk(filepath, url)
-        except Image.DoesNotExist:
-            Image.download_to_disk(filepath, url)
-        return headers['etag']
+            return headers['etag']
+        except ConnectionError as e:
+            logging.error('Failed connection "ConnectionError: %s"' % (e))
+        except requests.exceptions.SSLError as e:
+            logging.error('Failed connection "SSLError: %s"' % (e))
+        except requests.exceptions.ReadTimeout as e:
+            logging.error('Failed connection "ReadTimeout: %s"' % (e))
     
     def download_to_disk(filepath, url):
         try:
-            response = requests.get(url)
+            response = requests.get(url, stream=True, allow_redirects=True, timeout=2.50)
+            # This media addition needs cleaning up
+            with open(str(Path('media', filepath)), 'wb') as file:
+                file.write(response.content)
         except ConnectionError as e:
             logging.error('Failed connection "ConnectionError: %s"' % (e))
+        except requests.exceptions.SSLError as e:
+            logging.error('Failed connection "SSLError: %s"' % (e))
+        except requests.exceptions.ReadTimeout as e:
+            logging.error('Failed connection "ReadTimeout: %s"' % (e))
 
-        # This media addition needs cleaning up
-        with open(str(Path('media', filepath)), 'wb') as file:
-            file.write(response.content)
+        
